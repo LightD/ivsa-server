@@ -19,25 +19,30 @@ final class IVSAUser: Model {
     
     var id: Node?
     var email: String
-    var accessToken: String?
+    var password: String
+    var accessToken: String? // when it's nil, the user is logged out
+    
     var isDelegate: Bool = false
     
     init(node: Node, in context: Context) throws {
-        id = try node.extract("_id")
+        id = try node.extract("_id") // that's mongo's ID
         email = try node.extract("email")
+        password = try node.extract("passwrod")
         accessToken = try node.extract("access_token")
         isDelegate = try node.extract("is_delegate")
     }
     
     init(credentials: UsernamePassword) {
         self.email = credentials.username
-        self.accessToken = BCrypt.hash(password: credentials.password)
+        self.password = BCrypt.hash(password: credentials.password)
+        self.accessToken =  BCrypt.hash(password: credentials.password)
     }
     
     func makeNode(context: Context) throws -> Node {
         return try Node(node: [
             "id": id,
             "email": email,
+            "password": password,
             "access_token": accessToken,
             "is_delegate": false
             ])
@@ -65,7 +70,7 @@ extension IVSAUser: Auth.User {
             let fetchedUser = try IVSAUser.query()
                 .filter("email", credentials.username)
                 .first()
-            if let password = fetchedUser?.accessToken,
+            if let password = fetchedUser?.password,
                 password != "",
                 (try? BCrypt.verify(password: credentials.password, matchesHash: password)) == true {
                 user = fetchedUser
