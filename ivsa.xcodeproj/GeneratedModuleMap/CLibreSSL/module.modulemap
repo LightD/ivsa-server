@@ -1,5 +1,5 @@
 module CLibreSSL {
-    umbrella header "/Users/lightdream/Development/ivsa/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/CLibreSSL.h"
+    umbrella header "/Users/lightdream/Development/ivsa-server/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/CLibreSSL.h"
     link "CLibreSSL"
     export *
 }
