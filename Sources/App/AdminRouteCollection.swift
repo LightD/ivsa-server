@@ -55,6 +55,12 @@ class AdminRouteCollection: RouteCollection {
             return admin
         }
         
+        adminProtectedRouteBuilder.get("delegates", "inreview") { request in
+            
+            let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", "inReview").run()
+            return try JSON(node: Node(node: users))
+        }
+        
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
             user.applicationStatus = .accepted
             
@@ -72,6 +78,8 @@ class AdminRouteCollection: RouteCollection {
             
             return user
         }
+        
+        
         
     }
     
