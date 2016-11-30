@@ -14,13 +14,12 @@ import Routing
 
 final class AccountRouteCollection: RouteCollection {
     
-    private var authMiddleware: TokenAuthMiddleware
-
     typealias Wrapped = HTTP.Responder
-
+    
+    private var authMiddleware: TokenAuthMiddleware
+    
     init(authMiddleware: TokenAuthMiddleware) {
         self.authMiddleware = authMiddleware
-        
     }
     
     func build<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
@@ -31,8 +30,12 @@ final class AccountRouteCollection: RouteCollection {
         authenticatedBuilder.post("register") { request in
             
             // now take the parameters from the request, and file a registration request
+            var user = try request.user()
+            user.applicationStatus = .inReview
             
-            return "yaay autheddddd"
+            try user.save()
+            
+            return user
         }
         
         authenticatedBuilder.post("logout") { request in
@@ -40,6 +43,10 @@ final class AccountRouteCollection: RouteCollection {
             return JSON(["status": "OK"])
         }
 
+        
+        authenticatedBuilder.get("status") { request in
+            return try request.user()
+        }
         
     }
 

@@ -16,7 +16,7 @@
     "19278C05F991845F9DC0A319D6F77B1D93D9A83E" : "ivsa-server\/Packages\/VaporMongo-1.1.0\/",
     "4FDC995D8E7D859D7B56258C349B2368429A1836" : "ivsa-server\/",
     "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7" : "ivsa-server\/Packages\/BSON-3.7.2\/",
-    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2" : "ivsa-server\/Packages\/MongoKitten-1.7.3\/"
+    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2" : "ivsa-server\/Packages\/MongoKitten-1.7.4\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ivsa",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

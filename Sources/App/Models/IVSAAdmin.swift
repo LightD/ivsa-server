@@ -1,8 +1,8 @@
 //
-//  User.swift
+//  IVSAAdmin.swift
 //  ivsa
 //
-//  Created by Light Dream on 14/11/2016.
+//  Created by Light Dream on 01/12/2016.
 //
 //
 
@@ -12,44 +12,20 @@ import Fluent
 import Turnstile
 import TurnstileCrypto
 
-enum ApplicationStatus: String, NodeInitializable, NodeRepresentable {
-    case nonApplicant
-    case inReview
-    case accepted
-    case rejected
-    
-    init(node: Node, in context: Context) throws {
-        let status = node.string!
-        self = ApplicationStatus(rawValue: status)!
-    }
-    
-    func makeNode(context: Context) throws -> Node {
-        return Node(stringLiteral: self.rawValue)
-    }
-}
-
-final class IVSAUser: Model {
+final class IVSAAdmin: Model {
     // this is for fluent ORM
     var exists: Bool = false
-    
     
     var id: Node?
     var email: String
     var password: String
     var accessToken: String? // when it's nil, the user is logged out
-    var applicationStatus: ApplicationStatus = .nonApplicant
-    
-    init() {
-        self.email = ""
-        self.password = ""
-    }
     
     init(node: Node, in context: Context) throws {
         id = try node.extract("_id") // that's mongo's ID
         email = try node.extract("email")
         password = try node.extract("password")
         accessToken = try node.extract("access_token")
-        applicationStatus = try node.extract("application_status")
         
     }
     
@@ -65,51 +41,38 @@ final class IVSAUser: Model {
             "email": email,
             "password": password,
             "access_token": accessToken,
-            "application_status": applicationStatus
             ])
     }
     
 }
 
 /// Since we are dealing with mongo, we don't need to implement this
-extension IVSAUser: Preparation {
+extension IVSAAdmin: Preparation {
     static func prepare(_ database: Database) throws { }
     static func revert(_ database: Database) throws { }
 }
 
+
 import Auth
 
-extension IVSAUser: Auth.User {
+extension IVSAAdmin: Auth.User {
     static func authenticate(credentials: Credentials) throws -> Auth.User {
-        var user: IVSAUser?
-        debugPrint("authenticating user with credentials: \(credentials)")
+        var user: IVSAAdmin?
+        
         switch credentials {
-        
-        
+            
+            
         case let credentials as UsernamePassword:
-            
-            let query = try IVSAUser.query()
-            dump(query)
-            let emailFiltered = try query.filter("email", credentials.username)
-            dump(emailFiltered)
-            let first = try emailFiltered.first()
-            dump(first)
-            
-            let fetchedUser = try IVSAUser.query()
+            let fetchedUser = try IVSAAdmin.query()
                 .filter("email", credentials.username)
                 .first()
-            debugPrint("fetched potential user: \(fetchedUser) with credentials: \(credentials)")
             if let password = fetchedUser?.password,
                 password != "",
                 (try? BCrypt.verify(password: credentials.password, matchesHash: password)) == true {
                 user = fetchedUser
             }
-            
-            if fetchedUser != nil {
-                user = fetchedUser
-            }
         case let credentials as AccessToken:
-            let fetchedUser = try IVSAUser
+            let fetchedUser = try IVSAAdmin
                 .query()
                 .filter("access_token", credentials.string)
                 .first()
@@ -117,7 +80,7 @@ extension IVSAUser: Auth.User {
             if fetchedUser != nil {
                 user = fetchedUser
             }
-        
+            
         default:
             throw UnsupportedCredentialsError()
         }
@@ -131,19 +94,17 @@ extension IVSAUser: Auth.User {
     
     static func register(credentials: Credentials) throws -> Auth.User {
         
-        // create a user and 
-        var newUser: IVSAUser
+        // create a user and
+        var newUser: IVSAAdmin
         
         switch credentials {
         case let credentials as UsernamePassword:
-            newUser = IVSAUser(credentials: credentials)
+            newUser = IVSAAdmin(credentials: credentials)
         default:
             throw UnsupportedCredentialsError()
         }
         
-        debugPrint("registering a user \(newUser)")
-        
-        if try IVSAUser.query().filter("email", newUser.email).first() == nil {
+        if try IVSAAdmin.query().filter("email", newUser.email).first() == nil {
             try newUser.save()
             return newUser
         } else {
@@ -156,8 +117,8 @@ extension IVSAUser: Auth.User {
 import HTTP
 
 extension Request {
-    func user() throws -> IVSAUser {
+    func admin() throws -> IVSAAdmin {
         
-        return try ivsaAuth.user()
+        return try self.adminAuth.admin()
     }
 }

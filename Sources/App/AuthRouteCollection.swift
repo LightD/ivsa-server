@@ -18,7 +18,6 @@ final class AuthRouteCollection: RouteCollection {
     
     typealias Wrapped = HTTP.Responder
     
-    
     func build<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         
         builder.post("login") { request in
