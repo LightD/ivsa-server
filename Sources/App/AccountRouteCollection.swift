@@ -44,7 +44,7 @@ final class AccountRouteCollection: RouteCollection {
         }
 
         
-        authenticatedBuilder.get("status") { request in
+        authenticatedBuilder.get("me") { request in
             return try request.user()
         }
         

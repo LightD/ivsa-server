@@ -55,6 +55,11 @@ class AdminRouteCollection: RouteCollection {
             return admin
         }
         
+        
+        adminRouteBuilder.get("me") { request in
+            return try request.admin()
+        }
+        
         adminProtectedRouteBuilder.get("delegates", "inreview") { request in
             
             let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", "inReview").run()
