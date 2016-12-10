@@ -119,11 +119,11 @@ extension IVSAUser: Auth.User {
             }
         
         default:
-            throw UnsupportedCredentialsError()
+            throw Abort.custom(status: .badRequest, message: "Unsupported credentials.")
         }
         
         guard let u = user else {
-            throw IncorrectCredentialsError()
+            throw Abort.custom(status: .badRequest, message: "Incorrect credentials.")
         }
         
         return u
@@ -138,7 +138,7 @@ extension IVSAUser: Auth.User {
         case let credentials as UsernamePassword:
             newUser = IVSAUser(credentials: credentials)
         default:
-            throw UnsupportedCredentialsError()
+            throw Abort.custom(status: .badRequest, message: "Unsupported credentials.")
         }
         
         debugPrint("registering a user \(newUser)")
@@ -147,7 +147,7 @@ extension IVSAUser: Auth.User {
             try newUser.save()
             return newUser
         } else {
-            throw AccountTakenError()
+            throw Abort.custom(status: .badRequest, message: "This email is in use, please login.")
         }
         
     }

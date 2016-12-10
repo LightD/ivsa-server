@@ -82,11 +82,11 @@ extension IVSAAdmin: Auth.User {
             }
             
         default:
-            throw UnsupportedCredentialsError()
+            throw Abort.custom(status: .badRequest, message: "Unsupported credentials.")
         }
         
         guard let u = user else {
-            throw IncorrectCredentialsError()
+            throw Abort.custom(status: .badRequest, message: "Incorrect credentials.")
         }
         
         return u
@@ -101,14 +101,14 @@ extension IVSAAdmin: Auth.User {
         case let credentials as UsernamePassword:
             newUser = IVSAAdmin(credentials: credentials)
         default:
-            throw UnsupportedCredentialsError()
+            throw Abort.custom(status: .badRequest, message: "Unsupported credentials.")
         }
         
         if try IVSAAdmin.query().filter("email", newUser.email).first() == nil {
             try newUser.save()
             return newUser
         } else {
-            throw AccountTakenError()
+            throw Abort.custom(status: .badRequest, message: "This email is in use, please login.")
         }
         
     }

@@ -49,7 +49,6 @@ drop.get { req in
 drop.resource("posts", PostController())
 
 do {
-    
     try drop.addProvider(VaporMongo.Provider.self)
 }
 catch let e {
