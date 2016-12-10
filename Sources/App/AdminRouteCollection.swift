@@ -60,9 +60,13 @@ class AdminRouteCollection: RouteCollection {
             return try request.admin()
         }
         
-        adminProtectedRouteBuilder.get("delegates", "inreview") { request in
-            
-            let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", "inReview").run()
+        // accepted values for :application_status param are:
+        // inReview
+        // accepted
+        // rejected
+        adminProtectedRouteBuilder.get("delegates", ":application_status") { request in
+            let appStatus = try request.parameters.extract("application_status") as String
+            let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", appStatus).run()
             return try JSON(node: Node(node: users))
         }
         
