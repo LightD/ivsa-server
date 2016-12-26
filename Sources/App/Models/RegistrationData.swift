@@ -199,13 +199,16 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
     var personalInfo: PersonalInformation
     var contactDetails: ContactDetails
     var emergencyContact: EmergencyContact
+    var ivsaChapter: IVSAChapterInformation
     var eventSpecificInfo: EventSpecificInfo
+    
     var whyShouldWeChooseYou: String
     
     init(node: Node, in context: Context) throws {
         self.personalInfo = try PersonalInformation(node: try node.extract("personal_information"), in: context)
         self.contactDetails = try ContactDetails(node: try node.extract("contact_details"), in: context)
         self.emergencyContact = try EmergencyContact(node: try node.extract("emergency_contact"), in: context)
+        self.ivsaChapter = try IVSAChapterInformation(node: try node.extract("ivsa_chapter"), in: context)
         self.eventSpecificInfo = try EventSpecificInfo(node: try node.extract("event_info"), in: context)
         self.whyShouldWeChooseYou = try node.extract("why_you")
         
@@ -216,6 +219,7 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
             "personal_information": personalInfo,
             "contact_details": contactDetails,
             "emergency_contact": emergencyContact,
+            "ivsa_chapter": ivsaChapter,
             "event_info": eventSpecificInfo,
             "why_you": whyShouldWeChooseYou
             ])
