@@ -19,6 +19,7 @@ enum ApplicationStatus: String, NodeInitializable, NodeRepresentable {
     case rejected
     
     init(node: Node, in context: Context) throws {
+        // TODO: Add proper error handling here, instead of force unwrapping
         let status = node.string!
         self = ApplicationStatus(rawValue: status)!
     }
@@ -38,6 +39,7 @@ final class IVSAUser: Model {
     var password: String
     var accessToken: String? // when it's nil, the user is logged out
     var applicationStatus: ApplicationStatus = .nonApplicant
+    var registrationDetails: RegistrationData? // this is nil before the user registers.
     
     init() {
         self.email = ""
@@ -50,6 +52,7 @@ final class IVSAUser: Model {
         password = try node.extract("password")
         accessToken = try node.extract("access_token")
         applicationStatus = try node.extract("application_status")
+        registrationDetails = try node.extract("registration_details")
         
     }
     
@@ -65,7 +68,8 @@ final class IVSAUser: Model {
             "email": email,
             "password": password,
             "access_token": accessToken,
-            "application_status": applicationStatus
+            "application_status": applicationStatus,
+            "registration_details": registrationDetails
             ])
     }
     

@@ -30,8 +30,16 @@ final class AccountRouteCollection: RouteCollection {
         authenticatedBuilder.post("register") { request in
             
             // now take the parameters from the request, and file a registration request
+            guard let registrationJSON = request.json?["registration_data"] else {
+                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
+            }
+            
+            let registrationData: RegistrationData = try registrationJSON.converted()
+            debugPrint("registrationData: \(registrationData)")
+            
             var user = try request.user()
             user.applicationStatus = .inReview
+            user.registrationDetails = registrationData
             
             try user.save()
             
