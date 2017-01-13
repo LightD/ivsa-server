@@ -1679,13 +1679,11 @@
 		OBJ_3935 /* AdminRouteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1419 /* AdminRouteCollection.swift */; };
 		OBJ_3936 /* AuthRouteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1420 /* AuthRouteCollection.swift */; };
 		OBJ_3937 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1421 /* main.swift */; };
-		OBJ_3938 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1423 /* PostController.swift */; };
 		OBJ_3939 /* AdminMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1425 /* AdminMiddleware.swift */; };
 		OBJ_3940 /* DelegateProtectMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1426 /* DelegateProtectMiddleware.swift */; };
 		OBJ_3941 /* TokenAuthMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1427 /* TokenAuthMiddleware.swift */; };
 		OBJ_3942 /* IVSAAdmin.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1429 /* IVSAAdmin.swift */; };
 		OBJ_3943 /* IVSAUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1430 /* IVSAUser.swift */; };
-		OBJ_3944 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1431 /* Post.swift */; };
 		OBJ_3946 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1440 /* libc.framework */; };
 		OBJ_3947 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1439 /* Core.framework */; };
 		OBJ_3948 /* CLibreSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1441 /* CLibreSSL.framework */; };
@@ -5862,14 +5860,12 @@
 		OBJ_142 /* bss_file.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bss_file.c; sourceTree = "<group>"; };
 		OBJ_1420 /* AuthRouteCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouteCollection.swift; sourceTree = "<group>"; };
 		OBJ_1421 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		OBJ_1423 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		OBJ_1425 /* AdminMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMiddleware.swift; sourceTree = "<group>"; };
 		OBJ_1426 /* DelegateProtectMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateProtectMiddleware.swift; sourceTree = "<group>"; };
 		OBJ_1427 /* TokenAuthMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAuthMiddleware.swift; sourceTree = "<group>"; };
 		OBJ_1429 /* IVSAAdmin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVSAAdmin.swift; sourceTree = "<group>"; };
 		OBJ_143 /* bss_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bss_log.c; sourceTree = "<group>"; };
 		OBJ_1430 /* IVSAUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVSAUser.swift; sourceTree = "<group>"; };
-		OBJ_1431 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		OBJ_1433 /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = SOURCE_ROOT; };
 		OBJ_1434 /* DerivedData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DerivedData; sourceTree = SOURCE_ROOT; };
 		OBJ_1435 /* Localization */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Localization; sourceTree = SOURCE_ROOT; };
@@ -8669,7 +8665,6 @@
 		OBJ_1422 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_1423 /* PostController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -8690,7 +8685,6 @@
 				43C092F51E02A3AF00B1BE19 /* Params */,
 				OBJ_1429 /* IVSAAdmin.swift */,
 				OBJ_1430 /* IVSAUser.swift */,
-				OBJ_1431 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -13282,13 +13276,11 @@
 				43C092F71E02A3D600B1BE19 /* RegistrationData.swift in Sources */,
 				OBJ_3936 /* AuthRouteCollection.swift in Sources */,
 				OBJ_3937 /* main.swift in Sources */,
-				OBJ_3938 /* PostController.swift in Sources */,
 				OBJ_3939 /* AdminMiddleware.swift in Sources */,
 				OBJ_3940 /* DelegateProtectMiddleware.swift in Sources */,
 				OBJ_3941 /* TokenAuthMiddleware.swift in Sources */,
 				OBJ_3942 /* IVSAAdmin.swift in Sources */,
 				OBJ_3943 /* IVSAUser.swift in Sources */,
-				OBJ_3944 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

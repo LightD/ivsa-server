@@ -61,7 +61,7 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
     func makeNode(context: Context) throws -> Node {
         
         return try Node(node: [
-            "name": name,
+            "first_name": name,
             "middle_name": middleName,
             "surname": surname,
             "name_tag": nameTag,

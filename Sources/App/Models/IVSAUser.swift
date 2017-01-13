@@ -29,7 +29,7 @@ enum ApplicationStatus: String, NodeInitializable, NodeRepresentable {
     }
 }
 
-final class IVSAUser: Model {
+final class IVSAUser: Model, NodeInitializable {
     // this is for fluent ORM
     var exists: Bool = false
     
@@ -44,6 +44,15 @@ final class IVSAUser: Model {
     init() {
         self.email = ""
         self.password = ""
+    }
+    
+    init(node: Node) throws {
+        id = try node.extract("_id") // that's mongo's ID
+        email = try node.extract("email")
+        password = try node.extract("password")
+        accessToken = try node.extract("access_token")
+        applicationStatus = try node.extract("application_status")
+        registrationDetails = try node.extract("registration_details")
     }
     
     init(node: Node, in context: Context) throws {
@@ -113,9 +122,10 @@ extension IVSAUser: Auth.User {
                 user = fetchedUser
             }
         case let credentials as AccessToken:
-            let fetchedUser = try IVSAUser
+            
+            let fetchedUser = try  IVSAUser
                 .query()
-                .filter("access_token", credentials.string)
+                .filter("access_token", "\(credentials.string)")
                 .first()
             
             if fetchedUser != nil {
