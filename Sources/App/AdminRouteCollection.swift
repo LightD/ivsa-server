@@ -43,7 +43,7 @@ class AdminRouteCollection: RouteCollection {
             return try request.adminAuth.login(credentials)
         }
         
-        adminRouteBuilder.post("makenouradmin") { request in
+        adminRouteBuilder.get("makenouradmin") { request in
             
             let credentials = UsernamePassword(username: "admin@ivsa.com", password: "ivsa")
             var admin = IVSAAdmin(credentials: credentials)
