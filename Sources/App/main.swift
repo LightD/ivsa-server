@@ -7,8 +7,8 @@ import Turnstile
 let drop = Droplet()
 
 // So even though we're using mongo, you still have to call prepare on your models, or else it won't be able to reference the database and kaboom
-drop.preparations.append(IVSAUser.self)
-drop.preparations.append(IVSAAdmin.self)
+//drop.preparations.append(IVSAUser.self)
+//drop.preparations.append(IVSAAdmin.self)
 
 let auth = TokenAuthMiddleware()
 let adminAuth = AdminAuthMiddleware()
