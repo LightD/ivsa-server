@@ -1,0 +1,6 @@
+
+{
+    "production": {
+        "port": "$PORT"
+    }
+}
