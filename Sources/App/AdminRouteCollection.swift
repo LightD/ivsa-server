@@ -43,12 +43,9 @@ class AdminRouteCollection: RouteCollection {
             return try request.adminAuth.login(credentials)
         }
         
-        adminRouteBuilder.get("makenouradmin", IVSAUser.self) { request, user in
-            guard let password = request.data["password"]?.string else {
-                throw Abort.custom(status: .badRequest, message: "Missing param: password")
-            }
+        adminRouteBuilder.post("makenouradmin") { request in
             
-            let credentials = UsernamePassword(username: user.email, password: password)
+            let credentials = UsernamePassword(username: "admin@ivsa.com", password: "ivsa")
             var admin = IVSAAdmin(credentials: credentials)
             try admin.save()
             
@@ -67,7 +64,10 @@ class AdminRouteCollection: RouteCollection {
         adminProtectedRouteBuilder.get("delegates", ":application_status") { request in
             let appStatus = try request.parameters.extract("application_status") as String
             let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", appStatus).run()
-            return try JSON(node: Node(node: users))
+            let json = try JSON(node: Node(node: users))
+            debugPrint(json)
+            
+            return json
         }
         
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
@@ -87,8 +87,6 @@ class AdminRouteCollection: RouteCollection {
             
             return user
         }
-        
-        
         
     }
     

@@ -40,10 +40,15 @@ drop.get("hello") { request in
     return try JSON(node: ["Hello, world!": "FUCK YAAH :D"])
 }
 drop.get { req in
-    return try drop.view.make("welcome", [
+    return try drop.view.make("login", [
     	"message": drop.localization[req.lang, "welcome", "title"]
     ])
 }
+
+drop.get("signup") { request in
+    return try drop.view.make("signup")
+}
+
 
 do {
     try drop.addProvider(VaporMongo.Provider.self)

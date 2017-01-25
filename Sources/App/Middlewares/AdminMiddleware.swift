@@ -24,7 +24,7 @@ final class AdminAuthMiddleware: Middleware {
         
         do {
             // check if the access token is valid
-            let _ = try request.ivsaAuth.login(accessToken)
+            let _ = try request.adminAuth.login(accessToken)
         }
         catch {
             throw Abort.custom(status: .badRequest, message: "Invalid authentication credentials")
