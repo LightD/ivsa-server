@@ -13,7 +13,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3B7AD999-807E-4C5F-B795-36646ACF51D5",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : "ivsa-server\/Packages\/Jay-1.0.0\/",
+    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : "ivsa-server\/Packages\/Jay-1.0.1\/",
     "19278C05F991845F9DC0A319D6F77B1D93D9A83E" : "ivsa-server\/Packages\/VaporMongo-1.1.0\/",
     "4FDC995D8E7D859D7B56258C349B2368429A1836" : "ivsa-server\/",
     "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7" : "ivsa-server\/Packages\/BSON-3.7.2\/",
