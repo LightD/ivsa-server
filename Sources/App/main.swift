@@ -10,16 +10,8 @@ let drop = Droplet()
 drop.preparations.append(IVSAUser.self)
 drop.preparations.append(IVSAAdmin.self)
 
-let auth = TokenAuthMiddleware()
-let adminAuth = AdminAuthMiddleware()
+APIRouter.buildAPI(withDroplet: drop)
 
-let authRoutes = AuthRouteCollection()
-let accountRoutes = AccountRouteCollection(authMiddleware: auth)
-let adminRoutes = AdminRouteCollection(authMiddleware: adminAuth)
-
-drop.collection(authRoutes)
-drop.collection(accountRoutes)
-drop.collection(adminRoutes)
 
 protocol IVSAError: Error {
     var vaporError: Abort { get }
