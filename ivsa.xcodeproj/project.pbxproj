@@ -8181,6 +8181,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43C1E8A41E3C3A7C00B87E10 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_1438 /* AccountRouteCollection.swift */,
+				OBJ_1439 /* AdminRouteCollection.swift */,
+				OBJ_1440 /* APIRouter.swift */,
+				OBJ_1441 /* AuthRouteCollection.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		OBJ_1002 /* Console */ = {
 			isa = PBXGroup;
 			children = (
@@ -9193,11 +9204,8 @@
 		OBJ_1437 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_1438 /* AccountRouteCollection.swift */,
-				OBJ_1439 /* AdminRouteCollection.swift */,
-				OBJ_1440 /* APIRouter.swift */,
-				OBJ_1441 /* AuthRouteCollection.swift */,
 				OBJ_1442 /* main.swift */,
+				43C1E8A41E3C3A7C00B87E10 /* API */,
 				OBJ_1443 /* Middlewares */,
 				OBJ_1447 /* Models */,
 			);
@@ -9938,7 +9946,7 @@
 			path = "Packages/CLibreSSL-1.0.0/Sources/CLibreSSL";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -9950,7 +9958,6 @@
 				OBJ_1455 /* Resources */,
 				OBJ_1456 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_657 /* include */ = {
@@ -12301,7 +12308,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1456 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

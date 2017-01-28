@@ -203,6 +203,7 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
     var eventSpecificInfo: EventSpecificInfo
     
     var whyShouldWeChooseYou: String
+    var attendingPostCongress: Bool = false
     
     init(node: Node, in context: Context) throws {
         self.personalInfo = try PersonalInformation(node: try node.extract("personal_information"), in: context)
@@ -211,6 +212,7 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
         self.ivsaChapter = try IVSAChapterInformation(node: try node.extract("ivsa_chapter"), in: context)
         self.eventSpecificInfo = try EventSpecificInfo(node: try node.extract("event_info"), in: context)
         self.whyShouldWeChooseYou = try node.extract("why_you")
+        self.attendingPostCongress = try node.extract("attending_postcongress")
         
     }
     
@@ -221,7 +223,8 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
             "emergency_contact": emergencyContact,
             "ivsa_chapter": ivsaChapter,
             "event_info": eventSpecificInfo,
-            "why_you": whyShouldWeChooseYou
+            "why_you": whyShouldWeChooseYou,
+            "attending_postcongress": self.attendingPostCongress
             ])
     }
 }
