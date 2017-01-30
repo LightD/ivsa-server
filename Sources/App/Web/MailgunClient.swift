@@ -19,11 +19,11 @@ extension SMTPClient {
 
 struct MailgunClient {
     
-    static func sendVerificationEmail(toUser user: IVSAUser) throws {
+    static func sendVerificationEmail(toUser user: IVSAUser, baseURL: String) throws {
         let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
         // NOTE: for the userId, it will never come here if the user isn't properly populated, so force unwrap (!) is fine here :)
         let id = user.id!.string!
-        let content = "<html><b>thank you </b> for signing up, all you need to do is click on the following link to verify your email: <a href='http://127.0.0.1:8080/verify_email/\(id)/\(user.verificationToken)'> http://127.0.0.1:8080/verify_email/\(id)/\(user.verificationToken) </a> </html>"
+        let content = "<html><b>thank you </b> for signing up, all you need to do is click on the following link to verify your email: <a href='\(baseURL)/verify_email/\(id)/\(user.verificationToken)'> \(baseURL)/verify_email/\(id)/\(user.verificationToken) </a> </html>"
         
         
         try sendMail(client: client, to: user.email, subject: "Verify your email", body: EmailBody(type: .html, content: content))

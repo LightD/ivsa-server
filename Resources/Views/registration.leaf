@@ -12,10 +12,11 @@
         <div class="row">
 
             <div class="col-sm-6 col-sm-offset-3">
-                <form action="/signup" method="POST">
+                <form action="/register" method="POST" class="form-horizontal">
+                    <h3 style="text-align: center;">Personal Information</h3>
                     <div class="form-group">
-                        <label for="username">Fuck you loooo</label>
-                        <input type="email" class="form-control" name="username" placeholder="Email">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" placeholder="First name">
                     </div>
                 </form>
                 <p>Already have an account? <a href="/login" class="btn btn-primary">Login here</a>

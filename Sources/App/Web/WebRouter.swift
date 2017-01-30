@@ -49,11 +49,11 @@ struct WebRouter {
                     throw "redirect to auth page"
                 }
                 
-                // TODO: check the application status and redirect based on that one.
                 switch user.applicationStatus {
-                case .nonApplicant:
+                case .nonApplicant, .inReview:
                     return Response(redirect: "/register")
                 default:
+                    // TODO: redirect to home page or something?
                     throw "just because i have a global catch, i can do this as i please :3"
                 }
                 
@@ -99,7 +99,8 @@ struct WebRouter {
             }
             catch {
                 let errorNode = try Node(node: ["error": true,
-                                                "baseURL": request.baseURL])
+                                                "baseURL": request.baseURL,
+                                                "userId": user.id?.string])
                 return try self.drop.view.make("verification_success", errorNode)
             }
             
@@ -165,8 +166,19 @@ struct WebRouter {
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("register") { request in
             let user = try request.sessionAuth.user()
+            
+            if user?.applicationStatus == .inReview {
+                return try self.drop.view.make("application_in_review")
+            }
+            
             let node = try Node(node: ["user": try user?.makeNode()])
             return try self.drop.view.make("registration", node)
+        }
+        
+        builder.post("register") { request in
+            
+            
+            return try self.drop.view.make("application_in_review")
         }
     }
     

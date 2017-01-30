@@ -1,0 +1,22 @@
+#extend("base")
+
+#export("head") {
+
+}
+
+#export("body") {
+
+<div class="container-fluid" ng-controller="PhoneListController">
+    <div class="row">
+        <img class="ivsa-logo-main" src="/images/ivsalogo.png" />
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h3 style="text-align: center;">Your application is in review, you will be notified by email when your status changes.</h3>
+            <h4> Stay tuned! </h4>
+        </div>
+    </div>
+
+</div>
+
+}

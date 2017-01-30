@@ -156,9 +156,9 @@ extension IVSAUser: Auth.User {
         
         
         if try IVSAUser.query().filter("email", newUser.email).first() == nil {
+            
             try newUser.save()
             do {
-            
                 // send a verification email from here? this happens once only anyway.. it's exactly where we need it
                 try MailgunClient.sendVerificationEmail(toUser: newUser)
             } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
