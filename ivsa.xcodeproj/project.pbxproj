@@ -1752,7 +1752,7 @@
 		OBJ_4094 /* IVSAAdmin.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1449 /* IVSAAdmin.swift */; };
 		OBJ_4095 /* IVSAUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1450 /* IVSAUser.swift */; };
 		OBJ_4096 /* RegistrationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1451 /* RegistrationData.swift */; };
-		OBJ_4097 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1453 /* MailSender.swift */; };
+		OBJ_4097 /* MailgunClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1453 /* MailgunClient.swift */; };
 		OBJ_4098 /* WebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1454 /* WebRouter.swift */; };
 		OBJ_4100 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1462 /* libc.framework */; };
 		OBJ_4101 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1461 /* Core.framework */; };
@@ -6316,7 +6316,7 @@
 		OBJ_145 /* bss_null.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bss_null.c; sourceTree = "<group>"; };
 		OBJ_1450 /* IVSAUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVSAUser.swift; sourceTree = "<group>"; };
 		OBJ_1451 /* RegistrationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationData.swift; sourceTree = "<group>"; };
-		OBJ_1453 /* MailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
+		OBJ_1453 /* MailgunClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailgunClient.swift; sourceTree = "<group>"; };
 		OBJ_1454 /* WebRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRouter.swift; sourceTree = "<group>"; };
 		OBJ_1456 /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = SOURCE_ROOT; };
 		OBJ_1457 /* Localization */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Localization; sourceTree = SOURCE_ROOT; };
@@ -9236,7 +9236,7 @@
 		OBJ_1452 /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_1453 /* MailSender.swift */,
+				OBJ_1453 /* MailgunClient.swift */,
 				OBJ_1454 /* WebRouter.swift */,
 			);
 			path = Web;
@@ -13955,7 +13955,7 @@
 				OBJ_4094 /* IVSAAdmin.swift in Sources */,
 				OBJ_4095 /* IVSAUser.swift in Sources */,
 				OBJ_4096 /* RegistrationData.swift in Sources */,
-				OBJ_4097 /* MailSender.swift in Sources */,
+				OBJ_4097 /* MailgunClient.swift in Sources */,
 				OBJ_4098 /* WebRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

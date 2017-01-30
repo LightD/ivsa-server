@@ -1,0 +1,29 @@
+#extend("base")
+
+#export("head") {
+
+}
+
+#export("body") {
+
+<div class="container-fluid">
+<div class="row">
+<img class="ivsa-logo-main" src="/images/ivsalogo.png" />
+</div>
+<div class="row">
+<div class="col-sm-6 col-sm-offset-3">
+    #if(error) {
+        <h2 style="text-align: center;"> Oh uh! </h2>
+        <h4 style="text-align: center;"> We are sorry, but something went wrong :(</h4>
+        <h4 style="text-align: center;"> You can resend the verification email by <a href="#(baseURL)/resend_verification_email/#(userId)"> clicking here </a> </h4>
+    }
+    ##else() {
+        <h2 style="text-align: center;"> Congratulations! </h2>
+        <h4 style="text-align: center;"> Your email have been verified successfully :) </h4>
+    }
+</div>
+
+</div>
+</div>
+
+}

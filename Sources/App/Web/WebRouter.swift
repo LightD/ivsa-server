@@ -12,10 +12,6 @@ import HTTP
 import Turnstile
 import Routing
 
-extension String: Error {
-    
-}
-
 struct WebRouter {
     
     typealias Wrapped = HTTP.Responder
@@ -34,7 +30,7 @@ struct WebRouter {
     
     func registerRoutes(authMiddleware: SessionAuthMiddleware) {
         self.buildIndex(drop)
-        
+        self.buildEmails(drop)
         self.buildLogin(drop)
         self.buildSignup(drop)
         
@@ -55,16 +51,60 @@ struct WebRouter {
                 
                 // TODO: check the application status and redirect based on that one.
                 switch user.applicationStatus {
-                default: break
+                case .nonApplicant:
+                    return Response(redirect: "/register")
+                default:
+                    throw "just because i have a global catch, i can do this as i please :3"
                 }
                 
-                return Response(redirect: "/register")
+                
             }
             catch {
                 return Response(redirect: "/signup")
             }
             
         }
+    }
+    
+    private func buildEmails<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
+        
+        builder.get("verify_email", IVSAUser.self, String.self) { request, user, verificationToken in
+            
+            do {
+                
+                if user.verificationToken != verificationToken {
+                    throw "It will just show a generic error, what is this? why they try fool me?"
+                }
+                // since it's a success, you can now update the shit
+                user.isVerified = true
+                
+                var mutableUser = user
+                try mutableUser.save()
+                
+                return try self.drop.view.make("verification_success")
+            }
+            catch {
+                let errorNode = try Node(node: ["error": true,
+                                            "baseURL": request.baseURL,
+                                            "userId": user.id?.string])
+                return try self.drop.view.make("verification_success", errorNode)
+            }
+            
+        }
+        
+        builder.get("resend_verification_email", IVSAUser.self) { request, user in
+            do {
+                try MailgunClient.sendVerificationEmail(toUser: user)
+                return try self.drop.view.make("verification_sent")
+            }
+            catch {
+                let errorNode = try Node(node: ["error": true,
+                                                "baseURL": request.baseURL])
+                return try self.drop.view.make("verification_success", errorNode)
+            }
+            
+        }
+        
     }
     
     private func buildLogin<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {

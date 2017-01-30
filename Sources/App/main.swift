@@ -1,3 +1,4 @@
+import HTTP
 import Vapor
 import VaporMongo
 import Auth
@@ -22,6 +23,18 @@ enum GeneralErrors: IVSAError {
 }
 
 
+extension String: Error {
+    
+}
+
+extension Request {
+    // Base URL returns the hostname, scheme, and port in a URL string form.
+    var baseURL: String {
+        return uri.scheme + "://" + uri.host + (uri.port == nil ? "" : ":\(uri.port!)")
+    }
+    
+}
+
 
 let drop = Droplet()
 
@@ -39,7 +52,6 @@ drop.middleware.append(sessions)
 let webRouter = WebRouter.buildRouter(droplet: drop)
 let authMiddleware = SessionAuthMiddleware()
 webRouter.registerRoutes(authMiddleware: authMiddleware)
-
 
 
 do {

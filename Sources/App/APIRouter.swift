@@ -28,6 +28,5 @@ struct APIRouter {
         accountRoutes.build(apiRouter)
         adminRoutes.build(apiRouter)
         
-
     }
 }
