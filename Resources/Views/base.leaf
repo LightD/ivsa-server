@@ -16,13 +16,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
     
-    <script src="scripts/app.js" ></script>
-    <script src="scripts/vendor/uibootstrap.js" ></script>
+    <script src="/scripts/app.js" ></script>
+    <script src="/scripts/vendor/uibootstrap.js" ></script>
     #import("head")
-</head>
+    </head>
     <body>
+<div class="container">
+<div class="header clearfix">
+<nav>
+<ul class="nav nav-pills pull-right">
+    #if(user) {
+    <li role="presentation"><a href="javascript:;" onclick="var f=document.createElement('form');f.method='POST';f.action='/logout';f.submit();">Logout</a></li>
+    }
+</ul>
+</nav>
+    #if(flash) {
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        #(flash)
+    </div>
+    }
     #import("body")
-    
-    
+
+</div>
     </body>
 </html>

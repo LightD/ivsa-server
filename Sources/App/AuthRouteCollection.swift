@@ -38,7 +38,7 @@ final class AuthRouteCollection: RouteCollection {
             return try request.ivsaAuth.login(credentials)
         }
         
-        builder.post("signup") { request in
+        builder .post("signup") { request in
             guard let username = request.json?["email"]?.string,
                 let password = request.json?["password"]?.string else {
                     throw GeneralErrors.missingParams.vaporError

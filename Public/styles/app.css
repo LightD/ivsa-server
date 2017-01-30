@@ -29,3 +29,9 @@ body {
     margin-bottom: 30px;
     margin-top: 60px;
 }
+
+.logo-smaller {
+    width: 150px;
+    height: 150px;
+    margin-top: 40px;
+}

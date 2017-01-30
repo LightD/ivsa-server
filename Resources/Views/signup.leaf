@@ -1,0 +1,34 @@
+#extend("base")
+
+#export("head") {
+
+}
+
+#export("body") {
+
+<div class="container-fluid" ng-controller="PhoneListController">
+    <div class="row">
+        <img class="ivsa-logo-main" src="images/ivsalogo.png" />
+    </div>
+    <div class="row">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <form action="/signup" method="POST" style="margin-bottom: 20px;">
+            <div class="form-group">
+                <label for="username">Email address</label>
+                <input type="email" class="form-control" name="username" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-right: 14px;">Signup</button>
+        </form>
+        <p>Already have an account? <a href="/login" class="btn btn-primary">Login here</a>
+
+    </div>
+
+    </div>
+</div>
+
+}

@@ -98,39 +98,27 @@ extension IVSAUser: Auth.User {
         debugPrint("authenticating user with credentials: \(credentials)")
         switch credentials {
         
-        
+            
+        case let credentials as Identifier:
+            user = try IVSAUser.find(credentials.id)
+            
         case let credentials as UsernamePassword:
-            
-            let query = try IVSAUser.query()
-            dump(query)
-            let emailFiltered = try query.filter("email", credentials.username)
-            dump(emailFiltered)
-            let first = try emailFiltered.first()
-            dump(first)
-            
             let fetchedUser = try IVSAUser.query()
                 .filter("email", credentials.username)
                 .first()
-            debugPrint("fetched potential user: \(fetchedUser) with credentials: \(credentials)")
+            
             if let password = fetchedUser?.password,
                 password != "",
                 (try? BCrypt.verify(password: credentials.password, matchesHash: password)) == true {
                 user = fetchedUser
             }
             
-            if fetchedUser != nil {
-                user = fetchedUser
-            }
         case let credentials as AccessToken:
             
-            let fetchedUser = try  IVSAUser
+            user = try IVSAUser
                 .query()
                 .filter("access_token", "\(credentials.string)")
                 .first()
-            
-            if fetchedUser != nil {
-                user = fetchedUser
-            }
         
         default:
             throw Abort.custom(status: .badRequest, message: "Unsupported credentials.")
@@ -155,13 +143,12 @@ extension IVSAUser: Auth.User {
             throw Abort.custom(status: .badRequest, message: "Unsupported credentials.")
         }
         
-        debugPrint("registering a user \(newUser)")
         
         if try IVSAUser.query().filter("email", newUser.email).first() == nil {
             try newUser.save()
             return newUser
         } else {
-            throw Abort.custom(status: .badRequest, message: "This email is in use, please login.")
+            throw Abort.custom(status: .badRequest, message: "This email is already in use, please login instead!")
         }
         
     }

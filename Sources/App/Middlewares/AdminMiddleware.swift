@@ -19,7 +19,7 @@ final class AdminAuthMiddleware: Middleware {
         
         
         guard let accessToken = request.auth.header?.bearer else {
-            throw Abort.custom(status: .networkAuthenticationRequired, message: "Unauthenticated users request this.")
+            throw Abort.custom(status: .networkAuthenticationRequired, message: "Unauthenticated user request.")
         }
         
         do {

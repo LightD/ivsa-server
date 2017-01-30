@@ -2,15 +2,8 @@ import Vapor
 import VaporMongo
 import Auth
 import Turnstile
+import Sessions
 
-
-let drop = Droplet()
-
-// So even though we're using mongo, you still have to call prepare on your models, or else it won't be able to reference the database and kaboom
-drop.preparations.append(IVSAUser.self)
-drop.preparations.append(IVSAAdmin.self)
-
-APIRouter.buildAPI(withDroplet: drop)
 
 
 protocol IVSAError: Error {
@@ -28,18 +21,25 @@ enum GeneralErrors: IVSAError {
     }
 }
 
-drop.get("hello") { request in
-    return try JSON(node: ["Hello, world!": "FUCK YAAH :D"])
-}
-drop.get { req in
-    return try drop.view.make("login", [
-    	"message": drop.localization[req.lang, "welcome", "title"]
-    ])
-}
 
-drop.get("signup") { request in
-    return try drop.view.make("signup")
-}
+
+let drop = Droplet()
+
+// So even though we're using mongo, you still have to call prepare on your models, or else it won't be able to reference the database and kaboom
+drop.preparations.append(IVSAUser.self)
+drop.preparations.append(IVSAAdmin.self)
+
+APIRouter.buildAPI(withDroplet: drop)
+
+let memory = MemorySessions()
+let sessions = SessionsMiddleware(sessions: memory)
+drop.middleware.append(sessions)
+
+
+let webRouter = WebRouter.buildRouter(droplet: drop)
+let authMiddleware = SessionAuthMiddleware()
+webRouter.registerRoutes(authMiddleware: authMiddleware)
+
 
 
 do {
