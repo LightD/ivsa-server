@@ -5,17 +5,18 @@ var ivsaApp = angular.module('ivsaApp', ['ui.bootstrap']);
 ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegistrationController($scope, $http, $window, $filter) {
    
                    
-       $scope.vm = {};
-//       $scope.birthday = { opened: false };
+                   $scope.vm = { personal_information: {}, ivsa_chapter: {} };
+       $scope.vm.personal_information.sex = 1;
+       $scope.vm.ivsa_chapter.tshirt_size = 'M (medium)';
        $scope.isLoading = false;
     
        
        $scope.submit = function() {
             var data = {  registration_data:  $scope.vm };
 //            $scope.isLoading = true;
-                   var bday = data.registration_data.personal_information.birth_date;
-                   var formattedBday = $filter('date')(bday, "dd/MM/yyyy");
-                   data.registration_data.personal_information.birth_date = formattedBday;
+           var bday = data.registration_data.personal_information.birth_date;
+           var formattedBday = $filter('date')(bday, "dd/MM/yyyy");
+           data.registration_data.personal_information.birth_date = formattedBday;
             console.log(JSON.stringify(data));
 //            $http.post("/register", JSON.stringify(data))
 //            .then(function success(data) {

@@ -6,19 +6,13 @@ body, html {
 	padding: 0;
 	margin: 0;
 	height: 100%;
+    padding-bottom: 70px;
 }
 
 body {
 	font-family: sans-serif;
 	color: #333;
 	position: relative;
-}
-
-#droplet {
-    width: 50px;
-    display: inline-block;
-    margin-right: 12px;
-    float: left;
 }
 
 .ivsa-logo-main {
