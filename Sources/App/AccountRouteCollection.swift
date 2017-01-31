@@ -35,7 +35,6 @@ final class AccountRouteCollection: RouteCollection {
             }
             
             let registrationData: RegistrationData = try registrationJSON.converted()
-            debugPrint("registrationData: \(registrationData)")
             
             var user = try request.user()
             user.applicationStatus = .inReview

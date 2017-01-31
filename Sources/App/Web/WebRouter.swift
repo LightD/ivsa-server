@@ -180,9 +180,18 @@ struct WebRouter {
             guard var user = try request.sessionAuth.user() else {
                 return Response(redirect: "/")
             }
-//            user.applicationStatus = .inReview
-//            try user.save()
-            return Response() // try self.drop.view.make("application_in_review")
+            // now take the parameters from the request, and file a registration request
+            guard let registrationJSON = request.json?["registration_data"] else {
+                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
+            }
+            
+            let registrationData: RegistrationData = try registrationJSON.converted()
+            
+            user.registrationDetails = registrationData
+            user.applicationStatus = .inReview
+            try user.save()
+            
+            return Response()
         }
     }
     

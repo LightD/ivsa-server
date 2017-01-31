@@ -14,7 +14,7 @@
         <div class="row">
             
             <div class="col-lg-8 col-sm-offset-2 col-sm-pull-1">
-                <form class="form-horizontal" ng-submit="submit()">
+                <form class="form-horizontal">
                     <h3 style="text-align: center;">Personal Information</h3>
                     <div class="form-group">
                         <label class="col-md-2 control-label">First Name</label>
@@ -297,26 +297,26 @@
                     </div>
                     
                     <h3 style="text-align: center;">Post congress</h3>
-                    <h5>Post-congress will be 4days-3nights stay in the beautiful Tioman Island. Scuba Diving and water activities paradise. Limited to 80 places, selection on first-come-first-served basis.</h1>
+                    
                     <div class="form-group">
                         <label class="col-md-8 control-label">Are you interested in joining the Post Congress event?</label>
                         <div class="col-md-2">
                             <input type="checkbox" style="margin-top: 10px;" ng-model="vm.attending_postcongress" ng-true-value={{1}} ng-false-value={{0}} />
                         </div>
                     </div>
-                    
+                    <h5>Post-congress will be 4days-3nights stay in the beautiful Tioman Island. Scuba Diving and water activities paradise. Limited to 80 places, selection on first-come-first-served basis.</h5>
                     
                     
                     <h3 style="text-align: center;">Why should we choose you?</h3>
-                    <h4>In 150 words or less, let us know why we should choose you as a delegate for our event! Good luck!</h2>
+                    <h5>In 150 words or less, let us know why we should choose you as a delegate for our event! Good luck!</h2>
                     <div class="form-group">
                         
                         <div class="col-md-12 control-label">
-                            <textarea class="form-control" ng-model="vm.why_you" placeholder="Coz I am building this website... AND THE APP.. AND I wrote the placeholders in this form! See?"></textarea>
+                            <textarea class="form-control" rows="13" ng-model="vm.why_you" placeholder="Coz I am building this website... AND THE APP.. AND I wrote the placeholders in this form! See?"></textarea>
                         </div>
                     </div>
                     
-                    <button ng-disabled="isLoading" type="submit" class="btn btn-primary" style="margin-right: 14px; margin-bottom: 120px">Submit</button>
+                    <button ng-disabled="isLoading" ng-click="submit()" class="btn btn-primary" style="margin-right: 14px; margin-bottom: 120px">Submit</button>
                     
                 </form>
 
