@@ -15,22 +15,22 @@ import TurnstileWeb
 final class SessionAuthMiddleware: Middleware {
     func respond(to request: Request, chainingTo next: Responder) throws -> Response {
         
-        
-        // if there's no access token, we flip nigga!!
-        
-        
         do {
             // check if the access token is valid
-            let _ = try request.sessionAuth.user()
+            guard let _ = try request.sessionAuth.user() else {
+                throw "user wasn't found"
+            }
+            
+            
+            // authenticated and everything, perform the request
+            return try next.respond(to: request)
+            
         }
         catch {
-            throw Abort.custom(status: .badRequest, message: "Invalid authentication credentials")
+            // if there's an error, we redirect to root page, and that one decides
+            return Response(redirect: "/")
         }
-        
-        // authenticated and everything, perform the request
-        return try next.respond(to: request)
     }
-    
     
 }
 

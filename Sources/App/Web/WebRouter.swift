@@ -60,7 +60,7 @@ struct WebRouter {
                 
             }
             catch {
-                return Response(redirect: "/signup")
+                return Response(redirect: "/login")
             }
             
         }
@@ -94,7 +94,7 @@ struct WebRouter {
         
         builder.get("resend_verification_email", IVSAUser.self) { request, user in
             do {
-                try MailgunClient.sendVerificationEmail(toUser: user)
+                try MailgunClient.sendVerificationEmail(toUser: user, baseURL: request.baseURL)
                 return try self.drop.view.make("verification_sent")
             }
             catch {
@@ -166,19 +166,23 @@ struct WebRouter {
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("register") { request in
             let user = try request.sessionAuth.user()
+            let node = try Node(node: ["user": try user?.makeNode()])
             
             if user?.applicationStatus == .inReview {
-                return try self.drop.view.make("application_in_review")
+                return try self.drop.view.make("application_in_review", node)
             }
             
-            let node = try Node(node: ["user": try user?.makeNode()])
+            
             return try self.drop.view.make("registration", node)
         }
         
         builder.post("register") { request in
-            
-            
-            return try self.drop.view.make("application_in_review")
+            guard var user = try request.sessionAuth.user() else {
+                return Response(redirect: "/")
+            }
+//            user.applicationStatus = .inReview
+//            try user.save()
+            return Response() // try self.drop.view.make("application_in_review")
         }
     }
     

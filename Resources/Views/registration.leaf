@@ -5,21 +5,63 @@
 }
 
 #export("body") {
-    <div class="container-fluid" ng-controller="PhoneListController">
+    <div class="container-fluid" ng-controller="ApplicationRegistrationController">
+        <div class="loader animate-show-hide" ng-show="isLoading" >
+        </div>
         <div class="row">
             <img class="ivsa-logo-main logo-smaller" src="/images/ivsalogo.png" />
         </div>
         <div class="row">
-
-            <div class="col-sm-6 col-sm-offset-3">
-                <form action="/register" method="POST" class="form-horizontal">
+            
+            <div class="col-lg-8 col-sm-offset-2 col-sm-pull-1">
+                <form class="form-horizontal" ng-submit="submit()">
                     <h3 style="text-align: center;">Personal Information</h3>
                     <div class="form-group">
-                        <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" name="first_name" placeholder="First name">
+                        <label class="col-md-2 control-label">First Name</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="vm.personal_information.first_name" placeholder="Michael" />
+                        </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Middle Name</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="vm.personal_information.middle_name" placeholder="Angelo" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Surname</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="vm.personal_information.surname" placeholder="Ninja" />
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Preferred name on tag</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="vm.personal_information.name_tag" placeholder="TMNT ;)" />
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Birthday</label>
+                        <div class="col-md-10">
+                            <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{'dd/MM/yyyy'}}" is-open="birthday.opened" close-text="Close" ng-model="vm.personal_information.birth_date" placeholder="dd/MM/yyyy" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="birthday.opened = !birthday.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                            <p>
+                        </div>
+                    </div>
+                    
+                    
+                    <button ng-disabled="isLoading" type="submit" class="btn btn-primary" style="margin-right: 14px;">Submit</button>
+                    
                 </form>
-                <p>Already have an account? <a href="/login" class="btn btn-primary">Login here</a>
 
             </div>
 

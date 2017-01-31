@@ -6,7 +6,7 @@
 
 #export("body") {
 
-<div class="container-fluid" ng-controller="PhoneListController">
+<div class="container-fluid">
 <div class="row">
 <img class="ivsa-logo-main" src="/images/ivsalogo.png" />
 </div>
