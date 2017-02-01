@@ -16,12 +16,12 @@
         <div class="row">
             
             <div class="col-lg-12">
-                <form class="form-horizontal">
+                <form class="form-horizontal" name="registrationForm">
                     <h3 style="text-align: center;">Personal Information</h3>
                     <div class="form-group">
                         <label class="col-md-2 control-label">First Name</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" ng-model="vm.personal_information.first_name" placeholder="Michael" />
+                            <input type="text" class="form-control" ng-model="vm.personal_information.first_name" placeholder="Michael" required />
                         </div>
                     </div>
                     
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Surname</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" ng-model="vm.personal_information.surname" placeholder="Ninja" />
+                            <input type="text" class="form-control" ng-model="vm.personal_information.surname" placeholder="Ninja" required />
                         </div>
                     </div>
                     
@@ -52,7 +52,7 @@
                         <label class="col-md-2 control-label">Birthday</label>
                         <div class="col-md-10">
                             <p class="input-group">
-                            <input type="text" class="form-control" uib-datepicker-popup="{{'dd/MM/yyyy'}}" is-open="birthday.opened" close-text="Close" ng-model="vm.personal_information.birth_date" placeholder="dd/MM/yyyy" />
+                            <input type="text" class="form-control" uib-datepicker-popup="{{'dd/MM/yyyy'}}" is-open="birthday.opened" close-text="Close" ng-model="vm.personal_information.birth_date" placeholder="dd/MM/yyyy" required />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="birthday.opened = !birthday.opened"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
@@ -82,7 +82,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Nationality</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" ng-model="vm.personal_information.nationality" placeholder="Syria" />
+                            <input type="text" class="form-control" ng-model="vm.personal_information.nationality" placeholder="Syria" required />
                         </div>
                     </div>
                     
@@ -96,7 +96,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Passport number</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" ng-model="vm.personal_information.passport_number" placeholder="CKJD92828470" />
+                            <input type="text" class="form-control" ng-model="vm.personal_information.passport_number" placeholder="CKJD92828470" required />
                         </div>
                     </div>
                     
@@ -287,7 +287,7 @@
                             </label>
                             
                             <label class="radio-inline">
-                                <input type="radio" ng-model="vm.ivsa_chapter.tshirt_size" ng-value="'M (medium)'" /> M (medium)
+                                <input type="radio" ng-model="vm.ivsa_chapter.tshirt_size" ng-value="'M (medium)'" checked/> M (medium)
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" ng-model="vm.ivsa_chapter.tshirt_size" ng-value="'XL (extra large)'" /> XL (extra large)
@@ -314,6 +314,7 @@
                         
                         <div class="col-md-12 control-label">
                             <textarea required class="form-control" rows="13" ng-model="vm.why_you" placeholder="Coz I am building this website... AND THE APP.. AND I wrote the placeholders in this form! See?"></textarea>
+                            
                         </div>
                     </div>
                     
