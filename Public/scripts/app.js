@@ -1,5 +1,18 @@
 var ivsaApp = angular.module('ivsaApp', ['ui.bootstrap']);
 
+ivsaApp.directive("autoOpen", ["$parse", function($parse) {
+                           return {
+                           link: function(scope, iElement, iAttrs) {
+                           var isolatedScope = iElement.isolateScope();
+                           iElement.on("focus", function() {
+                                       isolatedScope.$apply(function() {
+                                                            $parse("isOpen").assign(isolatedScope, "true");
+                                                            });
+                                       });
+                           }
+                           };
+                           }]);
+
 ivsaApp.service('modalService', ['$uibModal',
 // NB: For Angular-bootstrap 0.14.0 or later, use $uibModal above instead of $uibModal
 function ($uibModal) {
@@ -57,6 +70,14 @@ function ($uibModal) {
 ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegistrationController($scope, $http, $window, $filter, modalService) {
 
   var $ctrl = this;
+                   
+                   
+                   $scope.dateOptions = {
+                   datepickerMode: 'year'
+                   
+                   
+                   };
+                   
   $scope.vm = { personal_information: {
     first_name: "",
     middle_name: "",
