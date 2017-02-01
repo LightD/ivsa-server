@@ -290,6 +290,9 @@
                                 <input type="radio" ng-model="vm.ivsa_chapter.tshirt_size" ng-value="'M (medium)'" /> M (medium)
                             </label>
                             <label class="radio-inline">
+                                <input type="radio" ng-model="vm.ivsa_chapter.tshirt_size" ng-value="'L (large)'" /> L (large)
+                            </label>
+                            <label class="radio-inline">
                                 <input type="radio" ng-model="vm.ivsa_chapter.tshirt_size" ng-value="'XL (extra large)'" /> XL (extra large)
                             </label>
                             <label class="radio-inline">
