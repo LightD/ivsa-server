@@ -6,6 +6,8 @@
 
 #export("body") {
     <div class="container-fluid" ng-controller="ApplicationRegistrationController">
+        
+        
         <div class="loader animate-show-hide" ng-show="isLoading" >
         </div>
         <div class="row">
@@ -110,7 +112,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">City</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" ng-model="vm.contact_details.city" placeholder="Magiconia" />
+                            <input type="text" class="form-control" ng-model="vm.contact_details.city" placeholder="Konoha Leaf City" />
                         </div>
                     </div>
                     
@@ -124,7 +126,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">State</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" ng-model="vm.contact_details.state" placeholder="ISIS?" />
+                            <input type="text" class="form-control" ng-model="vm.contact_details.state" placeholder="Magiconia" />
                         </div>
                     </div>
                     
@@ -231,7 +233,7 @@
                         </div>
                     </div>
                     
-                    <h3 style="text-align: center;">IVSA Chapter Information</h3>
+                    <h3 style="text-align: center;">Event Spefic Information</h3>
                     
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Vegeterian?</label>
@@ -312,7 +314,7 @@
                     <div class="form-group">
                         
                         <div class="col-md-12 control-label">
-                            <textarea class="form-control" rows="13" ng-model="vm.why_you" placeholder="Coz I am building this website... AND THE APP.. AND I wrote the placeholders in this form! See?"></textarea>
+                            <textarea required class="form-control" rows="13" ng-model="vm.why_you" placeholder="Coz I am building this website... AND THE APP.. AND I wrote the placeholders in this form! See?"></textarea>
                         </div>
                     </div>
                     
