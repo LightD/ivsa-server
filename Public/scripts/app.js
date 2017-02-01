@@ -46,7 +46,7 @@ function ($uibModal) {
                 };
             };
         }
-
+        
         tempModalDefaults["size"] = 'sm';
         return $uibModal.open(tempModalDefaults).result;
     };
@@ -110,8 +110,6 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
 
     $scope.submit = function() {
 
-      $scope.registrationForm.$setSubmitted();
-      if ($scope.registrationForm.$invalid) { return ; }
       var modalOptions = {
        closeButtonText: 'Cancel',
        actionButtonText: 'Submit',
@@ -121,9 +119,6 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
 
      modalService.showModal({}, modalOptions)
      .then(function (result) {
-
-
-
            var data = {  registration_data:  $scope.vm };
            $scope.isLoading = true;
            var bday = data.registration_data.personal_information.birth_date;
@@ -135,7 +130,7 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
              $scope.isLoading = false;
              $window.location.href = "/register";
              console.log("success registration: ", data);
-
+          
            }, function failed(error) {
              $scope.isLoading = false;
              console.log("failed: ", error);
