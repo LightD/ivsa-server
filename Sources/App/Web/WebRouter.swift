@@ -60,7 +60,7 @@ struct WebRouter {
                 
             }
             catch {
-                return Response(redirect: "/login")
+                return Response(redirect: "/signup")
             }
             
         }
