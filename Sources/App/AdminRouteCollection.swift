@@ -69,24 +69,24 @@ class AdminRouteCollection: RouteCollection {
             
             return json
         }
-        
-        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
-            user.applicationStatus = .accepted
-            
-            var user = user
-            try user.save()
-            
-            return user
-        }
-        
-        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
-            user.applicationStatus = .rejected
-            
-            var user = user
-            try user.save()
-            
-            return user
-        }
+//        
+//        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
+//            user.applicationStatus = .accepted
+//            
+//            var user = user
+//            try user.save()
+//            
+//            return user
+//        }
+//        
+//        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
+//            user.applicationStatus = .rejected
+//            
+//            var user = user
+//            try user.save()
+//            
+//            return user
+//        }
         
     }
     
