@@ -172,6 +172,17 @@ struct WebRouter {
                 return try self.drop.view.make("application_in_review", node)
             }
             
+            return try self.drop.view.make("registration", node)
+        }
+        
+        builder.get("edit_registration") { request in
+            
+            let user = try request.sessionAuth.user()
+            if let user = user, user.accessToken == nil {
+                user.generateAccessToken()
+            }
+            
+            let node = try Node(node: ["isEditMode": true, "accessToken": user!.accessToken])
             
             return try self.drop.view.make("registration", node)
         }

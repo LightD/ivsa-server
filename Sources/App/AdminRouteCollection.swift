@@ -29,8 +29,6 @@ class AdminRouteCollection: RouteCollection {
         let adminRouteBuilder = builder.grouped("admin")
         let adminProtectedRouteBuilder = adminRouteBuilder.grouped(self.authMiddleware)
         
-        
-        
         adminRouteBuilder.post("login") { request in
             
             guard let username = request.json?["email"]?.string,

@@ -4,21 +4,23 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7" : 9223372036854775807,
     "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : 9223372036854775807,
     "19278C05F991845F9DC0A319D6F77B1D93D9A83E" : 9223372036854775807,
-    "4FDC995D8E7D859D7B56258C349B2368429A1836" : 9223372036854775807,
-    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7" : 9223372036854775807,
     "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2" : 9223372036854775807,
-    "B86E645C7F342A0D7FD71E02D1073A6533C9A71D" : 9223372036854775807
+    "4FDC995D8E7D859D7B56258C349B2368429A1836" : 9223372036854775807,
+    "B86E645C7F342A0D7FD71E02D1073A6533C9A71D" : 9223372036854775807,
+    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3B7AD999-807E-4C5F-B795-36646ACF51D5",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7" : "ivsa-server\/Packages\/BSON-3.7.2\/",
     "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : "ivsa-server\/Packages\/Jay-1.0.1\/",
     "19278C05F991845F9DC0A319D6F77B1D93D9A83E" : "ivsa-server\/Packages\/VaporMongo-1.1.0\/",
-    "4FDC995D8E7D859D7B56258C349B2368429A1836" : "ivsa-server\/",
-    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7" : "ivsa-server\/Packages\/BSON-3.7.2\/",
     "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2" : "ivsa-server\/Packages\/MongoKitten-1.7.4\/",
-    "B86E645C7F342A0D7FD71E02D1073A6533C9A71D" : "ivsa-server\/Packages\/Mailgun-0.1.1\/"
+    "4FDC995D8E7D859D7B56258C349B2368429A1836" : "ivsa-server\/",
+    "B86E645C7F342A0D7FD71E02D1073A6533C9A71D" : "ivsa-server\/Packages\/Mailgun-0.1.1\/",
+    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC" : "ivsa-server\/Packages\/Polymorphic-1.0.1\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ivsa",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -38,6 +40,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/OpenKitten\/BSON.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/polymorphic.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/OpenKitten\/MongoKitten.git",

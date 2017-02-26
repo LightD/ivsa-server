@@ -228,3 +228,38 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
             ])
     }
 }
+
+
+extension Node {
+    func asString() -> String {
+        
+        var final = ""
+        
+        switch self {
+        case .array(let nodes):
+            final = "\"[\(nodes.map { "\"\($0.asString())\"" }.joined(separator: ","))]\""
+        case .bool(let val): final = val ? "true" : "false"
+        case .number(let val): final = val.description
+        case .string(let val): final = val
+        case .object(let val):
+            let stringRep = val.map {
+                
+                var value = ""
+                switch $1 {
+                case .object:
+                    value = "\"\($0)\": {\($1.asString())}"
+                default: value = "\"\($0)\": \"\($1.asString())\""
+                }
+                
+                return value
+                
+            }.joined(separator: ",")
+            
+            final = "\(stringRep)"
+        default:
+            return ""
+        }
+        
+        return final.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
+    }
+}

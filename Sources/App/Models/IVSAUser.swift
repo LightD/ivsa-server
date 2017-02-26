@@ -80,6 +80,10 @@ final class IVSAUser: Model, NodeInitializable {
         self.isVerified = false
     }
     
+    func generateAccessToken() {
+        self.accessToken =  BCrypt.hash(password: self.password)
+    }
+    
     func makeNode(context: Context) throws -> Node {
         return try Node(node: [
             "_id": id,

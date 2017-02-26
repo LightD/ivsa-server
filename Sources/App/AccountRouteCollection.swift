@@ -11,7 +11,6 @@ import Vapor
 import HTTP
 import Routing
 
-
 final class AccountRouteCollection: RouteCollection {
     
     typealias Wrapped = HTTP.Responder
@@ -49,7 +48,6 @@ final class AccountRouteCollection: RouteCollection {
             try request.ivsaAuth.logout()
             return JSON(["status": "OK"])
         }
-
         
         authenticatedBuilder.get("me") { request in
             return try request.user()

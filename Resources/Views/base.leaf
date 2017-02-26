@@ -26,7 +26,7 @@
 <nav>
 <ul class="nav nav-pills pull-right">
     #if(user) {
-    <li role="presentation"><a href="javascript:;" onclick="var f=document.createElement('form');f.method='POST';f.action='/logout';f.submit();">Logout</a></li>
+    <li role="presentation"><a href="javascript:;" onclick="var f=document.createElement('form');document.body.appendChild(f);f.method='POST';f.action='/logout';f.submit();">Logout</a></li>
     }
 </ul>
 </nav>

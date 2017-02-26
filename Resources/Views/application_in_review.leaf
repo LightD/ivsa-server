@@ -14,8 +14,12 @@
         <div class="col-sm-6 col-sm-offset-3">
             <h3 style="text-align: center;">Your application is in review, you will be notified by email when your status changes.</h3>
         </div>
+        <div class="col-sm-6 col-sm-offset-3">
+            <h5 style="text-align: center;">Additionally, you can edit your application information <a href="/edit_registration"> here </a></h3>
+        </div>
+        
     </div>
-
+    
 </div>
 
 }
