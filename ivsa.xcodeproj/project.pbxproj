@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		438DE8241E62C20B00EE25C4 /* AdminSessionAuthMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438DE8231E62C20B00EE25C4 /* AdminSessionAuthMiddleware.swift */; };
+		438DE8261E62C8DC00EE25C4 /* AdminWebRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438DE8251E62C8DC00EE25C4 /* AdminWebRouter.swift */; };
 		OBJ_1528 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Array.swift */; };
 		OBJ_1529 /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Bool+String.swift */; };
 		OBJ_1530 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Box.swift */; };
@@ -5904,6 +5906,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		438DE8231E62C20B00EE25C4 /* AdminSessionAuthMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminSessionAuthMiddleware.swift; sourceTree = "<group>"; };
+		438DE8251E62C8DC00EE25C4 /* AdminWebRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminWebRouter.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Bool+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
 		OBJ_100 /* bio_lib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bio_lib.c; sourceTree = "<group>"; };
 		OBJ_1000 /* FrameSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameSerializer.swift; sourceTree = "<group>"; };
@@ -9270,6 +9274,7 @@
 				OBJ_1455 /* DelegateProtectMiddleware.swift */,
 				OBJ_1456 /* SessionAuthMiddleware.swift */,
 				OBJ_1457 /* TokenAuthMiddleware.swift */,
+				438DE8231E62C20B00EE25C4 /* AdminSessionAuthMiddleware.swift */,
 			);
 			path = Middlewares;
 			sourceTree = "<group>";
@@ -9289,6 +9294,7 @@
 			children = (
 				OBJ_1463 /* MailgunClient.swift */,
 				OBJ_1464 /* WebRouter.swift */,
+				438DE8251E62C8DC00EE25C4 /* AdminWebRouter.swift */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -10006,7 +10012,7 @@
 			path = "Packages/CLibreSSL-1.0.0/Sources/CLibreSSL";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -10019,7 +10025,6 @@
 				OBJ_1470 /* Resources */,
 				OBJ_1471 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_657 /* include */ = {
@@ -12370,7 +12375,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1471 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -14009,9 +14014,11 @@
 				OBJ_4106 /* main.swift in Sources */,
 				OBJ_4107 /* AdminMiddleware.swift in Sources */,
 				OBJ_4108 /* DelegateProtectMiddleware.swift in Sources */,
+				438DE8261E62C8DC00EE25C4 /* AdminWebRouter.swift in Sources */,
 				OBJ_4109 /* SessionAuthMiddleware.swift in Sources */,
 				OBJ_4110 /* TokenAuthMiddleware.swift in Sources */,
 				OBJ_4111 /* IVSAAdmin.swift in Sources */,
+				438DE8241E62C20B00EE25C4 /* AdminSessionAuthMiddleware.swift in Sources */,
 				OBJ_4112 /* IVSAUser.swift in Sources */,
 				OBJ_4113 /* RegistrationData.swift in Sources */,
 				OBJ_4114 /* MailgunClient.swift in Sources */,

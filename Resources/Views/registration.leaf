@@ -7,7 +7,7 @@
 #export("body") {
     <div class="container-fluid" ng-controller="ApplicationRegistrationController">
 
-        <span ng-init='setup("#(accessToken)")'> "#(accessToken)" </span>
+        <span ng-init='setup("#(accessToken)")'>  </span>
 
 
         <div class="loader animate-show-hide" ng-show="isLoading" >

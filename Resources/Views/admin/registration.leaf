@@ -1,0 +1,34 @@
+#extend("main")
+
+#export("head") {
+
+}
+
+#export("body") {
+
+    <div class="container-fluid">
+        <div class="row">
+          <span> Total number of applicants is: #(applicants_num)
+            <table class="table table-striped">
+              <tr>
+                <th> Name </th>
+                <th> Position </th>
+                <th> Motivation Letter </th>
+                <th> Action </th> <!-- accept/reject button -->
+              </tr>
+              #loop(applicants, "applicant") {
+              <tr>
+                <td> #(applicant.registration_details.personal_information.first_name) #(applicant.registration_details.personal_information.surname) </td>
+                <td> #(applicant.registration_details.ivsa_chapter.position) </td>
+                <td> #(applicant.registration_details.why_you) </td>
+                <td>
+                  <button type="button" class="btn btn-success">Accept</button>
+                  <button type="button" class="btn btn-danger">Reject</button>
+                </td>
+              </tr>
+              }
+            </table>
+        </div>
+    </div>
+
+}
