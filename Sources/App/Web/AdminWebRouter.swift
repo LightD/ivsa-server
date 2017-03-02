@@ -8,6 +8,7 @@
 
 import Foundation
 import Vapor
+import Fluent
 import HTTP
 import Turnstile
 import Routing
@@ -85,12 +86,18 @@ struct AdminWebRouter {
     
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("registration") { request in
-            let adminNode = try Node(node: request.adminSessionAuth.admin()?.makeNode())
             
-            let applicants: [IVSAUser] =  try IVSAUser.query().filter("application_status", "inReview").run()
-            let applicantsNode = try Node(node: applicants)
+            guard var admin = try request.adminSessionAuth.admin() else {
+                throw "admin not found"
+            }
+            if admin.accessToken == nil {
+                admin.generateAccessToken()
+                try admin.save()
+            }
             
-            return try self.drop.view.make("admin/registration", ["registration": true, "user": adminNode, "applicants": applicantsNode, "applicants_num": applicants.count])
+            let adminNode = try Node(node: admin.makeNode())
+            
+            return try self.drop.view.make("admin/registration", ["registration": true, "user": adminNode])
         }
     }
 }

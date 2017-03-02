@@ -44,6 +44,9 @@ final class IVSAAdmin: Model {
             ])
     }
     
+    func generateAccessToken() {
+        self.accessToken =  BCrypt.hash(password: self.password)
+    }
 }
 
 /// Since we are dealing with mongo, we don't need to implement this

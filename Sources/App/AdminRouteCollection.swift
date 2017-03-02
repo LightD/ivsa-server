@@ -62,29 +62,36 @@ class AdminRouteCollection: RouteCollection {
         adminProtectedRouteBuilder.get("delegates", ":application_status") { request in
             let appStatus = try request.parameters.extract("application_status") as String
             let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", appStatus).run()
-            let json = try JSON(node: Node(node: users))
-            debugPrint(json)
+            
+            let sortedApplicants = users.filter { $0.registrationDetails != nil }.sorted(by: { (first, second) -> Bool in
+                
+                // we can force unwrap safely coz we filter first
+                return first.registrationDetails!.personalInfo.nationality < second.registrationDetails!.personalInfo.nationality
+            })
+            let applicantsNode = try Node(node: sortedApplicants)
+            
+            let json = try JSON(node: applicantsNode)
             
             return json
         }
-//        
-//        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
-//            user.applicationStatus = .accepted
-//            
-//            var user = user
-//            try user.save()
-//            
-//            return user
-//        }
-//        
-//        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
-//            user.applicationStatus = .rejected
-//            
-//            var user = user
-//            try user.save()
-//            
-//            return user
-//        }
+        
+        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
+            user.applicationStatus = .accepted
+            
+            var user = user
+            try user.save()
+            let node = try user.makeNode()
+            return try JSON(node: node)
+        }
+        
+        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
+            user.applicationStatus = .rejected
+            
+            var user = user
+            try user.save()
+            
+            return try JSON(node: try user.makeNode())
+        }
         
     }
     

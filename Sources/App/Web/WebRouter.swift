@@ -178,8 +178,9 @@ struct WebRouter {
         builder.get("edit_registration") { request in
             
             let user = try request.sessionAuth.user()
-            if let user = user, user.accessToken == nil {
+            if var user = user, user.accessToken == nil {
                 user.generateAccessToken()
+                try user.save()
             }
             
             let node = try Node(node: ["isEditMode": true, "accessToken": user!.accessToken])
