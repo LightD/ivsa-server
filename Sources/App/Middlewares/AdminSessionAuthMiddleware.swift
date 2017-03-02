@@ -28,7 +28,7 @@ final class AdminSessionAuthMiddleware: Middleware {
         }
         catch {
             // if there's an error, we redirect to root page, and that one decides
-            return Response(redirect: "/")
+            return Response(redirect: "/admin")
         }
     }
     

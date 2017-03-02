@@ -13,7 +13,7 @@
 
         <table class="table table-striped">
           <tr>
-            <th> # </th>
+            <th> #() </th>
             <th> Country </th>
             <th> Name </th>
             <th> Position </th>
