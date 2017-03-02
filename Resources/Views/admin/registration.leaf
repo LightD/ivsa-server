@@ -13,6 +13,7 @@
 
         <table class="table table-striped">
           <tr>
+            <th> # </th>
             <th> Country </th>
             <th> Name </th>
             <th> Position </th>
@@ -21,6 +22,7 @@
           </tr>
 
           <tr ng-repeat="applicant in applicants">
+            <td> {{ $index + 1 }} </td>
             <td> {{applicant.registration_details.personal_information.nationality}} </td>
             <td> {{applicant.registration_details.personal_information.first_name}} {{applicant.registration_details.personal_information.surname}} </td>
             <td> {{applicant.registration_details.ivsa_chapter.position}} </td>

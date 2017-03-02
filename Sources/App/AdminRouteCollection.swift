@@ -66,7 +66,7 @@ class AdminRouteCollection: RouteCollection {
             let sortedApplicants = users.filter { $0.registrationDetails != nil }.sorted(by: { (first, second) -> Bool in
                 
                 // we can force unwrap safely coz we filter first
-                return first.registrationDetails!.personalInfo.nationality < second.registrationDetails!.personalInfo.nationality
+                return first.registrationDetails!.ivsaChapter.country < second.registrationDetails!.ivsaChapter.country
             })
             let applicantsNode = try Node(node: sortedApplicants)
             
