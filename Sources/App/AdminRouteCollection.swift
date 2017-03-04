@@ -109,7 +109,7 @@ class AdminRouteCollection: RouteCollection {
             mutableUser.updatePassword(pass: newPass)
             try mutableUser.save()
             
-            return Response(redirect: "")
+            return try JSON(node: ["ok": 200])
         }
     }
     

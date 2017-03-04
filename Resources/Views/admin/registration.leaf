@@ -7,7 +7,7 @@
 #export("body") {
 
     <div class="container-fluid" ng-controller="ApplicantsController">
-      <span ng-init="setup('#(user.access_token)'"> </span>
+      <span ng-init="setup('#(user.access_token)')"> </span>
       <div class="row">
         <span> Total number of applicants is: {{applicants.length}} </span>
 
