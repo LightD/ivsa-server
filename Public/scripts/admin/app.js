@@ -419,7 +419,7 @@ ivsaAdmin.controller('ApplicationDetailsController', function ApplicationDetails
 
   $scope.editableJSON = {};
 
-  $scope.setup = function(token) {
+  $scope.setup = function(token, applicantID) {
     // var decodedURI = decodeURI(jsonString);
 //    var parts = jsonString.split(":");
 //    parts.forEach(function(item, index, theArray) {
@@ -437,10 +437,10 @@ ivsaAdmin.controller('ApplicationDetailsController', function ApplicationDetails
 //    console.log(wee);
      $scope.isLoading = true;
 
-     $http.get("/api/me", { headers: { "Authorization": "Bearer " +  token} })
+     $http.get("/api/admin/applicant/" + applicantID, { headers: { "Authorization": "Bearer " +  token} })
      .then(function success(object) {
           $scope.isLoading = false;
-          console.log("got me ", object.data.registration_details);
+          console.log("got applicant ", object.data.registration_details);
 
            var regd = object.data.registration_details;
            regd.personal_information.sex = ((regd.personal_information.sex) ? 1 : 0);

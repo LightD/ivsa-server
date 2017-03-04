@@ -1,13 +1,13 @@
-#extend("base")
+#extend("main")
 
 #export("head") {
 
 }
 
 #export("body") {
-    <div class="container-fluid" ng-controller="ApplicationRegistrationController">
+    <div class="container-fluid" ng-controller="ApplicationDetailsController">
 
-        <span ng-init='setup("#(accessToken)")'>  </span>
+        <span ng-init='setup("#(accessToken)", "#(applicantID)")'>  </span>
 
 
         <div class="loader animate-show-hide" ng-show="isLoading" >

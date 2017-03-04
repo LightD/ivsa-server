@@ -99,5 +99,20 @@ struct AdminWebRouter {
             
             return try self.drop.view.make("admin/registration", ["registration": true, "user": adminNode])
         }
+        
+        builder.get("applicant_details", String.self) { request, applicantID in
+            
+            
+            guard var admin = try request.adminSessionAuth.admin() else {
+                throw "admin not found"
+            }
+            if admin.accessToken == nil {
+                admin.generateAccessToken()
+                try admin.save()
+            }
+//            let data = Node(value: ["accessToken": admin.accessToken!, "applicantID": applicantID])
+            
+            return try self.drop.view.make("admin/applicant_details", ["accessToken": admin.accessToken!, "applicantID": applicantID])
+        }
     }
 }
