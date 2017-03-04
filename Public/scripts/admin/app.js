@@ -219,7 +219,7 @@ function ($uibModal) {
 }]);
 
 // Define the `PhoneListController` controller on the `phonecatApp` module
-ivsaAdmin.controller('ApplicantsController', function ApplicationRegistrationController($scope, $http, $window, $filter, modalService) {
+ivsaAdmin.controller('ApplicantsController', function ApplicantsController($scope, $http, $window, $filter, modalService) {
 
   var $ctrl = this;
 
@@ -320,6 +320,135 @@ ivsaAdmin.controller('ApplicantsController', function ApplicationRegistrationCon
 
           $scope.applicants = object.data;
           console.log("applicants ", $scope.applicants);
+      }, function failed(error) {
+          $scope.isLoading = false;
+          console.log("failed: ", error);
+      });
+  }
+
+
+});
+
+ivsaAdmin.controller('ApplicationDetailsController', function ApplicationDetailsController($scope, $http, $window, $filter, modalService) {
+
+  var $ctrl = this;
+
+  $scope.dateOptions = {
+    datepickerMode: 'year'
+  };
+
+  $scope.vm = { personal_information: {
+    first_name: "",
+    middle_name: "",
+    surname: "",
+    name_tag: "",
+    birth_date: "13/4/1993",
+    sex: 1,
+    study_year: "",
+    nationality: "",
+    residency_country: "",
+    passport_number: ""
+  },
+  contact_details: {
+    address: "",
+    city: "",
+    post_code: "",
+    state: "",
+    country: "",
+    phone_num: ""
+  },
+  emergency_contact: {
+    name: "",
+    association: "",
+    phone_num: "",
+    email: ""
+  },
+  ivsa_chapter: {
+    name: "",
+    faculty: "",
+    university_address: "",
+    city: "",
+    post_code: "",
+    state: "",
+    country: "",
+    position: ""
+  },
+  event_info: {
+    vegetarian: 0,
+    comments: "",
+    food_allergies: "",
+    chronic_disease: "",
+    medicine_allergies: "",
+    medical_needs: "",
+    tshirt_size: "M (medium)"
+  },
+  attending_postcongress: 0,
+  why_you: ""};
+
+  $scope.isLoading = false;
+
+  $scope.submit = function() {
+
+    var modalOptions = {
+      closeButtonText: 'Cancel',
+      actionButtonText: 'Submit',
+      headerText: 'Confirm',
+      bodyText: 'Are you sure you want to submit this form?'
+    };
+
+    modalService.showModal({}, modalOptions)
+    .then(function (result) {
+      var data = {  registration_data:  $scope.vm };
+      $scope.isLoading = true;
+      var bday = data.registration_data.personal_information.birth_date;
+      var formattedBday = $filter('date')(bday, "dd/MM/yyyy");
+      data.registration_data.personal_information.birth_date = formattedBday;
+      console.log(JSON.stringify(data));
+      $http.post("/register", JSON.stringify(data))
+      .then(function success(data) {
+        $scope.isLoading = false;
+        $window.location.href = "/register";
+        console.log("success registration: ", data);
+
+      }, function failed(error) {
+        $scope.isLoading = false;
+        console.log("failed: ", error);
+      });
+    });
+  }
+
+  $scope.editableJSON = {};
+
+  $scope.setup = function(token) {
+    // var decodedURI = decodeURI(jsonString);
+//    var parts = jsonString.split(":");
+//    parts.forEach(function(item, index, theArray) {
+//			var newItem = decodeURI(item);
+//
+//      theArray[index] = newItem;
+//    });
+//    console.log(parts);
+//    parts = parts.join(":");
+//    console.log(parts);
+//    let json = JSON.parse(parts);
+//    console.log(json);
+//
+//    let wee = eval(jsonString);
+//    console.log(wee);
+     $scope.isLoading = true;
+
+     $http.get("/api/me", { headers: { "Authorization": "Bearer " +  token} })
+     .then(function success(object) {
+          $scope.isLoading = false;
+          console.log("got me ", object.data.registration_details);
+
+           var regd = object.data.registration_details;
+           regd.personal_information.sex = ((regd.personal_information.sex) ? 1 : 0);
+           regd.event_info.vegetarian = ((regd.event_info.vegetarian) ? 1 : 0);
+           regd.attending_postcongress = ((regd.attending_postcongress) ? 1 : 0);
+           regd.personal_information.birth_date = getDateFromFormat(regd.personal_information.birth_date, "dd/MM/yyyy")
+
+          $scope.vm = regd;
       }, function failed(error) {
           $scope.isLoading = false;
           console.log("failed: ", error);

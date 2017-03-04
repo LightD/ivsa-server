@@ -75,6 +75,10 @@ class AdminRouteCollection: RouteCollection {
             return json
         }
         
+        adminProtectedRouteBuilder.get("applicant", IVSAUser.self) { request, user in
+            return try JSON(node: try user.makeNode())
+        }
+        
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
             user.applicationStatus = .accepted
             
@@ -93,6 +97,20 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: try user.makeNode())
         }
         
+        adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
+            
+            guard let newPass = request.json?["newPass"]?.string else {
+                throw Abort.custom(status: .badRequest, message: "Missing param")
+            }
+            
+            
+            
+            var mutableUser = user
+            mutableUser.updatePassword(pass: newPass)
+            try mutableUser.save()
+            
+            return Response(redirect: "")
+        }
     }
     
 }
