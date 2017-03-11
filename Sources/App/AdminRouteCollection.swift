@@ -78,24 +78,24 @@ class AdminRouteCollection: RouteCollection {
         adminProtectedRouteBuilder.get("applicant", IVSAUser.self) { request, user in
             return try JSON(node: try user.makeNode())
         }
-        
-        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
-            user.applicationStatus = .accepted
-            
-            var user = user
-            try user.save()
-            let node = try user.makeNode()
-            return try JSON(node: node)
-        }
-        
-        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
-            user.applicationStatus = .rejected
-            
-            var user = user
-            try user.save()
-            
-            return try JSON(node: try user.makeNode())
-        }
+//        
+//        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
+//            user.applicationStatus = .accepted
+//            
+//            var user = user
+//            try user.save()
+//            let node = try user.makeNode()
+//            return try JSON(node: node)
+//        }
+//        
+//        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
+//            user.applicationStatus = .rejected
+//            
+//            var user = user
+//            try user.save()
+//            
+//            return try JSON(node: try user.makeNode())
+//        }
         
         adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
             

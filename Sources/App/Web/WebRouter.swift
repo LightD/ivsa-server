@@ -165,14 +165,17 @@ struct WebRouter {
     
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("register") { request in
-            let user = try request.sessionAuth.user()
-            let node = try Node(node: ["user": try user?.makeNode()])
+//            let user = try request.sessionAuth.user()
+//            let node = try Node(node: ["user": try user?.makeNode()])
+//            
+//            if user?.applicationStatus == .inReview {
+//                return try self.drop.view.make("application_in_review", node)
+//            }
+//            
+//            return try self.drop.view.make("registration", node)
             
-            if user?.applicationStatus == .inReview {
-                return try self.drop.view.make("application_in_review", node)
-            }
             
-            return try self.drop.view.make("registration", node)
+            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
         
         builder.get("edit_registration") { request in
@@ -189,21 +192,23 @@ struct WebRouter {
         }
         
         builder.post("register") { request in
-            guard var user = try request.sessionAuth.user() else {
-                return Response(redirect: "/")
-            }
-            // now take the parameters from the request, and file a registration request
-            guard let registrationJSON = request.json?["registration_data"] else {
-                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
-            }
+//            guard var user = try request.sessionAuth.user() else {
+//                return Response(redirect: "/")
+//            }
+//            // now take the parameters from the request, and file a registration request
+//            guard let registrationJSON = request.json?["registration_data"] else {
+//                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
+//            }
+//            
+//            let registrationData: RegistrationData = try registrationJSON.converted()
+//            
+//            user.registrationDetails = registrationData
+//            user.applicationStatus = .inReview
+//            try user.save()
+//            
+//            return Response()
             
-            let registrationData: RegistrationData = try registrationJSON.converted()
-            
-            user.registrationDetails = registrationData
-            user.applicationStatus = .inReview
-            try user.save()
-            
-            return Response()
+            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
     }
     
