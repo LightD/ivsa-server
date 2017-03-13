@@ -322,8 +322,8 @@
                         </div>
                     </div>
 
-                    <!-- <button ng-disabled="isLoading" ng-click="submit()" class="btn btn-primary" style="margin-right: 14px; margin-bottom: 120px">Submit</button>
--->
+                    <button ng-disabled="isLoading" ng-click="submit()" class="btn btn-primary" ng-show="#(isEditMode)" style="margin-right: 14px; margin-bottom: 120px">Submit</button>
+
                 </form>
 
             </div>

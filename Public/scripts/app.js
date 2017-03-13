@@ -276,6 +276,7 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
   why_you: ""};
 
   $scope.isLoading = false;
+                   
 
   $scope.submit = function() {
 
@@ -310,6 +311,7 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
   $scope.editableJSON = {};
 
   $scope.setup = function(token) {
+
     // var decodedURI = decodeURI(jsonString);
 //    var parts = jsonString.split(":");
 //    parts.forEach(function(item, index, theArray) {
