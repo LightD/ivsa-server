@@ -18,6 +18,8 @@
             <th> Chapter Name </th>
             <th> Name </th>
             <th> Position </th>
+            <th> Gender </th>
+            <th> Year of study </th>
             <th> Motivation Letter </th>
             <th> Action </th> <!-- accept/reject button -->
           </tr>
@@ -28,6 +30,10 @@
             <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank"> {{applicant.registration_details.ivsa_chapter.name}} </a> </td>
             <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank"> {{applicant.registration_details.personal_information.first_name}} {{applicant.registration_details.personal_information.surname}} </a> </td>
             <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
+<td>
+{{applicant.registration_details.personal_information.sex ? 'Male' : 'Female' }}
+</td>
+<td> {{applicant.registration_details.personal_information.study_year}} </td>
             <td> <p> {{applicant.registration_details.why_you}} </p> </td>
             <td>
               <button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button>
