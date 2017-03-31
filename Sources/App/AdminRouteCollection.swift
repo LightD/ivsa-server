@@ -90,23 +90,33 @@ class AdminRouteCollection: RouteCollection {
 
         
         
-        //        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
-//            user.applicationStatus = .accepted
-//            
-//            var user = user
-//            try user.save()
-//            let node = try user.makeNode()
-//            return try JSON(node: node)
-//        }
-//        
-//        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
-//            user.applicationStatus = .rejected
-//            
-//            var user = user
-//            try user.save()
-//            
-//            return try JSON(node: try user.makeNode())
-//        }
+        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
+            user.applicationStatus = .accepted
+            
+            var user = user
+            try user.save()
+            let node = try user.makeNode()
+            
+            do {
+                try MailgunClient.sendAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+            } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
+            
+            return try JSON(node: node)
+        }
+        
+        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
+            user.applicationStatus = .rejected
+            
+            var user = user
+            try user.save()
+            
+            do {
+                try MailgunClient.sendRejectionEmail(toUser: user, baseURL: request.baseURL)
+            } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
+            
+            
+            return try JSON(node: try user.makeNode())
+        }
         
         adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
             
