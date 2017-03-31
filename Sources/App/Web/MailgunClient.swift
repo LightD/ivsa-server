@@ -59,7 +59,7 @@ func acceptDelegateEmail(baseURL: String) -> EmailBody {
     
     html += "<br /> <br />"
     
-    html += "<p> Attached is the official acceptance letter for your reference. We would like to advise you to <b><u>READ IT THOROUGHLY</u></b> as it contains all the important deadlines and instructions for your next steps to be <b></u>CONFIRMED</u></b> as a delegate for the Congress. </p>"
+    html += "<p> Attached is the official acceptance letter for your reference. We would like to advise you to <b><u>READ IT THOROUGHLY</u></b> as it contains all the important deadlines and instructions for your next steps to be <b><u>CONFIRMED</u></b> as a delegate for the Congress. </p>"
     
     html += "<br /> <br />"
     
