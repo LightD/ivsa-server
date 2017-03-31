@@ -55,6 +55,15 @@ class AdminRouteCollection: RouteCollection {
             return try request.admin()
         }
         
+        adminRouteBuilder.get("testemail") { request in
+            
+            var user = IVSAUser()
+            user.email = "nourforgive@gmail.com"
+            try MailgunClient.sendAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+            
+            return try JSON(node: ["ok": "awesome"])
+        }
+        
         // accepted values for :application_status param are:
         // inReview
         // accepted
@@ -78,8 +87,10 @@ class AdminRouteCollection: RouteCollection {
         adminProtectedRouteBuilder.get("applicant", IVSAUser.self) { request, user in
             return try JSON(node: try user.makeNode())
         }
-//        
-//        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
+
+        
+        
+        //        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
 //            user.applicationStatus = .accepted
 //            
 //            var user = user
