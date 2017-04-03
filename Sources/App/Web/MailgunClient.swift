@@ -157,7 +157,7 @@ struct MailgunClient {
             throw EmailError.missingFile
         }
         
-        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: acceptDelegateEmail(baseURL: baseURL), attachment: testPDF)
+        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: rejectDelegateEmail(baseURL: baseURL), attachment: testPDF)
     }
     
     private static func sendMail(client: SMTPClient<TCPClientStream>, to: String, subject: String, body: EmailBody, attachment: EmailAttachment? = nil) throws {
