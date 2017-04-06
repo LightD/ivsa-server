@@ -41,6 +41,53 @@ extension EmailAttachment {
     }
 }
 
+func postcongressCorrectionEmail(baseURL: String) -> EmailBody {
+    var html = ""
+    html += "<!DOCTYPE html>"
+    html += "<html>"
+    html += "<body>"
+    
+    html += "<p> Deal delegates,</p>"
+    html += "<br />"
+    
+    html += "<p> Referring to your acceptance letters, there is a slight inconsistency that we have made in Item 3: Post-Congress Trip on page 6 and 8. </p>"
+    html += "<br />"
+    
+    html += "<h3 align='center'> <span style='background-color: yellow; color: red;'> PLEASE NOTE THAT POST-CONGRESS PACKAGE D: THE DIVING COURSE COSTS 330 EUROS/PERSON AND NOT 315 EUROS AS STATED IN PAGE 6 </span> </h3>"
+    html += "<br />"
+    
+    html += "<h3 align='center' style='margin-bottom: 0px;'> <span style='background-color: yellow; color: red;'> MARINE PARK FEE (PAYABLE DURING CHECK-IN) </span> </h3>"
+    html += "<h3 align='center'> <span style='background-color: yellow; color: red;'> MYR 50.00 / PERSON </span> </h3>"
+    html += "<h3 align='center'> <span style='background-color: yellow; color: red;'> (APPROX. 10-12 EUROS) </span> </h3>"
+    html += "<br />"
+    
+    html += "<p> On page 6: </p>"
+    html += "<br />"
+    
+    html += "<img src='\(baseURL)/images/page6-correction.png' />"
+    html += "<br />"
+    
+    html += "<p> On page 8: </p>"
+    html += "<br />"
+    
+    html += "<img src='\(baseURL)/images/page8-correction.png' />"
+    html += "<br />"
+    
+    html += "<p> We apologise for the mistake. For those who have transferred the Post-Congress fee of 315 Euros (only for Package D) to us, the OC shall be collecting an extra 15 Euros from you upon arrival and registration in Malaysia. </p>"
+    html += "<br />"
+    
+    html += "<p> Regards, </p> <br /> <p> OC </p>"
+    
+    
+    html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
+    
+    html += "</body>"
+    html += "</html>"
+    
+    
+    return EmailBody(type: .html, content: html)
+}
+
 func acceptDelegateEmail(baseURL: String) -> EmailBody {
     var html = ""
     html += "<!DOCTYPE html>"
@@ -143,21 +190,28 @@ struct MailgunClient {
     static func sendAcceptanceEmail(toUser user: IVSAUser, baseURL: String) throws {
         let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
 
-        guard let testPDF = EmailAttachment(filename: "accept-letter.pdf", in: workDir) else {
+        guard let acceptLetterPDF = EmailAttachment(filename: "accept-letter.pdf", in: workDir) else {
             throw EmailError.missingFile
         }
         
-        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: acceptDelegateEmail(baseURL: baseURL), attachment: testPDF)
+        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: acceptDelegateEmail(baseURL: baseURL), attachment: acceptLetterPDF)
     }
     
     static func sendRejectionEmail(toUser user: IVSAUser, baseURL: String) throws {
         let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
         
-        guard let testPDF = EmailAttachment(filename: "reject-letter.pdf", in: workDir) else {
+        guard let rejectLetterPDF = EmailAttachment(filename: "reject-letter.pdf", in: workDir) else {
             throw EmailError.missingFile
         }
         
-        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: rejectDelegateEmail(baseURL: baseURL), attachment: testPDF)
+        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: rejectDelegateEmail(baseURL: baseURL), attachment: rejectLetterPDF)
+    }
+
+    static func sendPostcongressCorrectionEmail(toUser user: IVSAUser, baseURL: String) throws {
+        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        
+        
+        try sendMail(client: client, to: user.email, subject: "66th IVSA Congress 2017 - Post-Congress Trip: Minor Changes", body: postcongressCorrectionEmail(baseURL: baseURL))
     }
     
     private static func sendMail(client: SMTPClient<TCPClientStream>, to: String, subject: String, body: EmailBody, attachment: EmailAttachment? = nil) throws {

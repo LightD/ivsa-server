@@ -57,12 +57,13 @@ class AdminRouteCollection: RouteCollection {
         
         adminRouteBuilder.get("testemail") { request in
             
-            var user = IVSAUser()
+            let user = IVSAUser()
             user.email = "nourforgive@gmail.com"
-            try MailgunClient.sendAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+            try MailgunClient.sendPostcongressCorrectionEmail(toUser: user, baseURL: request.baseURL)
             
             return try JSON(node: ["ok": "awesome"])
         }
+        
         
         // accepted values for :application_status param are:
         // inReview
@@ -88,7 +89,24 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: try user.makeNode())
         }
 
-        
+        adminProtectedRouteBuilder.get("sendCorrectionEmail") { request in
+            
+            let users: [IVSAUser] = try IVSAUser.query().filter("applicationStatus", "accepted").run()
+            
+            for user in users {
+                if !user.didSendCorrectionEmail {
+                    do {
+                        try MailgunClient.sendPostcongressCorrectionEmail(toUser: user, baseURL: request.baseURL)
+                        var mutableUser = user
+                        mutableUser.didSendCorrectionEmail = true
+                        try mutableUser.save()
+                    } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
+                }
+            }
+
+            return try JSON(node: ["ok": "awesome"])
+            
+        }
         
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
             user.applicationStatus = .accepted

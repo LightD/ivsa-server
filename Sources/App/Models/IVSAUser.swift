@@ -45,6 +45,8 @@ final class IVSAUser: Model, NodeInitializable {
     var isVerified: Bool
     var verificationToken: String = URandom().secureToken
     
+    var didSendCorrectionEmail: Bool = false
+    
     init() {
         self.email = ""
         self.password = ""
@@ -60,6 +62,7 @@ final class IVSAUser: Model, NodeInitializable {
         registrationDetails = try node.extract("registration_details")
         isVerified = try node.extract("is_verified")
         verificationToken = try node.extract("verification_token")
+        didSendCorrectionEmail = try node.extract("correction_email_sent")
     }
     
     init(node: Node, in context: Context) throws {
@@ -71,6 +74,7 @@ final class IVSAUser: Model, NodeInitializable {
         registrationDetails = try node.extract("registration_details")
         isVerified = try node.extract("is_verified")
         verificationToken = try node.extract("verification_token")
+        didSendCorrectionEmail = try node.extract("correction_email_sent")
     }
     
     init(credentials: UsernamePassword) {
@@ -97,7 +101,8 @@ final class IVSAUser: Model, NodeInitializable {
             "application_status": applicationStatus,
             "registration_details": registrationDetails,
             "is_verified": isVerified,
-            "verification_token": verificationToken
+            "verification_token": verificationToken,
+            "correction_email_sent": didSendCorrectionEmail
             ])
     }
     
