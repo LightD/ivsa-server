@@ -51,6 +51,7 @@ final class IVSAUser: Model, NodeInitializable {
         self.email = ""
         self.password = ""
         self.isVerified = false
+        self.didSendCorrectionEmail = false
     }
     
     init(node: Node) throws {
@@ -62,7 +63,9 @@ final class IVSAUser: Model, NodeInitializable {
         registrationDetails = try node.extract("registration_details")
         isVerified = try node.extract("is_verified")
         verificationToken = try node.extract("verification_token")
-        didSendCorrectionEmail = try node.extract("correction_email_sent")
+        do {
+            didSendCorrectionEmail = try node.extract("correction_email_sent")
+        } catch { didSendCorrectionEmail = false }
     }
     
     init(node: Node, in context: Context) throws {
@@ -74,7 +77,10 @@ final class IVSAUser: Model, NodeInitializable {
         registrationDetails = try node.extract("registration_details")
         isVerified = try node.extract("is_verified")
         verificationToken = try node.extract("verification_token")
+        
+        do {
         didSendCorrectionEmail = try node.extract("correction_email_sent")
+        } catch { didSendCorrectionEmail = false }
     }
     
     init(credentials: UsernamePassword) {

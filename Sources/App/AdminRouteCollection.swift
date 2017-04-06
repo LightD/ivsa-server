@@ -74,7 +74,6 @@ class AdminRouteCollection: RouteCollection {
             let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", appStatus).run()
             
             let sortedApplicants = users.filter { $0.registrationDetails != nil }.sorted(by: { (first, second) -> Bool in
-                
                 // we can force unwrap safely coz we filter first
                 return first.registrationDetails!.ivsaChapter.country < second.registrationDetails!.ivsaChapter.country
             })
@@ -91,8 +90,8 @@ class AdminRouteCollection: RouteCollection {
 
         adminProtectedRouteBuilder.get("sendCorrectionEmail") { request in
             
-            let users: [IVSAUser] = try IVSAUser.query().filter("applicationStatus", "accepted").run()
-            
+            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", "accepted").run()
+            var sentToUsers = 0
             for user in users {
                 if !user.didSendCorrectionEmail {
                     do {
@@ -100,11 +99,12 @@ class AdminRouteCollection: RouteCollection {
                         var mutableUser = user
                         mutableUser.didSendCorrectionEmail = true
                         try mutableUser.save()
+                        sentToUsers += 1
                     } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
                 }
             }
 
-            return try JSON(node: ["ok": "awesome"])
+            return try JSON(node: ["ok": "awesome sent to \(sentToUsers)"])
             
         }
         
