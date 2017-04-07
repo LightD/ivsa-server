@@ -12,6 +12,7 @@ import Turnstile
 import Vapor
 import HTTP
 import Routing
+import Fluent
 
 class AdminRouteCollection: RouteCollection {
     
@@ -136,6 +137,19 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: try user.makeNode())
         }
         
+        adminProtectedRouteBuilder.get("getDuplicateAcceptedMembers") { request in
+            
+            //let users: [IVSAUser] = try IVSAUser.query()
+            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", contains: "accepted").run()
+            
+            var duplicatesCounts: [String: Int] = [:]
+            for user in users {
+                duplicatesCounts[user.id!.asString()] = (duplicatesCounts[user.id!.asString()] ?? 0) + 1
+            }
+            
+            return try JSON(node: ["duplicated users count": duplicatesCounts.count])
+        }
+    
         adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
             
             guard let newPass = request.json?["newPass"]?.string else {
