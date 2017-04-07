@@ -1,7 +1,7 @@
 {
     "user": "",
     "password": "",
-    "database": "ivsa",
+    "database": "ivsalocal",
     "port": "27017",
     "host": "127.0.0.1"
 }

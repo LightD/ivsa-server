@@ -89,25 +89,25 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: try user.makeNode())
         }
 
-        adminProtectedRouteBuilder.get("sendCorrectionEmail") { request in
-            
-            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", "accepted").run()
-            var sentToUsers = 0
-            for user in users {
-                if !user.didSendCorrectionEmail {
-                    do {
-                        try MailgunClient.sendPostcongressCorrectionEmail(toUser: user, baseURL: request.baseURL)
-                        var mutableUser = user
-                        mutableUser.didSendCorrectionEmail = true
-                        try mutableUser.save()
-                        sentToUsers += 1
-                    } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
-                }
-            }
-
-            return try JSON(node: ["ok": "awesome sent to \(sentToUsers)"])
-            
-        }
+//        adminProtectedRouteBuilder.get("sendCorrectionEmail") { request in
+//            
+//            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", "accepted").run()
+//            var sentToUsers = 0
+//            for user in users {
+//                if !user.didSendCorrectionEmail {
+//                    do {
+//                        try MailgunClient.sendPostcongressCorrectionEmail(toUser: user, baseURL: request.baseURL)
+//                        var mutableUser = user
+//                        mutableUser.didSendCorrectionEmail = true
+//                        try mutableUser.save()
+//                        sentToUsers += 1
+//                    } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
+//                }
+//            }
+//
+//            return try JSON(node: ["ok": "awesome sent to \(sentToUsers)"])
+//            
+//        }
         
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
             user.applicationStatus = .accepted
@@ -145,6 +145,8 @@ class AdminRouteCollection: RouteCollection {
             for user in users {
                 duplicatesCounts[user.id!.asString()] = (duplicatesCounts[user.id!.asString()] ?? 0) + 1
             }
+            
+            
             
 //            for duplicate in duplicatesCounts {
 //                
