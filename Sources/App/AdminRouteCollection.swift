@@ -139,7 +139,6 @@ class AdminRouteCollection: RouteCollection {
         
         adminProtectedRouteBuilder.get("getDuplicateAcceptedMembers") { request in
             
-            //let users: [IVSAUser] = try IVSAUser.query()
             let users: [IVSAUser] = try IVSAUser.query().filter("application_status", contains: "accepted").run()
             
             var duplicatesCounts: [String: Int] = [:]
@@ -147,7 +146,12 @@ class AdminRouteCollection: RouteCollection {
                 duplicatesCounts[user.id!.asString()] = (duplicatesCounts[user.id!.asString()] ?? 0) + 1
             }
             
-            return try JSON(node: ["duplicated users count": duplicatesCounts.count])
+//            for duplicate in duplicatesCounts {
+//                
+//                try IVSAUser.find(duplicate.key)?.delete()
+//            }
+            let duplicatesNode = try Node(node: duplicatesCounts)
+            return try JSON(node: ["duplicated users count": duplicatesCounts.count, "values:": duplicatesNode])
         }
     
         adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
