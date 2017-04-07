@@ -313,7 +313,7 @@ ivsaAdmin.controller('ApplicantsController', function ApplicantsController($scop
      $scope.isLoading = true;
      $scope.token = token;
 
-     $http.get("/api/admin/delegates/inReview", { headers: { "Authorization": "Bearer " +  token} })
+     $http.get("/api/admin/delegates/accepted", { headers: { "Authorization": "Bearer " +  token} })
      .then(function success(object) {
           $scope.isLoading = false;
           console.log("got users ", object.data);
