@@ -162,6 +162,46 @@ func rejectDelegateEmail(baseURL: String) -> EmailBody {
     return EmailBody(type: .html, content: html)
 }
 
+func refrainFromPostcongresPaymentEmail(baseURL: String) -> EmailBody {
+    var html = ""
+    html += "<!DOCTYPE html>"
+    html += "<html>"
+    html += "<body>"
+    
+    html += "<p> Dear Ladies and Gentlemen and <u>chosen delegates of 66th IVSA Congress.</u> </p>"
+    html += "<br />"
+    
+    html += "<p> <b> SPECIAL ATTENTION TO DELEGATES WHO ARE PLANNING TO ATTEND POST- CONGRESS, FOR ALL PACKAGES A,B,C & D. </b> </p>"
+    
+    
+    html += "<p> Please <b><u><i style='color: red' >REFRAIN</i></u> <i>from booking your return flight FROM Kuala Lumpur AND <u><i style='color: red' >REFRAIN</i></u> from paying your post congress fees for now</b></i>, as this issue will be settled by <b style='font-size: large'>TODAY</b> itself. </p>"
+    html += "<p> We apologize for this mishap at the moment due to managerial and unforeseen circumstances. </p>"
+    
+    html += "<p> We are changing the diving spots and Island to best suit as we promised (the most beautiful dive and beach that we can provide). <br /> <b><i>Emails to clarify on this issue will be sent as soon as possible from the OC. </i></b> <br /> <mark> (within the next 24 hours) </mark> </p>"
+    
+    html += "<p> <b>For those who have already paid for Post-Congress </b> and provided proof of payment, you shall be contacted personally as well! </p>"
+    
+    html += "<p>For any further inquiries, please do not hesitate to email us at:- ivsacongress.my@gmail.com </p>"
+    
+    html += "<p> Thank you for you patience and sorry for any inconvenience caused! </p>"
+    
+    html += "<p> <b><i>Deepest Gratitude, </i></b> <br/> Hugs, unicorns, and rainbows </p>"
+    html += "<br /> <br />"
+    
+    
+    html += "<p> <b>Khairina Abdul Halim</b> <br/> <i> Co-President, 66th IVSA Congress, Malaysia </i> <br /> <i> International Veterinary Students' Association </i> <br /> <i> +6017-685 6519 </i> </p>"
+    html += "<br />"
+    
+    
+    html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
+    
+    html += "</body>"
+    html += "</html>"
+    
+    
+    return EmailBody(type: .html, content: html)
+}
+
 
 extension SMTPClient {
     public static func makeMailgunClient() throws -> SMTPClient {
@@ -212,6 +252,12 @@ struct MailgunClient {
         
         
         try sendMail(client: client, to: user.email, subject: "66th IVSA Congress 2017 - Post-Congress Trip: Minor Changes", body: postcongressCorrectionEmail(baseURL: baseURL))
+    }
+    
+    static func sendPostCongressReferainFromPayment(toUser user: IVSAUser, baseURL: String) throws {
+        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+
+        try sendMail(client: client, to: user.email, subject: "ATTN: POST-CONGRESS FURTHER INFORMATION", body: refrainFromPostcongresPaymentEmail(baseURL: baseURL))
     }
     
     private static func sendMail(client: SMTPClient<TCPClientStream>, to: String, subject: String, body: EmailBody, attachment: EmailAttachment? = nil) throws {

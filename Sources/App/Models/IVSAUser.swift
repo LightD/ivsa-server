@@ -79,7 +79,7 @@ final class IVSAUser: Model, NodeInitializable {
         verificationToken = try node.extract("verification_token")
         
         do {
-        didSendCorrectionEmail = try node.extract("correction_email_sent")
+            didSendCorrectionEmail = try node.extract("correction_email_sent")
         } catch { didSendCorrectionEmail = false }
     }
     

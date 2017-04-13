@@ -60,7 +60,7 @@ class AdminRouteCollection: RouteCollection {
             
             let user = IVSAUser()
             user.email = "nourforgive@gmail.com"
-            try MailgunClient.sendPostcongressCorrectionEmail(toUser: user, baseURL: request.baseURL)
+            try MailgunClient.sendPostCongressReferainFromPayment(toUser: user, baseURL: request.baseURL)
             
             return try JSON(node: ["ok": "awesome"])
         }
@@ -89,26 +89,6 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: try user.makeNode())
         }
 
-//        adminProtectedRouteBuilder.get("sendCorrectionEmail") { request in
-//            
-//            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", "accepted").run()
-//            var sentToUsers = 0
-//            for user in users {
-//                if !user.didSendCorrectionEmail {
-//                    do {
-//                        try MailgunClient.sendPostcongressCorrectionEmail(toUser: user, baseURL: request.baseURL)
-//                        var mutableUser = user
-//                        mutableUser.didSendCorrectionEmail = true
-//                        try mutableUser.save()
-//                        sentToUsers += 1
-//                    } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
-//                }
-//            }
-//
-//            return try JSON(node: ["ok": "awesome sent to \(sentToUsers)"])
-//            
-//        }
-        
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
             user.applicationStatus = .accepted
             
@@ -137,32 +117,23 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: try user.makeNode())
         }
         
-        adminProtectedRouteBuilder.get("getDuplicateAcceptedMembers") { request in
+        adminProtectedRouteBuilder.get("sendRefrainFromPostcongressPaymentEmail") { request in
+            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", "accepted").run()
             
-            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", contains: "accepted").run()
-            
-            var duplicatesCounts: [String: Int] = [:]
             for user in users {
-                duplicatesCounts[user.id!.asString()] = (duplicatesCounts[user.id!.asString()] ?? 0) + 1
+                do {
+                    try MailgunClient.sendPostCongressReferainFromPayment(toUser: user, baseURL: request.baseURL)
+                } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
             }
             
-            
-            
-//            for duplicate in duplicatesCounts {
-//                
-//                try IVSAUser.find(duplicate.key)?.delete()
-//            }
-            let duplicatesNode = try Node(node: duplicatesCounts)
-            return try JSON(node: ["duplicated users count": duplicatesCounts.count, "values:": duplicatesNode])
+            return try JSON(node: ["ok": 200])
         }
-    
+        
         adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
             
             guard let newPass = request.json?["newPass"]?.string else {
                 throw Abort.custom(status: .badRequest, message: "Missing param")
             }
-            
-            
             
             var mutableUser = user
             mutableUser.updatePassword(pass: newPass)
