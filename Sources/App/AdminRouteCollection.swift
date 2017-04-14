@@ -60,7 +60,7 @@ class AdminRouteCollection: RouteCollection {
             
             let user = IVSAUser()
             user.email = "nourforgive@gmail.com"
-            try MailgunClient.sendPostCongressReferainFromPayment(toUser: user, baseURL: request.baseURL)
+            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user, baseURL: request.baseURL)
             
             return try JSON(node: ["ok": "awesome"])
         }
