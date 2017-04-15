@@ -271,7 +271,7 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
 
 extension SMTPClient {
     public static func makeMailgunClient() throws -> SMTPClient {
-        return try SMTPClient(host: "smtp.gmail.com", port: 465, securityLayer: .tls(nil))
+        return try SMTPClient(host: "smtp.gmail.com", port: 587, securityLayer: .tls(nil))
     }
     
 }
@@ -327,7 +327,7 @@ struct MailgunClient {
     }
     
     static func sendPostcongressDetailsUpdatesEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeGmailClient()
+        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
         
         
         guard let package4d3nPDF = EmailAttachment(filename: "4Day-3Night-Package.pdf", in: workDir) else {
