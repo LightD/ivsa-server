@@ -227,8 +227,8 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'><b>ii)</b><u>&nbsp;5D3N</u>&nbsp;will give you enough time to complete the diving course + 1 day for 3 extra \"Fun Dives\"<br></p></blockquote></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'>Price difference from the last Open Water Diving License Package is only an extra of 80euros for:-</p></blockquote></blockquote></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'>- Better beach location and marine life<br>- One (1) extra Day of sun and sea, and one extra Night of accomodation in Air-conditioned room<br>- Three (3) Extra Fun Dives to beautiful diving spots<br>- One (1) extra Buffet Breakfast</p><p style='margin: 0'>- One (1) extra Buffet Lunch<br>- One (1) extra Buffet Tea Break<br>- One (1) extra Buffet Dinner</p></blockquote></blockquote></blockquote>"
-    html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><b>As for&nbsp;</b><span style=\"font-weight:bold;background-color:rgb(255,0,255)\">PACKAGE B,C,D &amp; E</span><b>&nbsp;</b>we are giving you the options of either staying<font color=\"#ff0000\">&nbsp;<b>4D3N</b></font>&nbsp;or&nbsp;<b><font color=\"#ff0000\">5D4N</font></b>.&nbsp;<br>Just e-mail us at;&nbsp;<font color=\"#0000ff\" size=\"4\" style=\"font-weight:bold\">&nbsp;</font><font color=\"#0000ff\"><b><a href=\"mailto:ivsacongress.my@gmail.com\" target=\"_blank\">ivsacongress.my@gmail.com</a></b></font></blockquote>"
-    html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><font color=\"#000000\">&nbsp;the following template:-<br><br><b>POST-CONGRESS REPLY TEMPLATE<br><br>1) Package: &nbsp;</b>(e.g; 4D4N, Package C)<br><b>2) \"Other Activities\" (Discover Scuba):&nbsp;</b>&nbsp;(e.g; Yes/No)<br></font></blockquote></blockquote>"
+    html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><b>As for&nbsp;</b><span style=\"font-weight:bold;background-color:rgb(255,0,255)\">PACKAGE B,C,D &amp; E</span><b>&nbsp;</b>we are giving you the options of either staying<font color=\"#ff0000\">&nbsp;<b>4D3N</b></font>&nbsp;or&nbsp;<b><font color=\"#ff0000\">5D4N</font>\" (refer to PDF attachments for pricing)\"</b>.&nbsp;<br>Just e-mail us at;&nbsp;<font color=\"#0000ff\" size=\"4\" style=\"font-weight:bold\">&nbsp;</font><font color=\"#0000ff\"><b><a href=\"mailto:ivsacongress.my@gmail.com\" target=\"_blank\">ivsacongress.my@gmail.com</a></b></font></blockquote>"
+    html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><font color=\"#000000\">&nbsp;the following template:-<br><br><b>POST-CONGRESS REPLY TEMPLATE<br><br>1) Package: &nbsp;</b>(e.g; 4D3N, Package C)<br><b>2) \"Other Activities\" (Discover Scuba):&nbsp;</b>&nbsp;(e.g; Yes/No)<br></font></blockquote></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><font color=\"#000000\"><i>One session (1) of Discover Scuba is&nbsp;<u>already included</u>&nbsp;in&nbsp;<b style=\"background-color:rgb(255,0,255)\">Package D</b>&nbsp;for both 4D3N &amp; 5D4N.<br>Payment for&nbsp;<u><b>extra</b></u>&nbsp;Discover Scuba session or for those who want to&nbsp;<b>try</b>&nbsp;Discover Scuba (especially&nbsp;those taking&nbsp;<span style=\"background-color:rgb(255,0,255)\">Package E</span>) should bring extra cash of RM200 which will be collected upon Congress Registration</i></font></blockquote></blockquote></blockquote>"
     
     html += "<div><p style='margin: 0'><span style=\"line-height:14.95px\"><b><br></b></span></p><p  style='margin: 0'><span style=\"line-height:14.95px\"><b><br></b></span></p><p  style='margin: 0'><span style=\"line-height:14.95px\"><b>4. Post-Congress spots</b>&nbsp;are of&nbsp;<b><u>FIRST-COME-FIRST-SERVED</u></b>&nbsp;bas<wbr>is, whereby upon paying the&nbsp;<b>full payment</b>&nbsp;for the post-congress fee, your seat shall be confirmed.<br><br></span></p></div>"
@@ -242,6 +242,8 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     
     html += "<div><p  style='margin: 0'><span style=\"line-height:14.95px\"><b><br></b></span></p><p  style='margin: 0'><span style=\"line-height:14.95px\"><b>6. DELEGATES WHO HAVE ALREADY PAID FOR POST-CONGRESS</b></span></p><ul><li><b style=\"background-color:rgb(255,255,0)\">IF YOU HAVE PAID FOR POST-CONGRESS &amp; WE HAVE NOT CONTACTED YOU WITHIN THE NEXT 48 HOURS; DO DROP US AN EMAIL WITH YOUR PROOF OF PAYMENT AGAIN.<br></b>We would not like to miss out on anybody who has paid and would like to provide the opportunity to change packages if desired.<br><br></li><li><b><span style=\"line-height:14.95px\">Post-Congress fee can be transferred along with Congress Delegate Fee. Please state that both fees are transferred to us via email attached with a copy of the transfer slip.</span></b><br></li><li><b><span style=\"line-height:14.95px\"><b style=\"color:red\">PAYMENT WILL NOT BE REFUNDED FOR ANY CANCELLATION OF REGISTRATION OR NO-SHOW.</b></span></b></li></ul></div>"
     html += "</div>"
+    
+    html += "<p>The full itinerary for all days involved will be emailed by next week</p>"
     
     html += "<br style='clear: both'>"
 
@@ -258,7 +260,8 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     html += "<p style='margin: 0;'>+6017-685 6519</p>"
     
     html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
-    
+    html += "<br >"
+
     html += "</body>"
     html += "</html>"
     
@@ -268,7 +271,7 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
 
 extension SMTPClient {
     public static func makeMailgunClient() throws -> SMTPClient {
-        return try SMTPClient(host: "smtp.mailgun.org", port: 587, securityLayer: .none)
+        return try SMTPClient(host: "smtp.gmail.com", port: 465, securityLayer: .tls(nil))
     }
     
 }
@@ -297,7 +300,7 @@ struct MailgunClient {
             throw EmailError.missingFile
         }
         
-        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: acceptDelegateEmail(baseURL: baseURL), attachment: acceptLetterPDF)
+        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: acceptDelegateEmail(baseURL: baseURL), attachments: [acceptLetterPDF])
     }
     
     static func sendRejectionEmail(toUser user: IVSAUser, baseURL: String) throws {
@@ -307,7 +310,7 @@ struct MailgunClient {
             throw EmailError.missingFile
         }
         
-        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: rejectDelegateEmail(baseURL: baseURL), attachment: rejectLetterPDF)
+        try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: rejectDelegateEmail(baseURL: baseURL), attachments: [rejectLetterPDF])
     }
 
     static func sendPostcongressCorrectionEmail(toUser user: IVSAUser, baseURL: String) throws {
@@ -324,20 +327,29 @@ struct MailgunClient {
     }
     
     static func sendPostcongressDetailsUpdatesEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try SMTPClient<TCPClientStream>.makeGmailClient()
         
-        try sendMail(client: client, to: user.email, subject: "POST CONGRESS DETAILS AND FEE UPDATES (Exclusive) lol", body: postcongressDetailsUpdatesEmail(baseURL: baseURL))
+        
+        guard let package4d3nPDF = EmailAttachment(filename: "4Day-3Night-Package.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        
+        guard let package5d4nPDF = EmailAttachment(filename: "5Day-4Night-Package.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        
+        try sendMail(client: client, to: user.email, subject: "POST CONGRESS DETAILS AND FEE UPDATES (Exclusive) lol", body: postcongressDetailsUpdatesEmail(baseURL: baseURL), attachments: [package4d3nPDF, package5d4nPDF])
     }
     
-    private static func sendMail(client: SMTPClient<TCPClientStream>, to: String, subject: String, body: EmailBody, attachment: EmailAttachment? = nil) throws {
+    private static func sendMail(client: SMTPClient<TCPClientStream>, to: String, subject: String, body: EmailBody, attachments: [EmailAttachment] = []) throws {
         
         let credentials = SMTP.SMTPCredentials(
-            user: "ivsa@mycongresslah.com",
-            pass: "IVSAcongress2017"
+            user: "ivsacongress.my@gmail.com",
+            pass: "66ivsacongressmalaysia"
         )
         
         let from = SMTP.EmailAddress(name: "IVSA Malaysia OC Team",
-                                     address: "mail@mycongresslah.com")
+                                     address: "ivsacongress.my@gmail.com")
         
         
         
@@ -346,7 +358,7 @@ struct MailgunClient {
                                       subject: subject,
                                       body: body)
         
-        if let file = attachment {
+        for file in attachments {
             email.attachments.append(file)
         }
         

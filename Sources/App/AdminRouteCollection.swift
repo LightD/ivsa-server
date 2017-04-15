@@ -59,8 +59,18 @@ class AdminRouteCollection: RouteCollection {
         adminRouteBuilder.get("testemail") { request in
             
             let user = IVSAUser()
-            user.email = "nourforgive@gmail.com"
+            user.email = "khairina.halim@gmail.com"
             try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user, baseURL: request.baseURL)
+            
+            
+            let user2 = IVSAUser()
+            user2.email = "delnamazda@gmail.com"
+            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user2, baseURL: request.baseURL)
+            
+            
+            let user3 = IVSAUser()
+            user3.email = "dylanchoy54@gmail.com"
+            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user3, baseURL: request.baseURL)
             
             return try JSON(node: ["ok": "awesome"])
         }
@@ -117,18 +127,26 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: try user.makeNode())
         }
         
-        adminProtectedRouteBuilder.get("sendRefrainFromPostcongressPaymentEmail") { request in
+        adminProtectedRouteBuilder.post("confirmReject", IVSAUser.self) { request, user in
+            user.applicationStatus = .confirmedRejected
+            var user = user
+            try user.save()
+            
+            return try JSON(node: try user.makeNode())
+        }
+        
+        adminProtectedRouteBuilder.get("sendPostcongressFeesUpdatesEmail") { request in
             let users: [IVSAUser] = try IVSAUser.query().filter("application_status", "accepted").run()
             
             for user in users {
                 do {
-                    try MailgunClient.sendPostCongressReferainFromPayment(toUser: user, baseURL: request.baseURL)
+                    try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user, baseURL: request.baseURL)
                 } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
             }
             
             return try JSON(node: ["ok": 200])
         }
-        
+                
         adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
             
             guard let newPass = request.json?["newPass"]?.string else {

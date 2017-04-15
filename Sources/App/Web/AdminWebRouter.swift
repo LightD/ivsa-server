@@ -14,50 +14,50 @@ import Turnstile
 import Routing
 
 struct AdminWebRouter {
-    
+
     typealias Wrapped = HTTP.Responder
-    
+
     private let drop: Droplet
-    
+
     init(droplet: Droplet) {
         self.drop = droplet
     }
-    
+
     static func buildRouter(droplet: Droplet) -> AdminWebRouter {
         return AdminWebRouter(droplet: droplet)
     }
-    
+
     func registerRoutes(authMiddleware: AdminSessionAuthMiddleware) {
         let adminBuilder = drop.grouped("admin")
         let authBuilder = adminBuilder.grouped(authMiddleware)
-        
+
         self.buildIndex(adminBuilder)
         self.buildAuth(adminBuilder)
-        
+
         self.buildHome(authBuilder)
     }
-    
+
     private func buildIndex<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get { request in
             do {
                 guard let _ = try request.adminSessionAuth.admin() else {
                     throw "redirect to auth page"
                 }
-                
+
                 return Response(redirect: "/admin/registration")
             }
             catch {
                 return Response(redirect: "/admin/login")
             }
-            
+
         }
     }
-    
+
     private func buildAuth<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("login") { request in
             return try self.drop.view.make("admin/login")
         }
-        
+
         builder.post("login") { request in
             guard let username = request.formURLEncoded?["username"]?.string,
                 let password = request.formURLEncoded?["password"]?.string else {
@@ -66,7 +66,7 @@ struct AdminWebRouter {
             let credentials = UsernamePassword(username: username, password: password)
             do {
                 _ = try request.adminSessionAuth.login(credentials)
-                
+
                 return Response(redirect: "/admin")
             } catch let e as Abort {
                 switch e {
@@ -79,14 +79,14 @@ struct AdminWebRouter {
 
         }
     }
-    
+
     private func buildHome<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         self.buildRegistration(builder)
     }
-    
+
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("registration") { request in
-            
+
             guard var admin = try request.adminSessionAuth.admin() else {
                 throw "admin not found"
             }
@@ -94,15 +94,15 @@ struct AdminWebRouter {
                 admin.generateAccessToken()
                 try admin.save()
             }
-            
+
             let adminNode = try Node(node: admin.makeNode())
-            
+
             return try self.drop.view.make("admin/registration", ["registration": true, "user": adminNode])
         }
-        
+
         builder.get("applicant_details", String.self) { request, applicantID in
-            
-            
+
+
             guard var admin = try request.adminSessionAuth.admin() else {
                 throw "admin not found"
             }
@@ -111,8 +111,18 @@ struct AdminWebRouter {
                 try admin.save()
             }
 //            let data = Node(value: ["accessToken": admin.accessToken!, "applicantID": applicantID])
-            
+
             return try self.drop.view.make("admin/applicant_details", ["accessToken": admin.accessToken!, "applicantID": applicantID])
         }
+
+        builder.get("waiting_list") { request in
+            guard var admin = try request.adminSessionAuth.admin() else {
+                throw "admin not found"
+            }
+            let node = try Node(node: ["waitlist": true, "user": admin.makeNode()])
+
+            return try self.drop.view.make("admin/waitlist", node)
+        }
+
     }
 }
