@@ -55,6 +55,15 @@ class AdminRouteCollection: RouteCollection {
         adminRouteBuilder.get("me") { request in
             return try request.admin()
         }
+
+        adminRouteBuilder.get("getallacceptedemails") { request in
+            
+            let appStatus = try request.parameters.extract("application_status") as String
+            let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", appStatus).run()
+            let emails = users.map { $0.email }.joined(separator: ",")
+            
+            return try JSON(node: ["ok emails are: ": emails])
+        }
         
         adminRouteBuilder.get("testemail") { request in
             
