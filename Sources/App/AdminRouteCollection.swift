@@ -68,18 +68,18 @@ class AdminRouteCollection: RouteCollection {
         adminRouteBuilder.get("testemail") { request in
             
             let user = IVSAUser()
-            user.email = "khairina.halim@gmail.com"
+            user.email = "nourforgive@gmail.com"
             try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user, baseURL: request.baseURL)
             
-            
-            let user2 = IVSAUser()
-            user2.email = "delnamazda@gmail.com"
-            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user2, baseURL: request.baseURL)
-            
-            
-            let user3 = IVSAUser()
-            user3.email = "dylanchoy54@gmail.com"
-            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user3, baseURL: request.baseURL)
+//            
+//            let user2 = IVSAUser()
+//            user2.email = "delnamazda@gmail.com"
+//            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user2, baseURL: request.baseURL)
+//            
+//            
+//            let user3 = IVSAUser()
+//            user3.email = "dylanchoy54@gmail.com"
+//            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user3, baseURL: request.baseURL)
             
             return try JSON(node: ["ok": "awesome"])
         }
