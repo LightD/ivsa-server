@@ -69,17 +69,7 @@ class AdminRouteCollection: RouteCollection {
             
             let user = IVSAUser()
             user.email = "nourforgive@gmail.com"
-            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user, baseURL: request.baseURL)
-            
-//            
-//            let user2 = IVSAUser()
-//            user2.email = "delnamazda@gmail.com"
-//            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user2, baseURL: request.baseURL)
-//            
-//            
-//            let user3 = IVSAUser()
-//            user3.email = "dylanchoy54@gmail.com"
-//            try MailgunClient.sendPostcongressDetailsUpdatesEmail(toUser: user3, baseURL: request.baseURL)
+            try MailgunClient.sendWaitlistAcceptanceEmail(toUser: user, baseURL: request.baseURL)
             
             return try JSON(node: ["ok": "awesome"])
         }
@@ -109,14 +99,24 @@ class AdminRouteCollection: RouteCollection {
         }
 
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
+            
+            let originalStatus = user.applicationStatus
+            
+            
             user.applicationStatus = .accepted
             
             var user = user
+            
             try user.save()
             let node = try user.makeNode()
             
             do {
-                try MailgunClient.sendAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+                if originalStatus == .rejected {
+                    try MailgunClient.sendWaitlistAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+                }
+                else {
+                    try MailgunClient.sendAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+                }
             } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
             
             return try JSON(node: node)

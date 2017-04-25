@@ -57,6 +57,10 @@ struct ProofOfPayment: NodeInitializable, NodeRepresentable {
     }
 }
 
+struct FlightDetails {
+    
+}
+
 final class IVSAUser: Model, NodeInitializable {
     // this is for fluent ORM
     var exists: Bool = false

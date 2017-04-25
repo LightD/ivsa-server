@@ -45,6 +45,12 @@ final class AccountRouteCollection: RouteCollection {
 //            return user
         }
         
+        authenticatedBuilder.post("connect", "facebook") { request in
+            
+            
+            return JSON(["status", "ok"])
+        }
+        
         authenticatedBuilder.post("logout") { request in
             try request.ivsaAuth.logout()
             return JSON(["status": "OK"])

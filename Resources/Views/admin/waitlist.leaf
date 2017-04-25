@@ -6,7 +6,7 @@
 
 #export("body") {
 
-<div class="container-fluid" ng-controller="ApplicantsController">
+<div class="container-fluid" ng-controller="WaitlistController">
 <span ng-init="setup('#(user.access_token)')"> </span>
 <div class="row">
 <!-- <span> Total number of applicants is: {{applicants.length}} </span> -->
@@ -21,8 +21,6 @@
 	<th > Position </th>
 	<th > Gender </th>
 	<th > Year of study </th>
-	<th > Year of study </th>
-	<th> Year of study </th>
 	<!-- <th> Piggy </th> -->
 <!--  <th> Action </th> accept/reject button -->
 </tr>
@@ -41,10 +39,10 @@
 
 	<td>
 		<button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button>
-		<button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button>
+		<!-- <button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button> -->
 	</td>
-	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
-	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
+	<!-- <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
+	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td> -->
 	<!-- <td>
 	<button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button>
 	<button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button>

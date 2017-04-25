@@ -202,6 +202,39 @@ func refrainFromPostcongresPaymentEmail(baseURL: String) -> EmailBody {
     return EmailBody(type: .html, content: html)
 }
 
+func acceptWaitlistDelegateEmail(baseURL: String) -> EmailBody {
+    var html = ""
+    html += "<!DOCTYPE html>"
+    html += "<html>"
+    html += "<body>"
+    
+    html += "<p> Dear Future Delegate, </p>"
+    
+    html += "<p> CONGRATULATIONS! You have been selected to join the 66th IVSA Congress 2017 in Malaysia. :) </p>"
+    
+    html += "<p> We have bumped you up into our acceptance list as there are several delegates who could not make it to our event. Attached is the acceptance letter we have sent to all delegates, please do read it carefully. Note that the new deadline for confirmation is <mark style='font-size: large; color: red;'><u> <b> 30th APRIL 2017. </b> </u></mark> </p>"
+    
+    html += "<p><mark style='font-size: large; color: red;'><u><b> Payment Deadline: 12th May 2017 </b> </u></mark></p>"
+    
+    html += "<p><mark style='color: red;'><b> For Post-Congress, please refer to the other attached document for the latest amendment. </b></mark></p>"
+    
+    html += "<p> Please get back to us soon on your RSVP. </p>"
+    
+    html += "<p> Thank you! </p>"
+    
+    html += "<p> Regards, <br /> OC </p>"
+    
+    html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
+    html += "<br >"
+
+    
+    html += "</body>"
+    html += "</html>"
+    
+    
+    return EmailBody(type: .html, content: html)
+}
+
 func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     var html = ""
     html += "<!DOCTYPE html>"
@@ -214,7 +247,6 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     html += "<p style='margin: 0'> <b>1. First of all,</b> we would like to deeply apologize for <i>managerial and unforseen circumstances.</i></p>"
     html += "<p style='margin: 0'> &nbsp; &nbsp; As we also said in our previous email, <span style='font-size:12.8px'> we are changing the diving spots and Island to best suit as we promised, the most beautiful dive, snorkel, &nbsp;and beach that we can provide for our dearest delegates.</span> </p>"
     html += "</div>"
-//    html += "\r\n"
     
     html += "<div>"
     html += "<p> <span style='line-height:14.95px'><b>2.</b> We have changed our <b>Post-Congress trip location</b> to the <u>AS BEAUTIFUL and AS AMAZING</u> <i><span style='color: blue'> clear blue waters </span> & <span style='color: blue'> flourishing marine life </span></i> of <b> Redang Island</b> (PUlau Redang)"
@@ -224,35 +256,25 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     html += "<blockquote style='margin:0px 0px 0px 40px;border:none;padding:0px'><p style='margin: 0'><b>a) 4 Days 3 Nights Packages (B,C,D,E)<br>b) 5 Days 4 Nights Packages (A,B,C,D,E)<br>c) Itinerary for all days involved</b></p></blockquote>"
     html += "<blockquote style='margin:0px 0px 0px 40px;border:none;padding:0px'><p style='margin: 0'><b>IMPORTANT : OPEN WATER DIVING LICENSE&nbsp;<span style='background-color:rgb(255,0,255)'>(PACKAGE A)</span>&nbsp;IS NOT MADE AVAILABLE IN&nbsp;<font color='#ff0000'>4DAYS 3NIGHTS</font>&nbsp;PACKAGES DUE TO THE FOLLOWING REASONS FOUND COMPELLING TO THE OC:-<br></b></p></blockquote>"
     
-//    html += "\r\n"
-    
     html += "<blockquote style='margin:0px 0px 0px 40px;border:none;padding:0px'><blockquote style='margin:0px 0px 0px 40px;border:none;padding:0px'><p style='margin: 0'><b>i)</b>&nbsp;<u>4D3N</u>&nbsp;is exactly JUST ENOUGH TIME for you to complete your diving license course.&nbsp;<br></p></blockquote></blockquote>"
     html += "<blockquote style='margin:0px 0px 0px 40px;border:none;padding:0px'><blockquote style='margin:0px 0px 0px 40px;border:none;padding:0px'><blockquote style='margin:0px 0px 0px 40px;border:none;padding:0px'><p style='margin: 0'>The training diving spots (due to safety reasons) are not similar to the licensed \"Fun Dive Spots\" that are more beautiful.</p></blockquote></blockquote></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'><b>ii)</b><u>&nbsp;5D3N</u>&nbsp;will give you enough time to complete the diving course + 1 day for 3 extra \"Fun Dives\"<br></p></blockquote></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'>Price difference from the last Open Water Diving License Package is only an extra of 80euros for:-</p></blockquote></blockquote></blockquote>"
     
-//    html += "\r\n"
-    
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'>- Better beach location and marine life<br>- One (1) extra Day of sun and sea, and one extra Night of accomodation in Air-conditioned room<br>- Three (3) Extra Fun Dives to beautiful diving spots<br>- One (1) extra Buffet Breakfast</p><p style='margin: 0'>- One (1) extra Buffet Lunch<br>- One (1) extra Buffet Tea Break<br>- One (1) extra Buffet Dinner</p></blockquote></blockquote></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><b>As for&nbsp;</b><span style=\"font-weight:bold;background-color:rgb(255,0,255)\">PACKAGE B,C,D &amp; E</span><b>&nbsp;</b>we are giving you the options of either staying<font color=\"#ff0000\">&nbsp;<b>4D3N</b></font>&nbsp;or&nbsp;<b><font color=\"#ff0000\">5D4N</font>\" (refer to PDF attachments for pricing)\"</b>.&nbsp;<br>Just e-mail us at;&nbsp;<font color=\"#0000ff\" size=\"4\" style=\"font-weight:bold\">&nbsp;</font><font color=\"#0000ff\"><b><a href=\"mailto:ivsacongress.my@gmail.com\" target=\"_blank\">ivsacongress.my@gmail.com</a></b></font></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><font color=\"#000000\">&nbsp;the following template:-<br><br><b>POST-CONGRESS REPLY TEMPLATE<br><br>1) Package: &nbsp;</b>(e.g; 4D3N, Package C)<br><b>2) \"Other Activities\" (Discover Scuba):&nbsp;</b>&nbsp;(e.g; Yes/No)<br></font></blockquote></blockquote>"
-    
-//    html += "\r\n"
     
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><font color=\"#000000\"><i>One session (1) of Discover Scuba is&nbsp;<u>already included</u>&nbsp;in&nbsp;<b style=\"background-color:rgb(255,0,255)\">Package D</b>&nbsp;for both 4D3N &amp; 5D4N.<br>Payment for&nbsp;<u><b>extra</b></u>&nbsp;Discover Scuba session or for those who want to&nbsp;<b>try</b>&nbsp;Discover Scuba (especially&nbsp;those taking&nbsp;<span style=\"background-color:rgb(255,0,255)\">Package E</span>) should bring extra cash of RM200 which will be collected upon Congress Registration</i></font></blockquote></blockquote></blockquote>"
     
     html += "<div><p style='margin: 0'><span style=\"line-height:14.95px\"><b><br></b></span></p><p  style='margin: 0'><span style=\"line-height:14.95px\"><b><br></b></span></p><p  style='margin: 0'><span style=\"line-height:14.95px\"><b>4. Post-Congress spots</b>&nbsp;are of&nbsp;<b><u>FIRST-COME-FIRST-SERVED</u></b>&nbsp;bas<wbr>is, whereby upon paying the&nbsp;<b>full payment</b>&nbsp;for the post-congress fee, your seat shall be confirmed.<br><br></span></p></div>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'><span style=\"line-height:14.95px\"><span style=\"line-height:14.95px;background-image:initial;background-position:initial;background-size:initial;background-repeat:initial;background-origin:initial;background-clip:initial\"><span style=\"font-family:calibri,sans-serif;font-size:large;background-color:aqua\">First&nbsp;</span><b style=\"font-family:calibri,sans-serif;font-size:large;background-color:aqua\"><u>100 (ONE HUNDRED)</u></b><span style=\"font-family:calibri,sans-serif;font-size:large;background-color:aqua\">&nbsp;delegates who paid for the trip&nbsp;</span><b style=\"font-family:calibri,sans-serif;font-size:large;background-color:aqua\"><u>FULLY</u></b><span style=\"font-family:calibri,sans-serif;font-size:large;background-color:aqua\">&nbsp;shall have a confirmed spot.</span><br></span></span></p></blockquote></blockquote>"
     
-//    html += "\r\n"
-    
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'><br></p></blockquote></blockquote>"
     
     html += "<div><p style='margin: 0'><span style=\"line-height:14.95px\"><span style=\"line-height:14.95px;font-family:calibri,sans-serif;background:aqua\"><font size=\"4\"><br><br></font></span><b>5. For those of you who are taking Scuba Diving License Packages:-<br></b></span></p></div>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'><b>- Reading Manuals for the course will be given upon Congress Registration</b></p></blockquote>"
     html += "<blockquote style=\"margin:0px 0px 0px 40px;border:none;padding:0px\"><p style='margin: 0'><b>- Compulsory Dive safety and Procedures related \"Videos\" for those who successfully&nbsp;fully-paid for a Diving License course will be emailed to individuals and can be accessed (via dropbox or drive) as soon as we get a hold of the DVD!</b></p></blockquote>"
-    
-//    html += "\r\n"
     
     html += "<div><p  style='margin: 0'><span style=\"line-height:14.95px\"><b><br></b></span></p><p  style='margin: 0'><span style=\"line-height:14.95px\"><b>6. DELEGATES WHO HAVE ALREADY PAID FOR POST-CONGRESS</b></span></p><ul><li><b style=\"background-color:rgb(255,255,0)\">IF YOU HAVE PAID FOR POST-CONGRESS &amp; WE HAVE NOT CONTACTED YOU WITHIN THE NEXT 48 HOURS; DO DROP US AN EMAIL WITH YOUR PROOF OF PAYMENT AGAIN.<br></b>We would not like to miss out on anybody who has paid and would like to provide the opportunity to change packages if desired.<br><br></li><li><b><span style=\"line-height:14.95px\">Post-Congress fee can be transferred along with Congress Delegate Fee. Please state that both fees are transferred to us via email attached with a copy of the transfer slip.</span></b><br></li><li><b><span style=\"line-height:14.95px\"><b style=\"color:red\">PAYMENT WILL NOT BE REFUNDED FOR ANY CANCELLATION OF REGISTRATION OR NO-SHOW.</b></span></b></li></ul></div>"
     html += "</div>"
@@ -266,8 +288,6 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     html += "<p style='margin: 0'> Deepest Gratitude,</p>"
     html += "<p style='margin: 0'> Hugs and rainbows,</p>"
     html += "<br >"
-    
-//    html += "\r\n"
     
     html += "<p style=' margin: 0'><b><font face=\"times new roman, serif\" size=\"4\">Khairina Binti Abdul Halim</b></font></p>"
     html += "<p style='margin: 0;'>Co-President, 66th IVSA Congress, Malaysia</p>"
@@ -317,6 +337,25 @@ struct MailgunClient {
         }
         
         try sendMail(client: client, to: user.email, subject: "[APPLICATION RESULTS] 66th IVSA Congress 2017 in Malaysia", body: acceptDelegateEmail(baseURL: baseURL), attachments: [acceptLetterPDF])
+    }
+    
+    static func sendWaitlistAcceptanceEmail(toUser user: IVSAUser, baseURL: String) throws {
+        
+        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        
+        guard let acceptLetterPDF = EmailAttachment(filename: "accept-letter.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        
+        guard let package4d3nPDF = EmailAttachment(filename: "4Day-3Night-Package.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        
+        guard let package5d4nPDF = EmailAttachment(filename: "5Day-4Night-Package.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+                
+        try sendMail(client: client, to: user.email, subject: "[WAITING LIST STATUS REFRESHED] 66th IVSA Congress 2017", body: acceptWaitlistDelegateEmail(baseURL: baseURL), attachments: [acceptLetterPDF, package4d3nPDF, package5d4nPDF])
     }
     
     static func sendRejectionEmail(toUser user: IVSAUser, baseURL: String) throws {

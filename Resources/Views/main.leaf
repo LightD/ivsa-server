@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
                 <li #if(create) { class="active" } ><a href="/admin/create">Invite Admins</a></li>
-                <li #if(registration) { class="active" }><a href="/admin/delegates">Delegates</a></li>
+                <li #if(registration) { class="active" }><a href="/admin/registration">Delegates</a></li>
                 <li #if(waitlist) { class="active" }><a href="/admin/waiting_list">Waiting Lis</a></li>
               </ul>
 
