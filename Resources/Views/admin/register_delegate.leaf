@@ -1,0 +1,335 @@
+#extend("base")
+
+#export("head") {
+
+}
+
+#export("body") {
+<div class="container-fluid" ng-controller="ApplicationRegistrationController">
+
+<span ng-init='setup("#(accessToken)")'>  </span>
+
+
+<div class="loader animate-show-hide" ng-show="isLoading" >
+</div>
+<div class="row">
+<img class="ivsa-logo-main logo-smaller" src="/images/ivsalogo.png" />
+</div>
+<div class="row">
+
+<div class="col-lg-12">
+<form class="form-horizontal">
+<h3 style="text-align: center;">Personal Information</h3>
+<div class="form-group">
+<label class="col-md-2 control-label">First Name</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.first_name" placeholder="Michael" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Middle Name</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.middle_name" placeholder="Angelo" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Surname</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.surname" placeholder="Ninja" />
+</div>
+</div>
+
+
+<div class="form-group">
+<label class="col-md-2 control-label">Preferred name on tag</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.name_tag" placeholder="TMNT ;)" />
+</div>
+</div>
+
+
+<div class="form-group">
+<label class="col-md-2 control-label">Birthday</label>
+<div class="col-md-10">
+<p class="input-group">
+<input type="text" class="form-control" uib-datepicker-popup="{{'dd/MM/yyyy'}}" is-open="birthday.opened" datepicker-options="dateOptions" auto-open close-text="Close" ng-model="vm.personal_information.birth_date" placeholder="dd/MM/yyyy" />
+<span class="input-group-btn">
+<button type="button" class="btn btn-default" ng-click="birthday.opened = !birthday.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+</span>
+<p>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Gender</label>
+<div class="col-md-10">
+<label class="radio-inline">
+<input type="radio" ng-model="vm.personal_information.sex" ng-value="1" checked> Male
+</label>
+<label class="radio-inline">
+<input type="radio" ng-model="vm.personal_information.sex" ng-value="0"> Female
+</label>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Year of study</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.study_year" placeholder="Third year" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Nationality</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.nationality" placeholder="Syria" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Country of legal residence</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.residency_country" placeholder="Malaysia" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Passport number</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.personal_information.passport_number" placeholder="CKJD92828470" />
+</div>
+</div>
+
+<h3 style="text-align: center;">Contact details</h3>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Address</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.contact_details.address" placeholder="Hogwarts near the kitchen." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">City</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.contact_details.city" placeholder="Konoha Leaf City" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Post code</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.contact_details.post_code" placeholder="54493" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">State</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.contact_details.state" placeholder="Magiconia" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Country</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.contact_details.country" placeholder="Republic of witchcraft and wizardy." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Phone number</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.contact_details.phone_num" placeholder="+3010394493" />
+</div>
+</div>
+
+
+<h3 style="text-align: center;">Emergency Contact</h3>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Name</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.emergency_contact.name" placeholder="Cool side kick name." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Association</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.emergency_contact.association" placeholder="My side kick..." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Phone num</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.emergency_contact.phone_num" placeholder="+9048292834" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Email</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.emergency_contact.email" placeholder="awesome@sidekick.com" />
+</div>
+</div>
+
+<h3 style="text-align: center;">IVSA Chapter Information</h3>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Name</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.name" placeholder="IVSA Narnia" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Position</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.position" placeholder="President of the kingdom." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Faculty</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.faculty" placeholder="Faculty of magical creatures?" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">University address</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.university_address" placeholder="A far far away land" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">City</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.city" placeholder="Some city in narnia" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">State</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.state" placeholder="I don't even like narnia." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Post code</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.post_code" placeholder="293719" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Country</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.ivsa_chapter.country" placeholder="Narnialand" />
+</div>
+</div>
+
+<h3 style="text-align: center;">Event Spefic Information</h3>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Vegeterian?</label>
+<div class="col-sm-1">
+<input type="checkbox" style="margin-top: 10px;" ng-model="vm.event_info.vegetarian" ng-true-value={{1}} ng-false-value={{0}} />
+
+</div>
+<div class="col-sm-9">
+<input type="text" class="form-control" ng-model="vm.event_info.comments" placeholder="Comments?" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Food allergies?</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.event_info.food_allergies" placeholder="Slimy frogs." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Chronic illness?</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.event_info.chronic_disease" placeholder="Throwing up lizards when surprised." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Allergy to any medication?</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.event_info.medicine_allergies" placeholder="Panadol. (wow that would suck, really!)" />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">Other medical needs?</label>
+<div class="col-md-10">
+<input type="text" class="form-control" ng-model="vm.event_info.medical_needs" placeholder="I can't sleep if I don't hug a chicken." />
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-md-2 control-label">T-shirt size</label>
+<div class="col-md-10">
+
+<label class="radio-inline">
+<input type="radio" ng-model="vm.event_info.tshirt_size" ng-value="'XS (small)'" /> XS (extra small)
+</label>
+
+<label class="radio-inline">
+<input type="radio" ng-model="vm.event_info.tshirt_size" ng-value="'S (small)'" /> S (small)
+</label>
+
+<label class="radio-inline">
+<input type="radio" ng-model="vm.event_info.tshirt_size" ng-value="'M (medium)'" /> M (medium)
+</label>
+<label class="radio-inline">
+<input type="radio" ng-model="vm.event_info.tshirt_size" ng-value="'L (large)'" /> L (large)
+</label>
+<label class="radio-inline">
+<input type="radio" ng-model="vm.event_info.tshirt_size" ng-value="'XL (extra large)'" /> XL (extra large)
+</label>
+<label class="radio-inline">
+<input type="radio" ng-model="vm.event_info.tshirt_size" ng-value="'XXL (extra2 large)'" /> XXL (extra2 large)
+</label>
+</div>
+</div>
+
+<h3 style="text-align: center;">Post congress</h3>
+<h6><i>Post-congress will be 4days-3nights stay in the beautiful Tioman Island. Scuba Diving and water activities paradise. Limited to 80 places, selection on first-come-first-served basis.</i></h6>
+<div class="form-group">
+<label class="col-md-6 control-label" style="text-align: left;">Are you interested in joining the Post Congress event?</label>
+<div class="col-md-6">
+<input type="checkbox" style="margin-top: 10px;" ng-model="vm.attending_postcongress" ng-true-value={{1}} ng-false-value={{0}} />
+</div>
+</div>
+
+
+<h3 style="text-align: center; margin-top: 44px;">Why should we choose you?</h3>
+<h5>In 150 words or less, let us know why we should choose you as a delegate for our event! Good luck!</h2>
+<div class="form-group">
+
+<div class="col-md-12 control-label">
+<textarea required class="form-control" rows="13" ng-model="vm.why_you" placeholder="Coz I am building this website... AND THE APP.. AND I wrote the placeholders in this form! See?"></textarea>
+</div>
+</div>
+
+<button ng-disabled="isLoading" ng-click="submit()" class="btn btn-primary" style="margin-right: 14px; margin-bottom: 120px">Submit</button>
+
+</form>
+
+</div>
+
+</div>
+</div>
+
+
+}

@@ -172,9 +172,9 @@ struct WebRouter {
                 return try self.drop.view.make("application_in_review", node)
             }
 
-//            return try self.drop.view.make("registration", node)
+            return try self.drop.view.make("registration", node)
 
-            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
+//            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
 
         builder.get("edit_registration") { request in
@@ -202,9 +202,9 @@ struct WebRouter {
             let registrationData: RegistrationData = try registrationJSON.converted()
 
             user.registrationDetails = registrationData
-            user.applicationStatus = .inReview
+            user.applicationStatus = .rejected
             try user.save()
-
+            try request.sessionAuth.logout()
             return Response()
 
 //            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])

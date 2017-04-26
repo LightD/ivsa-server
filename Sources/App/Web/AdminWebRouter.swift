@@ -83,8 +83,26 @@ struct AdminWebRouter {
     private func buildHome<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         self.buildRegistration(builder)
     }
+    
+    
 
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
+        
+        builder.get("register_delegate") { request in
+            guard var admin = try request.adminSessionAuth.admin() else {
+                throw "admin not found"
+            }
+            if admin.accessToken == nil {
+                admin.generateAccessToken()
+                try admin.save()
+            }
+            let adminNode = try Node(node: admin.makeNode())
+
+            return try self.drop.view.make("admin/register_delegate", ["register_delegate": true, "user": adminNode])
+
+            
+        }
+        
         builder.get("registration") { request in
 
             guard var admin = try request.adminSessionAuth.admin() else {

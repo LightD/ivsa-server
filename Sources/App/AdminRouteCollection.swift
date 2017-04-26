@@ -155,7 +155,8 @@ class AdminRouteCollection: RouteCollection {
             
             return try JSON(node: ["ok": 200])
         }
-                
+        
+        
         adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
             
             guard let newPass = request.json?["newPass"]?.string else {
