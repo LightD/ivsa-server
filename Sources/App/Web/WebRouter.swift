@@ -48,19 +48,19 @@ struct WebRouter {
                 guard let user: IVSAUser = try request.sessionAuth.user() else {
                     throw "redirect to auth page"
                 }
+                return Response(redirect: "/register")
 
-                switch user.applicationStatus {
-                case .nonApplicant, .inReview:
-                    return Response(redirect: "/register")
-                default:
-                    // TODO: redirect to home page or something?
-                    throw "just because i have a global catch, i can do this as i please :3"
-                }
+//                switch user.applicationStatus {
+//                case .nonApplicant, .inReview:
+//                default:
+//                    // TODO: redirect to home page or something?
+//                    throw "just because i have a global catch, i can do this as i please :3"
+//                }
 
 
             }
             catch {
-                return Response(redirect: "/signup")
+                return Response(redirect: "/login")
             }
 
         }
@@ -168,11 +168,11 @@ struct WebRouter {
             let user = try request.sessionAuth.user()
             let node = try Node(node: ["user": try user?.makeNode()])
 
-            if user?.applicationStatus == .inReview {
-                return try self.drop.view.make("application_in_review", node)
+            if user?.applicationStatus == .nonApplicant {
+                return try self.drop.view.make("registration", node)
             }
-
-            return try self.drop.view.make("registration", node)
+            return try self.drop.view.make("application_in_review", node)
+            
 
 //            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
@@ -202,10 +202,10 @@ struct WebRouter {
             let registrationData: RegistrationData = try registrationJSON.converted()
 
             user.registrationDetails = registrationData
-            user.applicationStatus = .rejected
+//            user.applicationStatus = .rejected
             try user.save()
-            try request.sessionAuth.logout()
-            return Response()
+//            try request.sessionAuth.logout()
+            return Response(redirect: "/")
 
 //            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
