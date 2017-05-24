@@ -1,0 +1,22 @@
+#extend("base")
+
+#export("head") {
+
+}
+
+#export("body") {
+
+<div class="container-fluid">
+<div class="row">
+<img class="ivsa-logo-main" src="/images/ivsalogo.png" />
+</div>
+<div class="row">
+<div class="col-sm-6 col-sm-offset-3">
+<h2 style="text-align: center;"> You have been unsubscribed, and we are sad to see you go.</h2>
+
+</div>
+
+</div>
+</div>
+}
+

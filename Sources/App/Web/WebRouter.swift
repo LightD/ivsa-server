@@ -216,5 +216,9 @@ struct WebRouter {
             try request.sessionAuth.logout()
             return Response(redirect: "/")
         }
+        
+        builder.get("unsubscribed") { request in
+            return try self.drop.view.make("unsubscribe")
+        }
     }
 }

@@ -220,9 +220,82 @@ func optionsForTransportationsEmail(baseURL: String) -> EmailBody {
     
     html += "<div><font size='4'>We shall be giving you more options for the transportation to our beautiful Post-Congress destination:<b> <u>Redang Island!</u></b></font></div>"
     
+    html += "<div><br>Based on the<b> Ferry tentative schedule</b>:-<br><ul><li>We have to be at Shahbandar Jetty (to go to the Island): <u>Before <span tabindex='0'><span>8.00am</span></span></u> on the <span tabindex='0'><span>5th August 2017</span></span>.<br></li><li>From the Island back to Shahbandar Jetty: <u><span tabindex='0'><span>12.00pm</span></span></u> on the day chosen in your package (8th/9th August).<br></li><li>Ferry journey duration: <u>2 hours</u></li></ul><br><b>Therefore</b>, the transport options to and from Shahbandar Jetty is as follows:-<br><br></div>"
+    
+    html += "<div><font size='4'><b>1. Bus (Duration: approx. 6 hours)</b></font></div>"
+    
+    html += "<div><br></div>"
+    
+    html += "<div>Buses will be provided by the OC for those who are joining the Post-Congress trip. The bus shall be departing from our meeting place/hotel to the jetty of Redang Island at approx. <span tabindex='0'><span>12am</span></span> on <span tabindex='0'><span>4th August 2017</span></span>. We shall be arriving at the Shahbandar Jetty by <span tabindex='0'><span class='aQJ'>6am</span></span> on the <span tabindex='0'><span>5th August 2017</span></span> to catch the earliest ferry to Redang Island.</div>"
+    
+    html += "<div><br></div>"
+    
+    html += "<div>Bus ride per person: RM45/person/way - approx. 10 Euros/person/way<br>(Not Included in Post-Congress Fee, will be collected upon registration)</div>"
+    
+    html += "<div><br></div>"
+    html += "<div><br></div>"
+    
+    html += "<div><font size='4'><b>2. Plane (Duration: 55 mins)</b></font></div>"
+    html += "<div><br></div>"
+    
+    html += "<div>Direct flights are available to Kuala Terengganu, then a cab can be taken from the airport to the jetty. The distance between the airport to the jetty is approx. 13km (journey time estimated to be around 20-30 minutes, if unexpected jam, can take up to an hour)</div>"
+    html += "<div><br></div>"
+    
+    html += "<div>There are two airlines providing direct flights from Kuala Lumpur International Airport (KLIA) to Kuala Terengganu, namely AirAsia (budget airline) and Malaysia Airlines. Please note that the Post-Congress fee <b><u>DOES NOT</u></b> cover the flight, and<b><u> if you choose to fly, it is entirely on your own arrangement (i.e. you would have to buy tickets yourself)</u></b></div>"
+    html += "<div><br></div>"
+    
+    html += "<div><b>Route: Kuala Lumpur (KLIA/KLIA2) to Kuala Terengganu Airport</b></div>"
+    html += "<div>Departure Date: <span tabindex='0'>5th August 2017</span></span></div>"
+    html += "<div>Recommended ARRIVAL time at Kuala Terengganu Airport: <span tabindex='0'><span >6.00-7.00am</span></span> on <span tabindex='0'><span>5th August</span></span><br>(This is because we have to be at Shahbandar Jetty before <span  tabindex='0'><span>8am</span></span>)</div>"
+    html += "<div><br></div>"
+    
+    html += "<div><b>Route: Kuala Terengganu Airport to Kuala Lumpur (KLIA/KLIA2)</b></div>"
+    html += "<div>Departure Date: (4D3N) <span tabindex='0'><span >8th August 2017</span></span> / (5D4N) <span  tabindex='0'><span class='aQJ'>9th August 2017</span></span></div>"
+    html += "<div>Recommended DEPARTURE time from Kuala Terengganu: <span tabindex='0'><span class='aQJ'>4.30pm</span></span> onwards would be safe</div>"
+    html += "<div>Flight Duration: 55 mins<br><br><b>(Transport to and from KT Airport to Shahbandar Jetty)</b><br><b>Route:&nbsp;Kuala Terengganu Airport to Shahbandar Jetty AND/OR&nbsp;</b><b>Shahbandar Jetty to&nbsp;</b>&nbsp;<b>Kuala Terengganu Airport</b><br>Can be provided by the Resort that we are staying at (<b style='color:rgb(0,0,0)'>NEED TO INFORM OC IN ADVANCED)</b><br>Cost: RM15/pax/way, OR RM30/pax for return trip<br></div>"
+    html += "<div><br><br></div>"
+    
+    html += "<div><font size='4' color='#ff0000'><b><u style='background-color:rgb(255,255,0)'>Please reply to us ASAP on your options for travelling to and fro Kuala Terengganu.</u></b></font>&nbsp;</div>"
+    html += "<div><br></div>"
+    
+    html += "<div>Note that you can choose to fly or take the bus for any of the routes (either departing to Kuala Terengganu or Kuala Lumpur). Please specify your preference to us clearly.</div>"
+    html += "<div><br></div>"
+    
+    html += "<div><b><u><font size='4'>An <font color='#ff0000'>example</font> of reply is as follow:</font></u></b><br></div>"
+    html += "<div><br></div>"
+    
+    html += "<div>Dear OC,</div>"
+    html += "<div><br></div>"
+    
+    html += "<div>These are my option for transportation for my Post-Congress Trip:</div>"
+    html += "<div><br></div>"
+    html += "<div><i><b><font size='4'>For Bus:</font></b></i></div>"
+    html += "<div><br></div>"
+    
+    html += "<div>I will be taking the bus the OC have prepared from Kuala Lumpur to Kuala Terengganu. My chosen Post-Congress is 4D3N, Package E. My flight back to my home country is on the <i>(insert date of your departure flight from Kuala Lumpur)</i>.<br><br><b><font size='4'>OR</font></b></div>"
+    html += "<div><br></div>"
+    
+    html += "<div><i><b><font size='4'>For Flight:</font></b></i></div>"
+    html += "<div><br></div>"
+    
+    html += "<div><table style='width: 568px;' border='1' cellspacing='0' cellpadding='0'> <tbody> <tr> <td style='width: 567px;' colspan='2' valign='top'> <p><strong>DEPARTURE (KUALA LUMPUR &ndash; KUALA TERENGGANU)</strong></p> </td> </tr> <tr> <td style='width: 255px;' valign='top'> <p>Preferred Mode of Transport</p> </td> <td style='width: 312px;' valign='top'> <p>Flight</p> </td> </tr> <tr> <td style='width: 255px;' valign='top'> <p>Date</p> </td> <td style='width: 312px;' valign='top'> <p>5<sup>th</sup> August 2017</p> </td> </tr> <tr> <td style='width: 255px;' valign='top'> <p>Departure Time</p> </td> <td style='width: 312px;' valign='top'> <p>6.10am</p> </td> </tr> <tr> <td style='width: 255px;' valign='top'> <p>Estimated Arrival Time</p> </td> <td style='width: 312px;' valign='top'> <p>7.10am</p> </td> </tr> <tr> <td style='width: 255px;' valign='top'> <p>Transport from KT Airport to Jetty?</p> </td> <td style='width: 312px;' valign='top'><p>Yes/No?</p></td> </tr> <tr> <td style='width: 567px;' colspan='2' valign='top'> <p>I understand that the arrangement of flight to Kuala Terengganu and transportation to Shahbandar Jetty are entirely on my own. I will not hold the OC responsible should there be any delays, accidents etc. that may happen throughout my journey to Shahbandar Jetty. I will send my flight details to the OC once I have booked my flights for the Post-Congress trip.</p> <p>&nbsp;</p> </td> </tr> </tbody> </table></div>"
+    html += "<div><br></div>"
+    
+    html += "<div><table style='width: 568px;' border='1' cellspacing='0' cellpadding='0'> <tbody> <tr> <td style='width: 567px;' colspan='2' valign='top'> <p><strong>DEPARTURE (KUALA TERENGGANU - KUALA LUMPUR)</strong></p> </td> </tr> <tr> <td style='width: 236px;' valign='top'> <p>Preferred Mode of Transport</p> </td> <td style='width: 331px;' valign='top'> <p>Flight</p> </td> </tr> <tr> <td style='width: 236px;' valign='top'> <p>Date</p> </td> <td style='width: 331px;' valign='top'> <p>8th August 2017 (4D3N)</p> </td> </tr> <tr> <td style='width: 236px;' valign='top'> <p>Departure Time</p> </td> <td style='width: 331px;' valign='top'><p>5.00pm</p></td> </tr> <tr> <td style='width: 236px;' valign='top'> <p>Estimated Arrival Time</p> </td> <td style='width: 331px;' valign='top'><p>6.00pm</p></td> </tr> <tr> <td style='width: 236px;' valign='top'> <p>Transport from Jetty to KT Airport?</p> </td> <td style='width: 331px;' valign='top'><p>Yes/No?</p></td> </tr> <tr> <td style='width: 567px;' colspan='2' valign='top'> <p>I understand that the arrangement of flight to Kuala Lumpur and transportation to Sultan Mahmud Airport, Kuala Terengganu are entirely on my own. I will not hold the OC responsible should there be any delays, accidents etc. that may happen throughout my journey to the airport.&nbsp; I will send my flight details to the OC once I have booked my flights for the Post-Congress trip.</p> </td> </tr> </tbody> </table></div>"
+    html += "<div><br></div>"
+    
+    html += "<p> Please get back to us within 2 weeks (14 days) from the day you receive this email. Failure to reply to us will mean that you are taking the bus prepared by the OC. </p>"
+    html += "<div><br></div>"
+    
+    html += "<p>If you have any inquiries, feel free to send us an email stating your questions and we shall reply to you as soon as possible. </p>"
+    html += "<div><br></div>"
+    
+    
     html += "<p> Regards, </p> <br /> <p> OC </p>"
     html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
-
+    
+    html += "<p> If you wish, you can unsubscribe <a href='\(baseURL)/unsubscribe'> here </a>"
+    
     html += "</body>"
     html += "</html>"
 
