@@ -202,7 +202,7 @@ struct WebRouter {
             let registrationData: RegistrationData = try registrationJSON.converted()
 
             user.registrationDetails = registrationData
-//            user.applicationStatus = .rejected
+            user.applicationStatus = .inReview
             try user.save()
 //            try request.sessionAuth.logout()
             return Response(redirect: "/")
