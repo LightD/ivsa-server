@@ -19,7 +19,7 @@
 	<th > Email </th>
 	<th > Name </th>
 	<th > Position </th>
-    <th > Passport # </th>
+  <th > Passport #() </th>
 	<th > Year of study </th>
 	<!-- <th> Piggy </th> -->
 <!--  <th> Action </th> accept/reject button -->

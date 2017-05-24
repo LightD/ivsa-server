@@ -36,7 +36,7 @@
                 <li #if(registration) { class="active" }><a href="/admin/registration">Delegates</a></li>
                 <li #if(register_delegate) { class="active" }><a href="/admin/register_delegate">Register delegates</a></li>
 
-                <li #if(waitlist) { class="active" }><a href="/admin/waiting_list">Waiting Lis</a></li>
+                <li #if(waitlist) { class="active" }><a href="/admin/waiting_list">Waiting List</a></li>
               </ul>
 
               <ul class="nav navbar-nav navbar-right">
