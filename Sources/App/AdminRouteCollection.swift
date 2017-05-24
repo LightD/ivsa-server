@@ -100,24 +100,21 @@ class AdminRouteCollection: RouteCollection {
 
         adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
             
-            let originalStatus = user.applicationStatus
-            
+//            let originalStatus = user.applicationStatus
             
             user.applicationStatus = .accepted
-            
             var user = user
-            
             try user.save()
-            let node = try user.makeNode()
             
-            do {
-                if originalStatus == .rejected {
-                    try MailgunClient.sendWaitlistAcceptanceEmail(toUser: user, baseURL: request.baseURL)
-                }
-                else {
-                    try MailgunClient.sendAcceptanceEmail(toUser: user, baseURL: request.baseURL)
-                }
-            } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
+            let node = try user.makeNode()
+//            do {
+//                if originalStatus == .rejected {
+//                    try MailgunClient.sendWaitlistAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+//                }
+//                else {
+//                    try MailgunClient.sendAcceptanceEmail(toUser: user, baseURL: request.baseURL)
+//                }
+//            } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
             
             return try JSON(node: node)
         }

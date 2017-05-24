@@ -133,13 +133,14 @@ struct AdminWebRouter {
             return try self.drop.view.make("admin/applicant_details", ["accessToken": admin.accessToken!, "applicantID": applicantID])
         }
 
-        builder.get("waiting_list") { request in
-            guard var admin = try request.adminSessionAuth.admin() else {
+        builder.get("waiting_listz", String.self) { request, _ in
+            guard let admin = try request.adminSessionAuth.admin() else {
                 throw "admin not found"
             }
+            print("before making the node with admin: \(admin)")
             let node = try Node(node: ["waitlist": true, "user": admin.makeNode()])
-
-            return try self.drop.view.make("admin/waitlist", node)
+            print("after making the node: \(node)")
+            return try self.drop.view.make("admin/waitinglist", node)
         }
 
     }

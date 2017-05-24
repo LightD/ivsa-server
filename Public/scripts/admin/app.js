@@ -324,18 +324,18 @@ ivsaAdmin.controller('ApplicantsController', function ApplicantsController($scop
           $scope.isLoading = false;
           console.log("failed: ", error);
       });
-
-     $http.get("/api/admin/delegates/rejected", { headers: { "Authorization": "Bearer " +  token} })
-     .then(function success(object) {
-           $scope.isLoading = false;
-           console.log("got users ", object.data);
-
-           $scope.applicants = $scope.applicants.concat(object.data);
-           console.log("applicants ", $scope.applicants);
-           }, function failed(error) {
-           $scope.isLoading = false;
-           console.log("failed: ", error);
-        });
+//
+//     $http.get("/api/admin/delegates/rejected", { headers: { "Authorization": "Bearer " +  token} })
+//     .then(function success(object) {
+//           $scope.isLoading = false;
+//           console.log("got users ", object.data);
+//
+//           $scope.applicants = $scope.applicants.concat(object.data);
+//           console.log("applicants ", $scope.applicants);
+//           }, function failed(error) {
+//           $scope.isLoading = false;
+//           console.log("failed: ", error);
+//        });
   }
 
 
