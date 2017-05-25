@@ -30,19 +30,19 @@ final class AccountRouteCollection: RouteCollection {
 
             throw Abort.custom(status: .badRequest, message: "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page.")
             // now take the parameters from the request, and file a registration request
-//            guard let registrationJSON = request.json?["registration_data"] else {
-//                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
-//            }
-//            
-//            let registrationData: RegistrationData = try registrationJSON.converted()
-//            
-//            var user = try request.user()
-//            user.applicationStatus = .inReview
-//            user.registrationDetails = registrationData
-//            
-//            try user.save()
-//            
-//            return user
+            guard let registrationJSON = request.json?["registration_data"] else {
+                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
+            }
+            
+            let registrationData: RegistrationData = try registrationJSON.converted()
+            
+            var user = try request.user()
+            user.applicationStatus = .newApplicant
+            user.registrationDetails = registrationData
+            
+            try user.save()
+            
+            return user
         }
         
         authenticatedBuilder.post("connect", "facebook") { request in
