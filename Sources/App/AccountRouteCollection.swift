@@ -27,9 +27,9 @@ final class AccountRouteCollection: RouteCollection {
         let authenticatedBuilder = builder.grouped(authMiddleware)
         
         authenticatedBuilder.post("register") { request in
-
-            throw Abort.custom(status: .badRequest, message: "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page.")
-            // now take the parameters from the request, and file a registration request
+//
+//            throw Abort.custom(status: .badRequest, message: "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page.")
+//            // now take the parameters from the request, and file a registration request
             guard let registrationJSON = request.json?["registration_data"] else {
                 throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
             }
