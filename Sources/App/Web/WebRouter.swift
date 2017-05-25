@@ -147,9 +147,13 @@ struct WebRouter {
             let credentials = UsernamePassword(username: username, password: password)
 
             do {
-                let _ = try IVSAUser.register(credentials: credentials)
-                _ = try request.sessionAuth.login(credentials)
-
+                _ = try IVSAUser.register(credentials: credentials)
+                let user = try request.sessionAuth.login(credentials)
+                do {
+                    // send a verification email from here? this happens once only anyway.. it's exactly where we need it
+                    try MailgunClient.sendVerificationEmail(toUser: user, baseURL: request.baseURL)
+                } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
+                
                 return Response(redirect: "/")
             }
             catch let e as Abort {
