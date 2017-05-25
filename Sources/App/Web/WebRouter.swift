@@ -60,7 +60,7 @@ struct WebRouter {
 
             }
             catch {
-                return Response(redirect: "/login")
+                return Response(redirect: "/signup")
             }
 
         }
@@ -202,7 +202,7 @@ struct WebRouter {
             let registrationData: RegistrationData = try registrationJSON.converted()
 
             user.registrationDetails = registrationData
-            user.applicationStatus = .inReview
+            user.applicationStatus = .newApplicant
             try user.save()
 //            try request.sessionAuth.logout()
             return Response(redirect: "/")

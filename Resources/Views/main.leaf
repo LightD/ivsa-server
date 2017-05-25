@@ -18,6 +18,7 @@
 
   <script src="/scripts/admin/app.js" ></script>
   #if(waitlist) { <script src="/scripts/admin/waitlist.js" ></script> }
+  #if(newapplicants) { <script src="/scripts/admin/newapplicants.js" ></script> }
   <script src="/scripts/vendor/uibootstrap.js" ></script>
   #import("head")
 </head>
@@ -33,6 +34,8 @@
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
                 <li #if(create) { class="active" } ><a href="/admin/create">Invite Admins</a></li>
+                <li #if(newapplicants) { class="active" }><a href="/admin/new_applicants">New Applicants</a></li>
+
                 <li #if(registration) { class="active" }><a href="/admin/registration">Delegates</a></li>
                 <li #if(register_delegate) { class="active" }><a href="/admin/register_delegate">Register delegates</a></li>
 

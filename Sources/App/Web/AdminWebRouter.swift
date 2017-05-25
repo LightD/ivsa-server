@@ -142,6 +142,17 @@ struct AdminWebRouter {
             print("after making the node: \(node)")
             return try self.drop.view.make("admin/waitinglist", node)
         }
+        
+        
+        builder.get("new_applicants") { request in
+            guard let admin = try request.adminSessionAuth.admin() else {
+                throw "admin not found"
+            }
+            print("before making the node with admin: \(admin)")
+            let node = try Node(node: ["newapplicants": true, "user": admin.makeNode()])
+            print("after making the node: \(node)")
+            return try self.drop.view.make("admin/new_applicants", node)
+        }
 
     }
 }

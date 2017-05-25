@@ -17,6 +17,7 @@ import SMTP
 enum ApplicationStatus: String, NodeInitializable, NodeRepresentable {
     case nonApplicant
     case inReview
+    case newApplicant
     case accepted
     case rejected
     case confirmedRejected

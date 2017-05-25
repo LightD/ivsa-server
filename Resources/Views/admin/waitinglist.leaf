@@ -20,7 +20,7 @@
 	<th > Name </th>
 	<th > Position </th>
   <th > Passport #() </th>
-	<th > Year of study </th>
+	<th > Action </th>
 	<!-- <th> Piggy </th> -->
 <!--  <th> Action </th> accept/reject button -->
 </tr>

@@ -14,6 +14,7 @@
         <div class="col-sm-6 col-sm-offset-3">
 <h3 style="text-align: center;">Your application is
 #equal(user.application_status, "rejected") { in waiting list }
+##equal(user.application_status, "newApplicant") { in review }
 ##else() { #(user.application_status) }
 , you will be notified by email when your status changes.</h3>
         </div>
