@@ -323,6 +323,28 @@ func acceptWaitlistDelegateEmail(baseURL: String) -> EmailBody {
     return EmailBody(type: .html, content: html)
 }
 
+func emailVerificationEmail(forUser user: IVSAUser, baseURL: String) -> EmailBody {
+    var html = ""
+    html += "<!DOCTYPE html>"
+    html += "<html>"
+    html += "<body>"
+    
+    html += "<p> Dear Future Delegate, </p>"
+
+    // NOTE: for the userId, it will never come here if the user isn't properly populated, so force unwrap (!) is fine here :)
+    html += "<p> <b>Thank you </b> for signing up, all you need to do is click on the following link to verify your email: <a href='\(baseURL)/verify_email/\(user.id!.string!)/\(user.verificationToken)'> \(baseURL)/verify_email/\(user.id!.string!)/\(user.verificationToken) </a>  </p>"
+    
+    html += "<p> Regards, <br /> OC </p>"
+    
+    html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
+    html += "<br >"
+    
+    
+    html += "</body>"
+    html += "</html>"
+    return EmailBody(type: .html, content: html)
+}
+
 func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     var html = ""
     html += "<!DOCTYPE html>"
@@ -410,12 +432,8 @@ struct MailgunClient {
 
     static func sendVerificationEmail(toUser user: IVSAUser, baseURL: String) throws {
         let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
-        // NOTE: for the userId, it will never come here if the user isn't properly populated, so force unwrap (!) is fine here :)
-        let id = user.id!.string!
-        let content = "<html><b>thank you </b> for signing up, all you need to do is click on the following link to verify your email: <a href='\(baseURL)/verify_email/\(id)/\(user.verificationToken)'> \(baseURL)/verify_email/\(id)/\(user.verificationToken) </a> </html>"
-
-
-        try sendMail(client: client, to: user.email, subject: "Verify your email", body: EmailBody(type: .html, content: content))
+        
+        try sendMail(client: client, to: user.email, subject: "Verify your email", body: emailVerificationEmail(forUser: user, baseURL: baseURL))
 
     }
 
