@@ -237,7 +237,8 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
     study_year: "",
     nationality: "",
     residency_country: "",
-    passport_number: ""
+    passport_number: "",
+    student_id: ""
   },
   contact_details: {
     address: "",

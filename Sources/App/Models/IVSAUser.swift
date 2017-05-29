@@ -171,6 +171,11 @@ extension IVSAUser: Auth.User {
             user = try IVSAUser.find(credentials.id)
 
         case let credentials as UsernamePassword:
+            let alldadings = try IVSAUser.query()
+                .filter("email", credentials.username)
+                .run()
+            debugPrint(alldadings)
+            
             let fetchedUser = try IVSAUser.query()
                 .filter("email", credentials.username)
                 .first()
@@ -210,7 +215,6 @@ extension IVSAUser: Auth.User {
         default:
             throw Abort.custom(status: .badRequest, message: "Unsupported credentials.")
         }
-
 
         if try IVSAUser.query().filter("email", newUser.email).first() == nil {
 

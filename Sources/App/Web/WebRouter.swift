@@ -170,14 +170,19 @@ struct WebRouter {
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("register") { request in
             let user = try request.sessionAuth.user()
-            let node = try Node(node: ["user": try user?.makeNode()])
+            var data = ["user": try user?.makeNode()]
+            var node = try Node(node: data)
 
             if user?.applicationStatus == .nonApplicant {
                 return try self.drop.view.make("registration", node)
             }
+            
+            if let studentID = user?.registrationDetails?.personalInfo.studentId, studentID.isEmpty {
+                data["flash"] = "You must fill in your student ID to continue using the rest of the functionality"
+            }
+            node = try Node(node: data)
             return try self.drop.view.make("application_in_review", node)
             
-
 //            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
 

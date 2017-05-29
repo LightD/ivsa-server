@@ -39,6 +39,7 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
     var nationality: String
     var countryOfLegalResidence: String
     var passportNumber: String
+    var studentId: String
     
     init(node: Node, in context: Context) throws {
         self.name = try node.extract("first_name")
@@ -56,6 +57,7 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
         self.nationality = try node.extract("nationality")
         self.countryOfLegalResidence = try node.extract("residency_country")
         self.passportNumber = try node.extract("passport_number")
+        self.studentId = try node.extract("student_id")
     }
     
     func makeNode(context: Context) throws -> Node {
@@ -70,7 +72,8 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
             "study_year": yearOfStudy,
             "nationality": nationality,
             "residency_country": countryOfLegalResidence,
-            "passport_number": passportNumber
+            "passport_number": passportNumber,
+            "student_id": studentId
             ])
     }
 }
