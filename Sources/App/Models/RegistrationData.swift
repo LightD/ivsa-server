@@ -28,7 +28,7 @@ extension Date {
     }
 }
 
-struct PersonalInformation: NodeInitializable, NodeRepresentable {
+struct PersonalInformation: NodeConvertible {
     var name: String
     var middleName: String
     var surname: String
@@ -41,26 +41,26 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
     var passportNumber: String
     var studentId: String
     
-    init(node: Node, in context: Context) throws {
-        self.name = try node.extract("first_name")
-        self.middleName = try node.extract("middle_name")
-        self.surname = try node.extract("surname")
-        self.nameTag = try node.extract("name_tag")
-        self.birthDate = try node.extract("birth_date", transform: { (dateString: String) -> Date in
+    init(node: Node) throws {
+        self.name = try node.get("first_name")
+        self.middleName = try node.get("middle_name")
+        self.surname = try node.get("surname")
+        self.nameTag = try node.get("name_tag")
+        self.birthDate = try node.get("birth_date", transform: { (dateString: String) -> Date in
             guard let date = dateString.dateDDmmYYYY else {
-                throw Abort.custom(status: .badRequest, message: "Invalid format for birth date field")
+                throw Abort(.badRequest, metadata: nil, reason: "Invalid format for birth date field")
             }
             return date
         })
-        self.isMale = try node.extract("sex")
-        self.yearOfStudy = try node.extract("study_year")
-        self.nationality = try node.extract("nationality")
-        self.countryOfLegalResidence = try node.extract("residency_country")
-        self.passportNumber = try node.extract("passport_number")
-        self.studentId = try node.extract("student_id")
+        self.isMale = try node.get("sex")
+        self.yearOfStudy = try node.get("study_year")
+        self.nationality = try node.get("nationality")
+        self.countryOfLegalResidence = try node.get("residency_country")
+        self.passportNumber = try node.get("passport_number")
+        self.studentId = try node.get("student_id")
     }
     
-    func makeNode(context: Context) throws -> Node {
+    func makeNode(in context: Context?) throws -> Node {
         
         return try Node(node: [
             "first_name": name,
@@ -78,7 +78,7 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
     }
 }
 
-struct ContactDetails: NodeInitializable, NodeRepresentable {
+struct ContactDetails: NodeConvertible {
     var address: String
     var city: String
     var postalCode: String
@@ -86,16 +86,16 @@ struct ContactDetails: NodeInitializable, NodeRepresentable {
     var country: String
     var phoneNum: String
     
-    init(node: Node, in context: Context) throws {
-        self.address = try node.extract("address")
-        self.city = try node.extract("city")
-        self.postalCode = try node.extract("post_code")
-        self.state = try node.extract("state")
-        self.country = try node.extract("country")
-        self.phoneNum = try node.extract("phone_num")
+    init(node: Node) throws {
+        self.address = try node.get("address")
+        self.city = try node.get("city")
+        self.postalCode = try node.get("post_code")
+        self.state = try node.get("state")
+        self.country = try node.get("country")
+        self.phoneNum = try node.get("phone_num")
     }
     
-    func makeNode(context: Context) throws -> Node {
+    func makeNode(in context: Context?) throws -> Node {
         return try Node(node: [
             "address": address,
             "city": city,
@@ -107,20 +107,20 @@ struct ContactDetails: NodeInitializable, NodeRepresentable {
     }
 }
 
-struct EmergencyContact: NodeInitializable, NodeRepresentable {
+struct EmergencyContact: NodeConvertible {
     var name: String
     var association: String
     var phoneNum: String
     var email: String
     
-    init(node: Node, in context: Context) throws {
-        self.name = try node.extract("name")
-        self.association = try node.extract("association")
-        self.phoneNum = try node.extract("phone_num")
-        self.email = try node.extract("email")
+    init(node: Node) throws {
+        self.name = try node.get("name")
+        self.association = try node.get("association")
+        self.phoneNum = try node.get("phone_num")
+        self.email = try node.get("email")
     }
     
-    func makeNode(context: Context) throws -> Node {
+    func makeNode(in context: Context?) throws -> Node {
         return try Node(node: [
             "name": name,
             "association": association,
@@ -130,7 +130,7 @@ struct EmergencyContact: NodeInitializable, NodeRepresentable {
     }
 }
 
-struct IVSAChapterInformation: NodeInitializable, NodeRepresentable {
+struct IVSAChapterInformation: NodeConvertible {
     var chapterName: String
     var faculty: String
     var universityAddress: String
@@ -140,18 +140,18 @@ struct IVSAChapterInformation: NodeInitializable, NodeRepresentable {
     var country: String
     var positionAtLocalChapter: String
     
-    init(node: Node, in context: Context) throws {
-        self.chapterName = try node.extract("name")
-        self.faculty = try node.extract("faculty")
-        self.universityAddress = try node.extract("university_address")
-        self.city = try node.extract("city")
-        self.state = try node.extract("state")
-        self.postalCode = try node.extract("post_code")
-        self.country = try node.extract("country")
-        self.positionAtLocalChapter = try node.extract("position")
+    init(node: Node) throws {
+        self.chapterName = try node.get("name")
+        self.faculty = try node.get("faculty")
+        self.universityAddress = try node.get("university_address")
+        self.city = try node.get("city")
+        self.state = try node.get("state")
+        self.postalCode = try node.get("post_code")
+        self.country = try node.get("country")
+        self.positionAtLocalChapter = try node.get("position")
     }
     
-    func makeNode(context: Context) throws -> Node {
+    func makeNode(in context: Context?) throws -> Node {
         return try Node(node: [
             "name": chapterName,
             "faculty": faculty,
@@ -165,7 +165,7 @@ struct IVSAChapterInformation: NodeInitializable, NodeRepresentable {
     }
 }
 
-struct EventSpecificInfo: NodeInitializable, NodeRepresentable {
+struct EventSpecificInfo: NodeConvertible {
     var vegetarian: Bool = false
     var comments: String
     var foodAllergies: String
@@ -174,17 +174,17 @@ struct EventSpecificInfo: NodeInitializable, NodeRepresentable {
     var otherMedicalNeeds: String
     var tshirtSize: String
     
-    init(node: Node, in context: Context) throws {
-        self.vegetarian = try node.extract("vegetarian")
-        self.comments = try node.extract("comments")
-        self.foodAllergies = try node.extract("food_allergies")
-        self.chronicDisease = try node.extract("chronic_disease")
-        self.allergyToMedication = try node.extract("medicine_allergies")
-        self.otherMedicalNeeds = try node.extract("medical_needs")
-        self.tshirtSize = try node.extract("tshirt_size")
+    init(node: Node) throws {
+        self.vegetarian = try node.get("vegetarian")
+        self.comments = try node.get("comments")
+        self.foodAllergies = try node.get("food_allergies")
+        self.chronicDisease = try node.get("chronic_disease")
+        self.allergyToMedication = try node.get("medicine_allergies")
+        self.otherMedicalNeeds = try node.get("medical_needs")
+        self.tshirtSize = try node.get("tshirt_size")
     }
     
-    func makeNode(context: Context) throws -> Node {
+    func makeNode(in context: Context?) throws -> Node {
         return try Node(node: [
             "vegetarian": vegetarian,
             "comments": comments,
@@ -197,7 +197,7 @@ struct EventSpecificInfo: NodeInitializable, NodeRepresentable {
     }
 }
 
-struct RegistrationData: NodeInitializable, NodeRepresentable {
+struct RegistrationData: NodeConvertible {
     
     var personalInfo: PersonalInformation
     var contactDetails: ContactDetails
@@ -208,18 +208,18 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
     var whyShouldWeChooseYou: String
     var attendingPostCongress: Bool = false
     
-    init(node: Node, in context: Context) throws {
-        self.personalInfo = try PersonalInformation(node: try node.extract("personal_information"), in: context)
-        self.contactDetails = try ContactDetails(node: try node.extract("contact_details"), in: context)
-        self.emergencyContact = try EmergencyContact(node: try node.extract("emergency_contact"), in: context)
-        self.ivsaChapter = try IVSAChapterInformation(node: try node.extract("ivsa_chapter"), in: context)
-        self.eventSpecificInfo = try EventSpecificInfo(node: try node.extract("event_info"), in: context)
-        self.whyShouldWeChooseYou = try node.extract("why_you")
-        self.attendingPostCongress = try node.extract("attending_postcongress")
+    init(node: Node) throws {
+        self.personalInfo = try PersonalInformation(node: try node.get("personal_information"))
+        self.contactDetails = try ContactDetails(node: try node.get("contact_details"))
+        self.emergencyContact = try EmergencyContact(node: try node.get("emergency_contact"))
+        self.ivsaChapter = try IVSAChapterInformation(node: try node.get("ivsa_chapter"))
+        self.eventSpecificInfo = try EventSpecificInfo(node: try node.get("event_info"))
+        self.whyShouldWeChooseYou = try node.get("why_you")
+        self.attendingPostCongress = try node.get("attending_postcongress")
         
     }
     
-    func makeNode(context: Context) throws -> Node {
+    func makeNode(in context: Context?) throws -> Node {
         return try Node(node: [
             "personal_information": personalInfo,
             "contact_details": contactDetails,
@@ -229,40 +229,5 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
             "why_you": whyShouldWeChooseYou,
             "attending_postcongress": self.attendingPostCongress
             ])
-    }
-}
-
-
-extension Node {
-    func asString() -> String {
-        
-        var final = ""
-        
-        switch self {
-        case .array(let nodes):
-            final = "\"[\(nodes.map { "\"\($0.asString())\"" }.joined(separator: ","))]\""
-        case .bool(let val): final = val ? "true" : "false"
-        case .number(let val): final = val.description
-        case .string(let val): final = val
-        case .object(let val):
-            let stringRep = val.map {
-                
-                var value = ""
-                switch $1 {
-                case .object:
-                    value = "\"\($0)\": {\($1.asString())}"
-                default: value = "\"\($0)\": \"\($1.asString())\""
-                }
-                
-                return value
-                
-            }.joined(separator: ",")
-            
-            final = "\(stringRep)"
-        default:
-            return ""
-        }
-        
-        return final.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
     }
 }

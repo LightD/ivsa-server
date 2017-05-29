@@ -1,7 +1,5 @@
 {
-	"http": {
-		"port": "$PORT:8080",
-		"host": "127.0.0.1",
-		"securityLayer": "none"
-	}
+    "port": "$PORT:8080",
+    "host": "127.0.0.1",
+    "securityLayer": "none"
 }

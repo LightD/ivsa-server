@@ -3,19 +3,15 @@
     "client": "engine",
     "console": "terminal",
     "log": "console",
-    "hash": "crypto",
+    "hash": "bcrypt",
     "cipher": "crypto",
-    "middleware": {
-        "server": [
-            "file",
-            "abort",
-            "validation",
-            "type-safe",
-            "date",
-            "sessions"
-        ],
-        "client": [
-        
-        ]
-    }
+    "middleware": [
+       "error",
+       "date",
+       "file",
+       "sessions"
+    ],
+    "sessions": "memory",
+    "view": "leaf"
+    
 }

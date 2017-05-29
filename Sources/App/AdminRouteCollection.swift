@@ -7,45 +7,43 @@
 //
 
 import Foundation
-import Auth
-import Turnstile
 import Vapor
 import HTTP
 import Routing
-import Fluent
+import FluentProvider
+import AuthProvider
 
-class AdminRouteCollection: RouteCollection {
+class AdminRouteCollection: RouteCollection, EmptyInitializable {
     
     typealias Wrapped = HTTP.Responder
     
-    private var authMiddleware: AdminAuthMiddleware
+    required init() throws { }
     
-    
-    init(authMiddleware: AdminAuthMiddleware) {
-        self.authMiddleware = authMiddleware
-    }
-    
-    
-    func build<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
+    func build(_ builder: RouteBuilder) throws {
+        let authMiddleware = TokenAuthenticationMiddleware(IVSAAdmin.self)
+        
+        
         let adminRouteBuilder = builder.grouped("admin")
-        let adminProtectedRouteBuilder = adminRouteBuilder.grouped(self.authMiddleware)
+        let adminProtectedRouteBuilder = adminRouteBuilder.grouped(authMiddleware)
         
         adminRouteBuilder.post("login") { request in
             
             guard let username = request.json?["email"]?.string,
                 let password = request.json?["password"]?.string else {
-                    throw GeneralErrors.missingParams.vaporError
+                    throw GeneralErrors.missingParams
             }
             
-            let credentials = UsernamePassword(username: username, password: password)
-            
-            return try request.adminAuth.login(credentials)
+            let credentials = Password(username: username, password: password)
+            let adminCredentials = try IVSAAdmin(credentials: credentials)
+            request.auth.authenticate(adminCredentials)
+            let admin: IVSAAdmin = try request.auth.assertAuthenticated()
+            return try admin.makeJSON()
         }
         
         adminRouteBuilder.get("makenouradmin") { request in
             
-            let credentials = UsernamePassword(username: "admin@ivsa.com", password: "ivsa")
-            var admin = IVSAAdmin(credentials: credentials)
+            let credentials = Password(username: "admin@ivsa.com", password: "ivsa")
+            let admin = try IVSAAdmin(credentials: credentials)
             try admin.save()
             
             return admin
@@ -53,15 +51,15 @@ class AdminRouteCollection: RouteCollection {
         
         
         adminRouteBuilder.get("me") { request in
-            return try request.admin()
+            return try request.auth.assertAuthenticated(IVSAAdmin.self)
         }
 
         adminRouteBuilder.get("getallacceptedemails") { request in
             
-            let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", "accepted").run()
+            let users: [IVSAUser] =  try IVSAUser.makeQuery().filter("application_status", "accepted").all()
+            
             let emails = users.map { $0.email }.joined(separator: ",")
-            print("emails are: \(emails)")
-            print(emails)
+            
             return try JSON(node: ["ok emails are: ": emails])
         }
         
@@ -79,34 +77,38 @@ class AdminRouteCollection: RouteCollection {
         // inReview
         // accepted
         // rejected
-        adminProtectedRouteBuilder.get("delegates", ":application_status") { request in
-            let appStatus = try request.parameters.extract("application_status") as String
-            let users: [IVSAUser] =  try IVSAUser.query().filter("application_status", appStatus).run()
+        adminProtectedRouteBuilder.get("delegates", String.parameter) { request in
+            let appStatus: String = try request.parameters.next(String.self)
+            let users: [IVSAUser] =  try IVSAUser.makeQuery().filter("application_status", appStatus).filter("registration_details", Filter.Comparison.notEquals, nil)
+                .all()
+//                .sort("registration_details.ivsa_chapter.country", Sort.Direction.ascending).all()
             
-            let sortedApplicants = users.filter { $0.registrationDetails != nil }.sorted(by: { (first, second) -> Bool in
-                // we can force unwrap safely coz we filter first
-                return first.registrationDetails!.ivsaChapter.country < second.registrationDetails!.ivsaChapter.country
-            })
-            let applicantsNode = try Node(node: sortedApplicants)
+//            let sortedApplicants = users.filter { $0.registrationDetails != nil }.sorted(by: { (first, second) -> Bool in
+//                // we can force unwrap safely coz we filter first
+//                return first.registrationDetails!.ivsaChapter.country < second.registrationDetails!.ivsaChapter.country
+//            })
+//            let applicantsNode = try Node(node: )
             
-            let json = try JSON(node: applicantsNode)
+            let json = try JSON(node: users)
             
             return json
         }
         
-        adminProtectedRouteBuilder.get("applicant", IVSAUser.self) { request, user in
-            return try JSON(node: try user.makeNode())
+        adminProtectedRouteBuilder.get("applicant", IVSAUser.parameter) { request in
+            let user = try request.parameters.next(IVSAUser.self)
+            return JSON(node: try user.makeNode(in: nil))
         }
 
-        adminProtectedRouteBuilder.post("accept", IVSAUser.self) { request, user in
-            
+        adminProtectedRouteBuilder.post("accept", IVSAUser.parameter) { request in
+            let user = try request.parameters.next(IVSAUser.self)
+
 //            let originalStatus = user.applicationStatus
             
             user.applicationStatus = .accepted
-            var user = user
+//            var user = user
             try user.save()
             
-            let node = try user.makeNode()
+            let node = try user.makeNode(in: nil)
 //            do {
 //                if originalStatus == .rejected {
 //                    try MailgunClient.sendWaitlistAcceptanceEmail(toUser: user, baseURL: request.baseURL)
@@ -116,33 +118,33 @@ class AdminRouteCollection: RouteCollection {
 //                }
 //            } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
             
-            return try JSON(node: node)
+            return JSON(node: node)
         }
         
-        adminProtectedRouteBuilder.post("reject", IVSAUser.self) { request, user in
+        adminProtectedRouteBuilder.post("reject", IVSAUser.parameter) { request in
+            let user = try request.parameters.next(IVSAUser.self)
             user.applicationStatus = .rejected
-            
-            var user = user
             try user.save()
-//            
+//
 //            do {
 //                try MailgunClient.sendRejectionEmail(toUser: user, baseURL: request.baseURL)
 //            } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
-//            
+//
             
-            return try JSON(node: try user.makeNode())
+            return JSON(node: try user.makeNode(in: nil))
         }
         
-        adminProtectedRouteBuilder.post("confirmReject", IVSAUser.self) { request, user in
+        adminProtectedRouteBuilder.post("confirmReject", IVSAUser.parameter) { request in
+            let user = try request.parameters.next(IVSAUser.self)
+
             user.applicationStatus = .confirmedRejected
-            var user = user
             try user.save()
             
-            return try JSON(node: try user.makeNode())
+            return JSON(node: try user.makeNode(in: nil))
         }
         
         adminProtectedRouteBuilder.get("sendPostcongressFeesUpdatesEmail") { request in
-            let users: [IVSAUser] = try IVSAUser.query().filter("application_status", "accepted").run()
+            let users: [IVSAUser] = try IVSAUser.makeQuery().filter("application_status", "accepted").all()
             
             for user in users {
                 do {
@@ -154,15 +156,14 @@ class AdminRouteCollection: RouteCollection {
         }
         
         
-        adminProtectedRouteBuilder.post("updatePass", IVSAUser.self) { request, user in
-            
+        adminProtectedRouteBuilder.post("updatePass", IVSAUser.parameter) { request in
+            let user = try request.parameters.next(IVSAUser.self)
+
             guard let newPass = request.json?["newPass"]?.string else {
-                throw Abort.custom(status: .badRequest, message: "Missing param")
+                throw Abort(.badRequest, reason: "Missing param")
             }
-            
-            var mutableUser = user
-            mutableUser.updatePassword(pass: newPass)
-            try mutableUser.save()
+            try user.updatePassword(pass: newPass)
+            try user.save()
             
             return try JSON(node: ["ok": 200])
         }

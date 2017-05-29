@@ -416,13 +416,13 @@ func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
 }
 
 
-
-extension SMTPClient {
-    public static func makeMailgunClient() throws -> SMTPClient {
-        return try SMTPClient(host: "smtp.mailgun.org", port: 587, securityLayer: .none)
-    }
-
-}
+//
+//extension SMTPClient {
+//    public static func makeMailgunClient() throws -> SMTPClient {
+//        return try SMTPClient(host: "smtp.mailgun.org", port: 587, securityLayer: .none)
+//    }
+//
+//}
 
 enum EmailError: Swift.Error {
     case missingFile
@@ -431,14 +431,14 @@ enum EmailError: Swift.Error {
 struct MailgunClient {
 
     static func sendVerificationEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
         
         try sendMail(client: client, to: user.email, subject: "Verify your email", body: emailVerificationEmail(forUser: user, baseURL: baseURL))
 
     }
 
     static func sendAcceptanceEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
 
         guard let acceptLetterPDF = EmailAttachment(filename: "accept-letter.pdf", in: workDir) else {
             throw EmailError.missingFile
@@ -449,7 +449,7 @@ struct MailgunClient {
 
     static func sendWaitlistAcceptanceEmail(toUser user: IVSAUser, baseURL: String) throws {
 
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
 
         guard let acceptLetterPDF = EmailAttachment(filename: "accept-letter.pdf", in: workDir) else {
             throw EmailError.missingFile
@@ -467,7 +467,7 @@ struct MailgunClient {
     }
 
     static func sendRejectionEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
 
         guard let rejectLetterPDF = EmailAttachment(filename: "reject-letter.pdf", in: workDir) else {
             throw EmailError.missingFile
@@ -477,20 +477,20 @@ struct MailgunClient {
     }
 
     static func sendPostcongressCorrectionEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
 
 
         try sendMail(client: client, to: user.email, subject: "66th IVSA Congress 2017 - Post-Congress Trip: Minor Changes", body: postcongressCorrectionEmail(baseURL: baseURL))
     }
 
     static func sendPostCongressReferainFromPayment(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
 
         try sendMail(client: client, to: user.email, subject: "ATTN: POST-CONGRESS FURTHER INFORMATION", body: refrainFromPostcongresPaymentEmail(baseURL: baseURL))
     }
 
     static func sendPostcongressDetailsUpdatesEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
 
 
         guard let package4d3nPDF = EmailAttachment(filename: "4Day-3Night-Package.pdf", in: workDir) else {
@@ -505,13 +505,12 @@ struct MailgunClient {
     }
     
     static func sendTransportationOptionsEmail(toUser user: IVSAUser, baseURL: String) throws {
-        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        let client = try TCPSMTPClient.makeMailgunClient()
         try sendMail(client: client, to: user.email, subject: "[POST CONGRESS] Options for Transportation", body: optionsForTransportationsEmail(baseURL: baseURL))
         
     }
 
-    private static func sendMail(client: SMTPClient<TCPClientStream>, to: String, subject: String, body: EmailBody, attachments: [EmailAttachment] = []) throws {
-
+    private static func sendMail(client: TCPSMTPClient, to: String, subject: String, body: EmailBody, attachments: [EmailAttachment] = []) throws {
 
         let credentials = SMTP.SMTPCredentials(
             user: "ivsa@mycongresslah.com",
@@ -520,8 +519,6 @@ struct MailgunClient {
 
         let from = SMTP.EmailAddress(name: "IVSA Malaysia OC Team",
                                      address: "ivsacongress.my@gmail.com")
-
-
 
         let email: SMTP.Email = Email(from: from,
                                       to: to,

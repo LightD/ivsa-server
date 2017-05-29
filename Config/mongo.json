@@ -3,5 +3,6 @@
     "password": "",
     "database": "ivsalocal",
     "port": "27017",
-    "host": "127.0.0.1"
+    "host": "127.0.0.1",
+    "url": "mongodb://127.0.0.1:27017/ivsalocal"
 }

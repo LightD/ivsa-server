@@ -8,42 +8,46 @@
 
 import Foundation
 import Vapor
-import Fluent
 import HTTP
-import Turnstile
+import FluentProvider
+import AuthProvider
 import Routing
+import Sessions
 
-struct AdminWebRouter {
+struct AdminWebRouter: RouteCollection, EmptyInitializable {
 
     typealias Wrapped = HTTP.Responder
-
-    private let drop: Droplet
-
-    init(droplet: Droplet) {
-        self.drop = droplet
+//
+//    private var authMiddleware: PasswordAuthenticationMiddleware<IVSAAdmin>
+    
+    init() throws {
+    
+    }
+    
+    func build(_ builder: RouteBuilder) throws {
+        try self.registerRoutes()
     }
 
-    static func buildRouter(droplet: Droplet) -> AdminWebRouter {
-        return AdminWebRouter(droplet: droplet)
-    }
-
-    func registerRoutes(authMiddleware: AdminSessionAuthMiddleware) {
+    func registerRoutes() throws {
+        
+        let persistMiddleware = PersistMiddleware(IVSAAdmin.self)
+        let authMiddleware = PasswordAuthenticationMiddleware(IVSAAdmin.self)
+        
         let adminBuilder = drop.grouped("admin")
-        let authBuilder = adminBuilder.grouped(authMiddleware)
+        let authBuilder = adminBuilder.grouped([persistMiddleware, authMiddleware])
 
-        self.buildIndex(adminBuilder)
-        self.buildAuth(adminBuilder)
+        try self.buildIndex(adminBuilder)
+        try self.buildAuth(adminBuilder)
 
-        self.buildHome(authBuilder)
+        try self.buildHome(authBuilder)
     }
 
-    private func buildIndex<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
+    
+    
+    private func buildIndex(_ builder: RouteBuilder) throws {
         builder.get { request in
             do {
-                guard let _ = try request.adminSessionAuth.admin() else {
-                    throw "redirect to auth page"
-                }
-
+                let _ = try request.auth.assertAuthenticated(IVSAUser.self)
                 return Response(redirect: "/admin/registration")
             }
             catch {
@@ -53,105 +57,96 @@ struct AdminWebRouter {
         }
     }
 
-    private func buildAuth<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
+    private func buildAuth(_ builder: RouteBuilder) throws {
         builder.get("login") { request in
-            return try self.drop.view.make("admin/login")
+            return try drop.view.make("admin/login")
         }
 
         builder.post("login") { request in
             guard let username = request.formURLEncoded?["username"]?.string,
                 let password = request.formURLEncoded?["password"]?.string else {
-                    return try self.drop.view.make("admin/login", ["flash": "Missing username or password"])
+                    return try drop.view.make("admin/login", ["flash": "Missing username or password"])
             }
-            let credentials = UsernamePassword(username: username, password: password)
+            let credentials = Password(username: username, password: password)
             do {
-                _ = try request.adminSessionAuth.login(credentials)
+                let adminCredentials = try IVSAAdmin(credentials: credentials)
+                let _ = try request.auth.authenticate(adminCredentials, persist: true)
+//                _ = try request.adminSessionAuth.login(credentials)
 
                 return Response(redirect: "/admin")
             } catch let e as Abort {
-                switch e {
-                case .custom(_, let message):
-                    return try self.drop.view.make("admin/login", ["flash": message])
-                default:
-                    return try self.drop.view.make("admin/login", ["flash": "Something went wrong. Please try again later!"])
-                }
+                return try drop.view.make("admin/login", ["flash": e.reason])
+//                default:
+//                    return try drop.view.make("admin/login", ["flash": "Something went wrong. Please try again later!"])
+//                }
             }
 
         }
     }
 
-    private func buildHome<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
-        self.buildRegistration(builder)
+    private func buildHome(_ builder: RouteBuilder) throws {
+        try self.buildRegistration(builder)
     }
     
-    
-
-    private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
+    private func buildRegistration(_ builder: RouteBuilder) throws {
         
         builder.get("register_delegate") { request in
-            guard var admin = try request.adminSessionAuth.admin() else {
-                throw "admin not found"
-            }
+            let admin: IVSAAdmin = try request.auth.assertAuthenticated()
+            
             if admin.accessToken == nil {
-                admin.generateAccessToken()
+                try admin.generateAccessToken()
                 try admin.save()
             }
-            let adminNode = try Node(node: admin.makeNode())
+            let adminNode = try Node(node: admin.makeNode(in: nil))
 
-            return try self.drop.view.make("admin/register_delegate", ["register_delegate": true, "user": adminNode])
-
+            return try drop.view.make("admin/register_delegate", ["register_delegate": true, "user": adminNode])
             
         }
         
         builder.get("registration") { request in
 
-            guard var admin = try request.adminSessionAuth.admin() else {
-                throw "admin not found"
-            }
+            let admin: IVSAAdmin = try request.auth.assertAuthenticated()
+            
             if admin.accessToken == nil {
-                admin.generateAccessToken()
+                try admin.generateAccessToken()
                 try admin.save()
             }
 
-            let adminNode = try Node(node: admin.makeNode())
+            let adminNode = try Node(node: admin.makeNode(in: nil))
 
-            return try self.drop.view.make("admin/registration", ["registration": true, "user": adminNode])
+            return try drop.view.make("admin/registration", ["registration": true, "user": adminNode])
         }
 
-        builder.get("applicant_details", String.self) { request, applicantID in
+        builder.get("applicant_details", String.parameter) { request in
+            let applicantID = try request.parameters.next(String.self)
+            let admin: IVSAAdmin = try request.auth.assertAuthenticated()
 
-
-            guard var admin = try request.adminSessionAuth.admin() else {
-                throw "admin not found"
-            }
             if admin.accessToken == nil {
-                admin.generateAccessToken()
+                try admin.generateAccessToken()
                 try admin.save()
             }
 //            let data = Node(value: ["accessToken": admin.accessToken!, "applicantID": applicantID])
-
-            return try self.drop.view.make("admin/applicant_details", ["accessToken": admin.accessToken!, "applicantID": applicantID])
+            
+            return try drop.view.make("admin/applicant_details", ["accessToken": admin.accessToken!, "applicantID": applicantID])
         }
 
         builder.get("waiting_list") { request in
-            guard let admin = try request.adminSessionAuth.admin() else {
-                throw "admin not found"
-            }
+            let admin: IVSAAdmin = try request.auth.assertAuthenticated()
+
             print("before making the node with admin: \(admin)")
-            let node = try Node(node: ["waitlist": true, "user": admin.makeNode()])
+            let node = try Node(node: ["waitlist": true, "user": try admin.makeNode(in: nil)])
             print("after making the node: \(node)")
-            return try self.drop.view.make("admin/waitinglist", node)
+            return try drop.view.make("admin/waitinglist", node)
         }
         
         
         builder.get("new_applicants") { request in
-            guard let admin = try request.adminSessionAuth.admin() else {
-                throw "admin not found"
-            }
+            let admin: IVSAAdmin = try request.auth.assertAuthenticated()
+
             print("before making the node with admin: \(admin)")
-            let node = try Node(node: ["newapplicants": true, "user": admin.makeNode()])
+            let node = try Node(node: ["newapplicants": true, "user": admin.makeNode(in: nil)])
             print("after making the node: \(node)")
-            return try self.drop.view.make("admin/new_applicants", node)
+            return try drop.view.make("admin/new_applicants", node)
         }
 
     }

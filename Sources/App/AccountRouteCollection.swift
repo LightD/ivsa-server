@@ -10,19 +10,25 @@ import Foundation
 import Vapor
 import HTTP
 import Routing
+import AuthProvider
 
-final class AccountRouteCollection: RouteCollection {
+final class AccountRouteCollection: RouteCollection, EmptyInitializable {
+
+
     
     typealias Wrapped = HTTP.Responder
     
-    private var authMiddleware: TokenAuthMiddleware
+//    private var authMiddleware: TokenAuthenticationMiddleware<IVSAUser>
+//    
+//    init(authMiddleware: TokenAuthenticationMiddleware<IVSAUser>) {
+//        self.authMiddleware = authMiddleware
+//    }
     
-    init(authMiddleware: TokenAuthMiddleware) {
-        self.authMiddleware = authMiddleware
-    }
     
-    func build<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
-        
+    
+    func build(_ builder: RouteBuilder) throws {
+        let authMiddleware = TokenAuthenticationMiddleware(IVSAUser.self)
+
         
         let authenticatedBuilder = builder.grouped(authMiddleware)
         
@@ -30,16 +36,16 @@ final class AccountRouteCollection: RouteCollection {
 //
 //            throw Abort.custom(status: .badRequest, message: "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page.")
 //            // now take the parameters from the request, and file a registration request
-            guard let registrationJSON = request.json?["registration_data"] else {
-                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
+            guard let registrationJSON = request.data["registration_data"] else {
+                
+                throw Abort(.badRequest, reason: "no json with `registration_data` found")
             }
             
             let registrationData: RegistrationData = try registrationJSON.converted()
             
-            var user = try request.user()
+            let user = try request.auth.assertAuthenticated(IVSAUser.self)
             user.applicationStatus = .newApplicant
             user.registrationDetails = registrationData
-            
             try user.save()
             
             return user
@@ -52,14 +58,14 @@ final class AccountRouteCollection: RouteCollection {
         }
         
         authenticatedBuilder.post("logout") { request in
-            try request.ivsaAuth.logout()
+            try request.auth.unauthenticate()
             return JSON(["status": "OK"])
         }
         
         authenticatedBuilder.get("me") { request in
-            return try request.user()
+            return try request.auth.assertAuthenticated(IVSAUser.self)
         }
         
     }
-
+    
 }

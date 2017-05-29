@@ -7,81 +7,72 @@
 //
 
 import Foundation
-import Auth
-import Turnstile
 import Vapor
-import HTTP
 import Routing
+import AuthProvider
 
-
-final class AuthRouteCollection: RouteCollection {
+final class AuthRouteCollection: RouteCollection, EmptyInitializable {
     
     typealias Wrapped = HTTP.Responder
-    
-    func build<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
-        
-        
+
+    func build(_ builder: RouteBuilder) throws {
         
         builder.post("login") { request in
             
             guard let username = request.json?["email"]?.string,
                 let password = request.json?["password"]?.string else {
-                    throw GeneralErrors.missingParams.vaporError
+                    throw GeneralErrors.missingParams
             }
             if username.isEmpty || password.isEmpty {
                 throw AuthErrors.emptyParams
             }
             
+            let credentials = Password(username: username, password: password)
+            let userCredentials = try IVSAUser(credentials: credentials)
+            // check if user exists
+            let _ = try IVSAUser.makeQuery().filter("email", credentials.username).filter("password", credentials.password).first()
             
-            let credentials = UsernamePassword(username: username, password: password)
-            
-            return try request.ivsaAuth.login(credentials)
+            request.auth.authenticate(userCredentials)
+            return try request.auth.assertAuthenticated(IVSAUser.self)
+//            return try request.auth.authenticate(<#T##ap: Persistable & Authenticatable##Persistable & Authenticatable#>, persist: <#T##Bool#>)
         }
         
         builder .post("signup") { request in
             guard let username = request.json?["email"]?.string,
                 let password = request.json?["password"]?.string else {
-                    throw GeneralErrors.missingParams.vaporError
+                    throw GeneralErrors.missingParams
             }
             
             if username.isEmpty || password.isEmpty {
                 throw AuthErrors.emptyParams
             }
+//            
+//            do {
+//                
+//                try Email.validate(input: username)
+//            }
+//            catch _ as ValidationErrorProtocol {
+//                throw AuthErrors.invalidEmail
+//            }
             
-            do {
-                try Email.validate(input: username)
-            }
-            catch _ as ValidationErrorProtocol {
-                throw AuthErrors.invalidEmail
-            }
+            let credentials = Password(username: username, password: password)
             
-            let credentials = UsernamePassword(username: username, password: password)
-            
-            let user = try IVSAUser.register(credentials: credentials) as! IVSAUser
+            let user = try IVSAUser.register(credentials: credentials)
             do {
                 // send a verification email from here? this happens once only anyway.. it's exactly where we need it
                 try MailgunClient.sendVerificationEmail(toUser: user, baseURL: request.baseURL)
             } catch { }  // do nothing here!!!! we don't want the whole request to fail just because the mail client failed to initialize or send an email or whatever -_-
             
-            return try request.ivsaAuth.login(credentials)
+            request.auth.authenticate(user)
+            return try request.auth.assertAuthenticated(IVSAUser.self)
             
         }
         
     }
-    
 }
 
-enum AuthErrors: IVSAError {
+enum AuthErrors: String, Error {
     case emptyParams
     case invalidEmail
-    
-    var vaporError: Abort {
-        switch self {
-        case .emptyParams:
-            return Abort.custom(status: .forbidden, message: "You can't submit empty values!")
-        case .invalidEmail:
-            return Abort.custom(status: .forbidden, message: "Invalid email, please provide a valid email and try again!")
-        }
-    }
 }
 
