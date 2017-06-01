@@ -7,11 +7,26 @@
 #export("body") {
 
 <div class="container-fluid">
+  #if(urgentMessage) {
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Warning:</span>
-<a href="/edit_registration"> #(urgentMessage) </a>
+<a href="/edit_registration"><br> The following details are crucial to ensure a smooth sailing Congress and for our Delegates to get freebies! <br>
+Please fill them up in order to successfully update your information:-
+<ul>
+  <ol> 1. University Student Card ID Number </ol>
+<ol> 2. Flight Details: Arrival (Date, Time, KLIA or klia2)
+                             Departure (Date, Time, KLIA or klia2)
+                           </ol>
+                         </ul>
+                         
+                         You can fill those up by clicking on this banner.
+                           </a>
+
     </div>
+  }
+
+
     <div class="row">
         <img class="ivsa-logo-main" src="/images/ivsalogo.png" />
     </div>
@@ -26,9 +41,9 @@
         <div class="col-sm-6 col-sm-offset-3">
             <h5 style="text-align: center;">Additionally, you can edit your application information <a href="/edit_registration"> here </a></h3>
         </div>
-        
+
     </div>
-    
+
 </div>
 
 }

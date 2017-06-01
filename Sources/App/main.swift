@@ -60,8 +60,8 @@ adminWeb.registerRoutes(authMiddleware: adminAuthSessionMiddleware)
 
 
 do {
-    let provider = try VaporMongo.Provider(config: drop.config)
-    try drop.addProvider(VaporMongo.Provider.self)
+    let provider = try VaporMongo.Provider(database: "ivsalocal", user: "", password: "")
+    drop.addProvider(provider)
 }
 catch let e {
     debugPrint("failed to add mongo provider \(e)")

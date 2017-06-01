@@ -232,7 +232,7 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
     middle_name: "",
     surname: "",
     name_tag: "",
-    birth_date: "13/4/1993",
+    birth_date: new Date(1993, 4, 13),
     sex: 1,
     study_year: "",
     nationality: "",
@@ -242,12 +242,12 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
   },
   flight_details: {
     arrival: {
-      datetime: new Date(),
+      datetime: new Date(2017, 7, 24),
       airport_name: "",
       flight_num: ""
     },
     departure: {
-      datetime: new Date(),
+      datetime: new Date(2017, 8, 4),
       airport_name: "",
       flight_num: ""
     }
@@ -291,8 +291,8 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
   $scope.isLoading = false;
 
 
-  $scope.submit = function(isValid) {
-
+  $scope.submit = function(event) {
+    event.preventDefault();
 
     var modalOptions = {
       closeButtonText: 'Cancel',
@@ -309,23 +309,23 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
       var formattedBday = $filter('date')(bday, "dd/MM/yyyy");
       data.registration_data.personal_information.birth_date = formattedBday;
       console.log(JSON.stringify(data));
-      // $http.post("/register", JSON.stringify(data))
-      // .then(function success(data) {
-      //   $scope.isLoading = false;
-      //   $window.location.href = "/register";
-      //   console.log("success registration: ", data);
-      //
-      // }, function failed(error) {
-      //   $scope.isLoading = false;
-      //   console.log("failed: ", error);
-      // });
+      $http.post("/register", JSON.stringify(data))
+      .then(function success(data) {
+        $scope.isLoading = false;
+        $window.location.href = "/register";
+        console.log("success registration: ", data);
+
+      }, function failed(error) {
+        $scope.isLoading = false;
+        console.log("failed: ", error);
+      });
     });
   }
 
-  $scope.editableJSON = {};
+  $scope.token = "";
 
   $scope.setup = function(token) {
-
+    $scope.token = token;
      $scope.isLoading = true;
 
      $http.get("/api/me", { headers: { "Authorization": "Bearer " +  token} })
@@ -334,28 +334,22 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
           console.log("got me ", object.data.registration_details);
 
            var regd = object.data.registration_details;
-           regd.personal_information.sex = ((regd.personal_information.sex) ? 1 : 0);
-           regd.event_info.vegetarian = ((regd.event_info.vegetarian) ? 1 : 0);
-           regd.attending_postcongress = ((regd.attending_postcongress) ? 1 : 0);
-           regd.personal_information.birth_date =  getDateFromFormat(regd.personal_information.birth_date, "dd/MM/yyyy");
+           if (regd != null) {
+             regd.personal_information.sex = ((regd.personal_information.sex) ? 1 : 0);
+             regd.event_info.vegetarian = ((regd.event_info.vegetarian) ? 1 : 0);
+             regd.attending_postcongress = ((regd.attending_postcongress) ? 1 : 0);
+             regd.personal_information.birth_date =  getDateFromFormat(regd.personal_information.birth_date, "dd/MM/yyyy");
 
-           if (regd.flight_details != null) {
-             regd.flight_details.arrival.datetime = new Date(regd.flight_details.arrival.datetime);
-             regd.flight_details.departure.datetime = new Date(regd.flight_details.departure.datetime);
+             if (regd.flight_details != null) {
+               regd.flight_details.arrival.datetime = new Date(regd.flight_details.arrival.datetime);
+               regd.flight_details.departure.datetime = new Date(regd.flight_details.departure.datetime);
+             }
+             else {
+               regd.flight_details =  $scope.vm.flight_details;
+             }
            }
            else {
-             regd.flight_details =  {
-                 arrival: {
-                   datetime: new Date(),
-                   airport_name: "",
-                   flight_num: ""
-                 },
-                 departure: {
-                   datetime: new Date(),
-                   airport_name: "",
-                   flight_num: ""
-                 }
-               };
+             regd = $scope.vm;
            }
           $scope.vm = regd;
       }, function failed(error) {

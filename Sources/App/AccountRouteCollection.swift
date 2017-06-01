@@ -47,7 +47,6 @@ final class AccountRouteCollection: RouteCollection {
         
         authenticatedBuilder.post("connect", "facebook") { request in
             
-            
             return JSON(["status", "ok"])
         }
         

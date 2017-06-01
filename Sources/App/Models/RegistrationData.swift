@@ -19,7 +19,7 @@ extension String {
     
     var fullDateTime: Date? {
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-ddTHH:mm"
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let date = dateformatter.date(from: self)
         return date
     }
@@ -36,7 +36,7 @@ extension Date {
     
     var stringFullDateTime: String {
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-ddTHH:mm"
+        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let string = dateformatter.string(from: self)
         return string
     }
@@ -53,7 +53,7 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
     var nationality: String
     var countryOfLegalResidence: String
     var passportNumber: String
-    var studentId: String
+    var studentId: String?
     
     init(node: Node, in context: Context) throws {
         self.name = try node.extract("first_name")
@@ -72,6 +72,8 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
         self.countryOfLegalResidence = try node.extract("residency_country")
         self.passportNumber = try node.extract("passport_number")
         self.studentId = try node.extract("student_id")
+        
+        
     }
     
     func makeNode(context: Context) throws -> Node {
@@ -108,32 +110,34 @@ struct FlightDetails: NodeConvertible {
             "departure": departure
             ])
     }
+}
+
+struct FlightInfo: NodeConvertible {
     
-    struct FlightInfo: NodeConvertible {
-        var datetime: Date
-        var airportName: String
-        var flightNumber: String
-        init(node: Node, in context: Context) throws {
-            self.datetime = try node.extract("datetime", transform:{ (dateString: String) -> Date in
-                guard let date = dateString.dateDDmmYYYY else {
-                    throw Abort.custom(status: .badRequest, message: "Invalid format for birth date field")
-                }
-                return date
-            })
-            self.airportName = try node.extract("airport_name")
-            self.flightNumber = try node.extract("flight_number")
+    var datetime: Date
+    var airportName: String
+    var flightNumber: String
+    
+    init(node: Node, in context: Context) throws {
+        self.datetime = try node.extract("datetime", transform:{ (dateString: String) -> Date in
             
-        }
+            guard let date = dateString.fullDateTime else {
+                throw Abort.custom(status: .badRequest, message: "Invalid format for flight datetime field :\(dateString)")
+            }
+            return date
+        })
+        self.airportName = try node.extract("airport_name")
+        self.flightNumber = try node.extract("flight_num")
         
-        func makeNode(context: Context) throws -> Node {
-            return try Node(node: [
-                "datetime": datetime.stringFullDateTime,
-                "airport_name": airportName,
-                "flight_num": flightNumber
-                ])
-        }
     }
     
+    func makeNode(context: Context) throws -> Node {
+        return try Node(node: [
+            "datetime": datetime.stringFullDateTime,
+            "airport_name": airportName,
+            "flight_num": flightNumber
+            ])
+    }
 }
 
 //struct Flight

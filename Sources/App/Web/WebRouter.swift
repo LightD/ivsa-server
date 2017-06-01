@@ -45,7 +45,7 @@ struct WebRouter {
         builder.get { request in
 
             do {
-                guard let user: IVSAUser = try request.sessionAuth.user() else {
+                guard let _ = try request.sessionAuth.user() else {
                     throw "redirect to auth page"
                 }
                 return Response(redirect: "/register")
@@ -170,15 +170,22 @@ struct WebRouter {
     private func buildRegistration<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
         builder.get("register") { request in
             let user = try request.sessionAuth.user()
-            var data = ["user": try user?.makeNode()]
+            if var user = user, user.accessToken == nil {
+                user.generateAccessToken()
+                try user.save()
+            }
+            
+            var data: [String : Node] = ["user": try user?.makeNode() ?? EmptyNode, "accessToken": Node.string(user?.accessToken ?? "")]
+            
             var node = try Node(node: data)
 
             if user?.applicationStatus == .nonApplicant {
                 return try self.drop.view.make("registration", node)
             }
             
-            if user?.registrationDetails?.personalInfo.studentId.isEmpty ?? false {
-                data["urgentMessage"] = "You must fill in your Student ID# to continue using the rest of the functionality. You can do so by clicking on this banner to edit your profile info."
+            if (user?.registrationDetails?.personalInfo.studentId?.isEmpty ?? false)
+            || user?.registrationDetails?.flightDetails == nil {
+                data["urgentMessage"] = true
             }
             
             node = try Node(node: data)
@@ -202,15 +209,17 @@ struct WebRouter {
 
         builder.post("register") { request in
             guard var user = try request.sessionAuth.user() else {
+                debugPrint("couldn't find user session")
                 return Response(redirect: "/")
             }
+            
             // now take the parameters from the request, and file a registration request
             guard let registrationJSON = request.json?["registration_data"] else {
                 throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
             }
-
+            
             let registrationData: RegistrationData = try registrationJSON.converted()
-
+            
             user.registrationDetails = registrationData
             user.applicationStatus = .newApplicant
             try user.save()
