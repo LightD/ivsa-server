@@ -16,6 +16,13 @@ extension String {
         let date = dateformatter.date(from: self)
         return date
     }
+    
+    var fullDateTime: Date? {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-ddTHH:mm"
+        let date = dateformatter.date(from: self)
+        return date
+    }
 }
 
 extension Date {
@@ -23,6 +30,13 @@ extension Date {
     var stringDDmmYYYY: String {
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "dd/MM/yyyy"
+        let string = dateformatter.string(from: self)
+        return string
+    }
+    
+    var stringFullDateTime: String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-ddTHH:mm"
         let string = dateformatter.string(from: self)
         return string
     }
@@ -77,6 +91,52 @@ struct PersonalInformation: NodeInitializable, NodeRepresentable {
             ])
     }
 }
+
+struct FlightDetails: NodeConvertible {
+    
+    var arrival: FlightInfo
+    var departure: FlightInfo
+    
+    init(node: Node, in context: Context) throws {
+        self.arrival = try node.extract("arrival")
+        self.departure = try node.extract("departure")
+    }
+    
+    func makeNode(context: Context) throws -> Node {
+        return try Node(node: [
+            "arrival": arrival,
+            "departure": departure
+            ])
+    }
+    
+    struct FlightInfo: NodeConvertible {
+        var datetime: Date
+        var airportName: String
+        var flightNumber: String
+        init(node: Node, in context: Context) throws {
+            self.datetime = try node.extract("datetime", transform:{ (dateString: String) -> Date in
+                guard let date = dateString.dateDDmmYYYY else {
+                    throw Abort.custom(status: .badRequest, message: "Invalid format for birth date field")
+                }
+                return date
+            })
+            self.airportName = try node.extract("airport_name")
+            self.flightNumber = try node.extract("flight_number")
+            
+        }
+        
+        func makeNode(context: Context) throws -> Node {
+            return try Node(node: [
+                "datetime": datetime.stringFullDateTime,
+                "airport_name": airportName,
+                "flight_num": flightNumber
+                ])
+        }
+    }
+    
+}
+
+//struct Flight
 
 struct ContactDetails: NodeInitializable, NodeRepresentable {
     var address: String
@@ -200,16 +260,23 @@ struct EventSpecificInfo: NodeInitializable, NodeRepresentable {
 struct RegistrationData: NodeInitializable, NodeRepresentable {
     
     var personalInfo: PersonalInformation
+    var flightDetails: FlightDetails? = nil// because this was added later, so could be optional
     var contactDetails: ContactDetails
     var emergencyContact: EmergencyContact
     var ivsaChapter: IVSAChapterInformation
     var eventSpecificInfo: EventSpecificInfo
+    
     
     var whyShouldWeChooseYou: String
     var attendingPostCongress: Bool = false
     
     init(node: Node, in context: Context) throws {
         self.personalInfo = try PersonalInformation(node: try node.extract("personal_information"), in: context)
+        
+        let flightInfo: Node? = try node.extract("flight_details")
+        if let flights = flightInfo {
+            self.flightDetails = try FlightDetails(node: flights, in: context)
+        }
         self.contactDetails = try ContactDetails(node: try node.extract("contact_details"), in: context)
         self.emergencyContact = try EmergencyContact(node: try node.extract("emergency_contact"), in: context)
         self.ivsaChapter = try IVSAChapterInformation(node: try node.extract("ivsa_chapter"), in: context)
@@ -222,6 +289,7 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
     func makeNode(context: Context) throws -> Node {
         return try Node(node: [
             "personal_information": personalInfo,
+            "flight_details": flightDetails,
             "contact_details": contactDetails,
             "emergency_contact": emergencyContact,
             "ivsa_chapter": ivsaChapter,
@@ -229,40 +297,5 @@ struct RegistrationData: NodeInitializable, NodeRepresentable {
             "why_you": whyShouldWeChooseYou,
             "attending_postcongress": self.attendingPostCongress
             ])
-    }
-}
-
-
-extension Node {
-    func asString() -> String {
-        
-        var final = ""
-        
-        switch self {
-        case .array(let nodes):
-            final = "\"[\(nodes.map { "\"\($0.asString())\"" }.joined(separator: ","))]\""
-        case .bool(let val): final = val ? "true" : "false"
-        case .number(let val): final = val.description
-        case .string(let val): final = val
-        case .object(let val):
-            let stringRep = val.map {
-                
-                var value = ""
-                switch $1 {
-                case .object:
-                    value = "\"\($0)\": {\($1.asString())}"
-                default: value = "\"\($0)\": \"\($1.asString())\""
-                }
-                
-                return value
-                
-            }.joined(separator: ",")
-            
-            final = "\(stringRep)"
-        default:
-            return ""
-        }
-        
-        return final.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
     }
 }

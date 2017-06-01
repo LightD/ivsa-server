@@ -44,7 +44,7 @@ function getDateFromFormat(val,format) {
     var mm=now.getMinutes();
     var ss=now.getSeconds();
     var ampm="";
-    
+
     while (i_format < format.length) {
         // Get next token from format string
         c=format.charAt(i_format);
@@ -240,6 +240,18 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
     passport_number: "",
     student_id: ""
   },
+  flight_details: {
+    arrival: {
+      datetime: new Date(),
+      airport_name: "",
+      flight_num: ""
+    },
+    departure: {
+      datetime: new Date(),
+      airport_name: "",
+      flight_num: ""
+    }
+  },
   contact_details: {
     address: "",
     city: "",
@@ -277,9 +289,10 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
   why_you: ""};
 
   $scope.isLoading = false;
-                   
 
-  $scope.submit = function() {
+
+  $scope.submit = function(isValid) {
+
 
     var modalOptions = {
       closeButtonText: 'Cancel',
@@ -296,16 +309,16 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
       var formattedBday = $filter('date')(bday, "dd/MM/yyyy");
       data.registration_data.personal_information.birth_date = formattedBday;
       console.log(JSON.stringify(data));
-      $http.post("/register", JSON.stringify(data))
-      .then(function success(data) {
-        $scope.isLoading = false;
-        $window.location.href = "/register";
-        console.log("success registration: ", data);
-
-      }, function failed(error) {
-        $scope.isLoading = false;
-        console.log("failed: ", error);
-      });
+      // $http.post("/register", JSON.stringify(data))
+      // .then(function success(data) {
+      //   $scope.isLoading = false;
+      //   $window.location.href = "/register";
+      //   console.log("success registration: ", data);
+      //
+      // }, function failed(error) {
+      //   $scope.isLoading = false;
+      //   console.log("failed: ", error);
+      // });
     });
   }
 
@@ -313,34 +326,37 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
 
   $scope.setup = function(token) {
 
-    // var decodedURI = decodeURI(jsonString);
-//    var parts = jsonString.split(":");
-//    parts.forEach(function(item, index, theArray) {
-//			var newItem = decodeURI(item);
-//			
-//      theArray[index] = newItem;
-//    });
-//    console.log(parts);
-//    parts = parts.join(":");
-//    console.log(parts);
-//    let json = JSON.parse(parts);
-//    console.log(json);
-//
-//    let wee = eval(jsonString);
-//    console.log(wee);
      $scope.isLoading = true;
-                   
+
      $http.get("/api/me", { headers: { "Authorization": "Bearer " +  token} })
      .then(function success(object) {
           $scope.isLoading = false;
           console.log("got me ", object.data.registration_details);
-           
+
            var regd = object.data.registration_details;
            regd.personal_information.sex = ((regd.personal_information.sex) ? 1 : 0);
            regd.event_info.vegetarian = ((regd.event_info.vegetarian) ? 1 : 0);
            regd.attending_postcongress = ((regd.attending_postcongress) ? 1 : 0);
-           regd.personal_information.birth_date = getDateFromFormat(regd.personal_information.birth_date, "dd/MM/yyyy")
-           
+           regd.personal_information.birth_date =  getDateFromFormat(regd.personal_information.birth_date, "dd/MM/yyyy");
+
+           if (regd.flight_details != null) {
+             regd.flight_details.arrival.datetime = new Date(regd.flight_details.arrival.datetime);
+             regd.flight_details.departure.datetime = new Date(regd.flight_details.departure.datetime);
+           }
+           else {
+             regd.flight_details =  {
+                 arrival: {
+                   datetime: new Date(),
+                   airport_name: "",
+                   flight_num: ""
+                 },
+                 departure: {
+                   datetime: new Date(),
+                   airport_name: "",
+                   flight_num: ""
+                 }
+               };
+           }
           $scope.vm = regd;
       }, function failed(error) {
           $scope.isLoading = false;

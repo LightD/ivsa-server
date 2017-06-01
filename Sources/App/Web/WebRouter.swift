@@ -177,9 +177,10 @@ struct WebRouter {
                 return try self.drop.view.make("registration", node)
             }
             
-            if let studentID = user?.registrationDetails?.personalInfo.studentId, studentID.isEmpty {
-                data["flash"] = "You must fill in your student ID to continue using the rest of the functionality"
+            if user?.registrationDetails?.personalInfo.studentId.isEmpty ?? false {
+                data["urgentMessage"] = "You must fill in your Student ID# to continue using the rest of the functionality. You can do so by clicking on this banner to edit your profile info."
             }
+            
             node = try Node(node: data)
             return try self.drop.view.make("application_in_review", node)
             

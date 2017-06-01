@@ -1,6 +1,6 @@
 {
 	"http": {
-		"port": "$PORT:8080",
+		"port": "$PORT:8088",
 		"host": "127.0.0.1",
 		"securityLayer": "none"
 	}

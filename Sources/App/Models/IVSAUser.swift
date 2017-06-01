@@ -33,34 +33,30 @@ enum ApplicationStatus: String, NodeInitializable, NodeRepresentable {
     }
 }
 
-struct ProofOfPayment: NodeInitializable, NodeRepresentable {
-    var congressPaymentPaidDate: String
-    var congressPaymentRemarks: String
-
-    var postcongressPaidDate: String
-    var postcongressPaidRemarks: String
-
-    init(node: Node, in context: Context) throws {
-        self.congressPaymentPaidDate = try node.extract("congress_payment_date")
-        self.congressPaymentRemarks = try node.extract("congress_payment_remarks")
-        self.postcongressPaidDate = try node.extract("post_congress_payment_date")
-        self.postcongressPaidRemarks = try node.extract("post_congress_payment_remarks")
-    }
-
-    func makeNode(context: Context) throws -> Node {
-
-        return try Node(node: [
-            "congress_payment_date": congressPaymentPaidDate,
-            "congress_payment_remarks": congressPaymentRemarks,
-            "post_congress_payment_date": postcongressPaidDate,
-            "post_congress_payment_remarks": postcongressPaidRemarks
-            ])
-    }
-}
-
-struct FlightDetails {
-    
-}
+//struct ProofOfPayment: NodeInitializable, NodeRepresentable {
+//    var congressPaymentPaidDate: String
+//    var congressPaymentRemarks: String
+//
+//    var postcongressPaidDate: String
+//    var postcongressPaidRemarks: String
+//
+//    init(node: Node, in context: Context) throws {
+//        self.congressPaymentPaidDate = try node.extract("congress_payment_date")
+//        self.congressPaymentRemarks = try node.extract("congress_payment_remarks")
+//        self.postcongressPaidDate = try node.extract("post_congress_payment_date")
+//        self.postcongressPaidRemarks = try node.extract("post_congress_payment_remarks")
+//    }
+//
+//    func makeNode(context: Context) throws -> Node {
+//
+//        return try Node(node: [
+//            "congress_payment_date": congressPaymentPaidDate,
+//            "congress_payment_remarks": congressPaymentRemarks,
+//            "post_congress_payment_date": postcongressPaidDate,
+//            "post_congress_payment_remarks": postcongressPaidRemarks
+//            ])
+//    }
+//}
 
 final class IVSAUser: Model, NodeInitializable {
     // this is for fluent ORM
@@ -75,7 +71,6 @@ final class IVSAUser: Model, NodeInitializable {
     var registrationDetails: RegistrationData? // this is nil before the user registers.
     var isVerified: Bool
     var verificationToken: String = URandom().secureToken
-    var proofOfPayment: ProofOfPayment?
     var didSendCorrectionEmail: Bool = false
 
     init() {
@@ -97,9 +92,6 @@ final class IVSAUser: Model, NodeInitializable {
         do {
             didSendCorrectionEmail = try node.extract("correction_email_sent")
         } catch { didSendCorrectionEmail = false }
-        do {
-            proofOfPayment = try node.extract("proof_of_payment")
-        } catch { debugPrint("null proof of payment")  }
     }
 
     init(node: Node, in context: Context) throws {
@@ -115,9 +107,6 @@ final class IVSAUser: Model, NodeInitializable {
         do {
             didSendCorrectionEmail = try node.extract("correction_email_sent")
         } catch { didSendCorrectionEmail = false }
-        do {
-            proofOfPayment = try node.extract("proof_of_payment")
-        } catch { debugPrint("null proof of payment") }
     }
 
     init(credentials: UsernamePassword) {
@@ -145,8 +134,7 @@ final class IVSAUser: Model, NodeInitializable {
             "registration_details": registrationDetails,
             "is_verified": isVerified,
             "verification_token": verificationToken,
-            "correction_email_sent": didSendCorrectionEmail,
-            "proof_of_payment": proofOfPayment
+            "correction_email_sent": didSendCorrectionEmail
             ])
     }
 

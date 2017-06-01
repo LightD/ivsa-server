@@ -58,7 +58,9 @@ let adminWeb = AdminWebRouter.buildRouter(droplet: drop)
 let adminAuthSessionMiddleware = AdminSessionAuthMiddleware()
 adminWeb.registerRoutes(authMiddleware: adminAuthSessionMiddleware)
 
+
 do {
+    let provider = try VaporMongo.Provider(config: drop.config)
     try drop.addProvider(VaporMongo.Provider.self)
 }
 catch let e {

@@ -7,6 +7,11 @@
 #export("body") {
 
 <div class="container-fluid">
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Warning:</span>
+<a href="/edit_registration"> #(urgentMessage) </a>
+    </div>
     <div class="row">
         <img class="ivsa-logo-main" src="/images/ivsalogo.png" />
     </div>
