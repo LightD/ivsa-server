@@ -13,7 +13,7 @@ protocol IVSAError: Error {
 
 enum GeneralErrors: IVSAError {
     case missingParams
-    
+
     var vaporError: Abort {
         switch self {
         case .missingParams:
@@ -24,7 +24,7 @@ enum GeneralErrors: IVSAError {
 
 
 extension String: Error {
-    
+
 }
 
 extension Request {
@@ -32,7 +32,7 @@ extension Request {
     var baseURL: String {
         return uri.scheme + "://" + uri.host + (uri.port == nil ? "" : ":\(uri.port!)")
     }
-    
+
 }
 
 
@@ -60,8 +60,8 @@ adminWeb.registerRoutes(authMiddleware: adminAuthSessionMiddleware)
 
 
 do {
-    let provider = try VaporMongo.Provider(database: "ivsalocal", user: "", password: "")
-    drop.addProvider(provider)
+    // let provider = try VaporMongo.Provider(database: "ivsalocal", user: "", password: "")
+    try drop.addProvider(VaporMongo.Provider.self)
 }
 catch let e {
     debugPrint("failed to add mongo provider \(e)")
