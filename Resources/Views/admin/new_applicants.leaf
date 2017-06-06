@@ -38,8 +38,8 @@
 <!-- <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
 <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td> -->
 <td>
-<button type="button" class="btn btn-success" ng-click="">Accept</button>
-<button type="button" class="btn btn-danger" ng-click="">Reject</button>
+<button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button>
+<button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button>
 </td>
 </tr>
 </table>

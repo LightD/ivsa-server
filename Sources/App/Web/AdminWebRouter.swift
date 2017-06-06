@@ -153,6 +153,15 @@ struct AdminWebRouter {
             print("after making the node: \(node)")
             return try self.drop.view.make("admin/new_applicants", node)
         }
-
+        
+        builder.get("rejected") { request in
+            guard let admin = try request.adminSessionAuth.admin() else {
+                throw "admin not found"
+            }
+            print("before making the node with admin: \(admin)")
+            let node = try Node(node: ["rejected": true, "user": admin.makeNode()])
+            print("after making the node: \(node)")
+            return try self.drop.view.make("admin/rejected", node)
+        }
     }
 }

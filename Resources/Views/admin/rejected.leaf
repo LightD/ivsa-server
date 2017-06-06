@@ -1,0 +1,47 @@
+#extend("main")
+
+#export("head") {
+
+}
+
+#export("body") {
+
+<div class="container-fluid" ng-controller="RejectedController">
+<span ng-init="setup('#(user.access_token)')"> </span>
+<div class="row">
+<!-- <span> Total number of applicants is: {{applicants.length}} </span> -->
+
+<table class="table table-striped">
+<tr>
+	<th > #() </th>
+	<th > Chapter Country </th>
+	<th > Chapter Name </th>
+	<th > Email </th>
+	<th > Name </th>
+	<th > Position </th>
+  <th > Passport #() </th>
+</tr>
+
+<tr ng-repeat="applicant in applicants track by $index">
+	<td > {{ $index + 1 }} </td>
+	<td > <a href="/admin/applicant_details/{{applicant._id}}" target="_blank"> {{applicant.registration_details.ivsa_chapter.country}} </a> </td>
+	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank"> {{applicant.registration_details.ivsa_chapter.name}} </a> </td>
+	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank"> {{applicant.email}} </a> </td>
+
+	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank"> {{applicant.registration_details.personal_information.first_name}} {{applicant.registration_details.personal_information.surname}} </a> </td>
+	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
+	<td>
+	{{applicant.registration_details.personal_information.passport_number }}
+	</td>
+	<!-- <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
+	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td> -->
+	<!-- <td>
+	<button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button>
+	<button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button>
+	</td> -->
+</tr>
+</table>
+</div>
+</div>
+
+}
