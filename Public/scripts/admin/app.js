@@ -361,6 +361,18 @@ ivsaAdmin.controller('ApplicationDetailsController', function ApplicationDetails
     residency_country: "",
     passport_number: ""
   },
+  flight_details: {
+    arrival: {
+      datetime: new Date(2017, 7, 24),
+      airport_name: "",
+      flight_num: ""
+    },
+    departure: {
+      datetime: new Date(2017, 8, 4),
+      airport_name: "",
+      flight_num: ""
+    }
+  },
   contact_details: {
     address: "",
     city: "",
@@ -454,11 +466,21 @@ ivsaAdmin.controller('ApplicationDetailsController', function ApplicationDetails
           $scope.isLoading = false;
           console.log("got applicant ", object.data.registration_details);
 
-           var regd = object.data.registration_details;
-           regd.personal_information.sex = ((regd.personal_information.sex) ? 1 : 0);
-           regd.event_info.vegetarian = ((regd.event_info.vegetarian) ? 1 : 0);
-           regd.attending_postcongress = ((regd.attending_postcongress) ? 1 : 0);
-           regd.personal_information.birth_date = getDateFromFormat(regd.personal_information.birth_date, "dd/MM/yyyy")
+          var regd = object.data.registration_details;
+          regd.personal_information.sex = ((regd.personal_information.sex) ? 1 : 0);
+          regd.event_info.vegetarian = ((regd.event_info.vegetarian) ? 1 : 0);
+          regd.attending_postcongress = ((regd.attending_postcongress) ? 1 : 0);
+          regd.personal_information.birth_date = getDateFromFormat(regd.personal_information.birth_date, "dd/MM/yyyy")
+
+
+          if (regd.flight_details != null) {
+            regd.flight_details.arrival.datetime = new Date(regd.flight_details.arrival.datetime);
+            regd.flight_details.departure.datetime = new Date(regd.flight_details.departure.datetime);
+          }
+          else {
+            regd.flight_details =  $scope.vm.flight_details;
+          }
+
 
           $scope.vm = regd;
       }, function failed(error) {
