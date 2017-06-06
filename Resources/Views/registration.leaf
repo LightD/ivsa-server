@@ -6,8 +6,13 @@
 
 #export("body") {
     <div class="container-fluid" ng-controller="ApplicationRegistrationController">
+        #if(isEditMode) {
+          <span ng-init='setup("#(accessToken)", true)'>  </span>
+        }
+        ##else() {
+          <span ng-init='setup("#(accessToken)")'>  </span>
+        }
 
-        <span ng-init='setup("#(accessToken)", #(isEditMode))'>  </span>
 
 
         <div class="loader animate-show-hide" ng-show="isLoading" >
@@ -137,7 +142,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Flight #()</label>
                         <div class="col-md-10">
-                            <input type="text" #if(isEditMode) { required } class="form-control" ng-model="vm.flight_details.arrival.airport_num" placeholder="LFS4820"></input>
+                            <input type="text" #if(isEditMode) { required } class="form-control" ng-model="vm.flight_details.arrival.flight_num" placeholder="LFS4820"></input>
                         </div>
                     </div>
 
