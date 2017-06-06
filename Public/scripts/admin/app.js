@@ -263,7 +263,7 @@ ivsaAdmin.controller('ApplicantsController', function ApplicantsController($scop
     modalService.showModal({}, modalOptions)
     .then(function (result) {
       $scope.isLoading = true;
-      $http.post("/api/admin/reject/" + userID, null, { headers: { "Authorization": "Bearer " +  $scope.token } })
+      $http.post("/api/admin/confirmReject/" + userID, null, { headers: { "Authorization": "Bearer " +  $scope.token } })
       .then(function success(data) {
         $scope.isLoading = false;
         $scope.applicants.splice(index, 1);

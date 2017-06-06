@@ -19,6 +19,7 @@
   <script src="/scripts/admin/app.js" ></script>
   #if(waitlist) { <script src="/scripts/admin/waitlist.js" ></script> }
   #if(newapplicants) { <script src="/scripts/admin/newapplicants.js" ></script> }
+  #if(rejected) { <script src="/scripts/admin/rejected.js" ></script> }
   <script src="/scripts/vendor/uibootstrap.js" ></script>
   #import("head")
 </head>

@@ -22,7 +22,7 @@
             <th> Passport #() </th>
             <th> Year of study </th>
             <th> Status </th>
-            <!--  <th> Action </th> accept/reject button -->
+             <th> Action </th>
           </tr>
 
           <tr ng-repeat="applicant in applicants track by $index">
@@ -40,10 +40,10 @@
             <td> {{applicant.registration_details.personal_information.study_year}} </td>
 
             <td> <p> {{applicant.application_status}} </p> </td>
-            <!-- <td>
-              <button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button>
+            <td>
+              <!-- <button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button> -->
               <button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button>
-            </td> -->
+            </td>
           </tr>
         </table>
       </div>
