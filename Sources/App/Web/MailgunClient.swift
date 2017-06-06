@@ -345,6 +345,29 @@ func emailVerificationEmail(forUser user: IVSAUser, baseURL: String) -> EmailBod
     return EmailBody(type: .html, content: html)
 }
 
+func resetPasswordEmail(forUser user: IVSAUser, baseURL: String) -> EmailBody {
+    var html = ""
+    html += "<!DOCTYPE html>"
+    html += "<html>"
+    html += "<body>"
+    
+    html += "<p> Dear Delegate, </p>"
+    
+    html += "<p> You have requested a password reset for the email: \(user.email). <br> To choose a password and complete resetting your password, please click: <a href='\(baseURL)/reset_password/\(user.id!.string!)/\(user.resetPasswordToken)'> \(baseURL)/reset_password/\(user.id!.string!)/\(user.resetPasswordToken) </a>  </p>"
+    
+    
+    html += "<br /> <p> Regards, <br /> OC </p>"
+    
+    html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
+    html += "<br >"
+    
+    
+    html += "</body>"
+    html += "</html>"
+    return EmailBody(type: .html, content: html)
+}
+
+
 func postcongressDetailsUpdatesEmail(baseURL: String) -> EmailBody {
     var html = ""
     html += "<!DOCTYPE html>"
@@ -435,6 +458,12 @@ struct MailgunClient {
         
         try sendMail(client: client, to: user.email, subject: "Verify your email", body: emailVerificationEmail(forUser: user, baseURL: baseURL))
 
+    }
+    
+    static func sendResetPasswordEmail(toUser user: IVSAUser, baseURL: String) throws {
+        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
+        
+        try sendMail(client: client, to: user.email, subject: "Reset your password", body: resetPasswordEmail(forUser: user, baseURL: baseURL))
     }
 
     static func sendAcceptanceEmail(toUser user: IVSAUser, baseURL: String) throws {

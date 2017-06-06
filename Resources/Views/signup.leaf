@@ -24,8 +24,8 @@
             </div>
             <button type="submit" class="btn btn-primary" style="margin-right: 14px;">Signup</button>
         </form>
-        <p>Already have an account? <a href="/login" class="btn btn-primary">Login here</a>
-
+        <p>Already have an account? <a href="/login" class="btn btn-link">Login here</a>
+        <p>Forgot your password? <a href="/request_reset_password" class="btn btn-warning">Request password reset</a>
     </div>
 
     </div>

@@ -7,7 +7,7 @@
 #export("body") {
     <div class="container-fluid" ng-controller="ApplicationRegistrationController">
 
-        <span ng-init='setup("#(accessToken)")'>  </span>
+        <span ng-init='setup("#(accessToken)", #(isEditMode))'>  </span>
 
 
         <div class="loader animate-show-hide" ng-show="isLoading" >
@@ -19,6 +19,7 @@
 
             <div class="col-lg-12">
                 <form name="myform" class="form-horizontal" ng-submit="submit($event)">
+
                     <h3 style="text-align: center;">Personal Information</h3>
                     <div class="form-group">
                         <label class="col-md-2 control-label">First Name</label>

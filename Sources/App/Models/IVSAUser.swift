@@ -72,7 +72,10 @@ final class IVSAUser: Model, NodeInitializable {
     var isVerified: Bool
     var verificationToken: String = URandom().secureToken
     var didSendCorrectionEmail: Bool = false
-
+    
+    var isPasswordResetting: Bool = false
+    var resetPasswordToken: String = URandom().secureToken
+    
     init() {
         self.email = ""
         self.password = ""
@@ -89,6 +92,16 @@ final class IVSAUser: Model, NodeInitializable {
         registrationDetails = try node.extract("registration_details")
         isVerified = try node.extract("is_verified")
         verificationToken = try node.extract("verification_token")
+        
+        do {
+            isPasswordResetting = try node.extract("is_resetting_password")
+        }
+        catch { isPasswordResetting = false }
+        do {
+            resetPasswordToken = try node.extract("reset_password_token")
+        }
+        catch { resetPasswordToken = URandom().secureToken }
+        
         do {
             didSendCorrectionEmail = try node.extract("correction_email_sent")
         } catch { didSendCorrectionEmail = false }
@@ -103,7 +116,16 @@ final class IVSAUser: Model, NodeInitializable {
         registrationDetails = try node.extract("registration_details")
         isVerified = try node.extract("is_verified")
         verificationToken = try node.extract("verification_token")
-
+        
+        
+        do {
+            isPasswordResetting = try node.extract("is_resetting_password")
+        }
+        catch { isPasswordResetting = false }
+        do {
+            resetPasswordToken = try node.extract("reset_password_token")
+        }
+        catch { resetPasswordToken = URandom().secureToken }
         do {
             didSendCorrectionEmail = try node.extract("correction_email_sent")
         } catch { didSendCorrectionEmail = false }
@@ -118,12 +140,18 @@ final class IVSAUser: Model, NodeInitializable {
 
     func updatePassword(pass: String) {
         self.password = BCrypt.hash(password: pass)
+        self.isPasswordResetting = false
     }
 
     func generateAccessToken() {
         self.accessToken =  BCrypt.hash(password: self.password)
     }
 
+    func generateResetPasswordToken() {
+        self.resetPasswordToken = URandom().secureToken
+        self.isPasswordResetting = true
+    }
+    
     func makeNode(context: Context) throws -> Node {
         return try Node(node: [
             "_id": id,
@@ -134,7 +162,9 @@ final class IVSAUser: Model, NodeInitializable {
             "registration_details": registrationDetails,
             "is_verified": isVerified,
             "verification_token": verificationToken,
-            "correction_email_sent": didSendCorrectionEmail
+            "correction_email_sent": didSendCorrectionEmail,
+            "reset_password_token": resetPasswordToken,
+            "is_resetting_password": isPasswordResetting
             ])
     }
 

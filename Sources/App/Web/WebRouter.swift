@@ -33,6 +33,7 @@ struct WebRouter {
         self.buildEmails(drop)
         self.buildLogin(drop)
         self.buildSignup(drop)
+        self.buildResetPassword(drop)
 
         let authGroup = drop.grouped(authMiddleware)
 
@@ -193,20 +194,7 @@ struct WebRouter {
             
 //            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
-
-        builder.get("edit_registration") { request in
-
-            let user = try request.sessionAuth.user()
-            if var user = user, user.accessToken == nil {
-                user.generateAccessToken()
-                try user.save()
-            }
-
-            let node = try Node(node: ["isEditMode": true, "accessToken": user!.accessToken])
-
-            return try self.drop.view.make("registration", node)
-        }
-
+        
         builder.post("register") { request in
             guard var user = try request.sessionAuth.user() else {
                 debugPrint("couldn't find user session")
@@ -223,11 +211,47 @@ struct WebRouter {
             user.registrationDetails = registrationData
             user.applicationStatus = .newApplicant
             try user.save()
-//            try request.sessionAuth.logout()
+            //            try request.sessionAuth.logout()
             return Response(redirect: "/")
-
-//            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
+            
+            //            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
         }
+
+        builder.get("edit_registration") { request in
+
+            let user = try request.sessionAuth.user()
+            if var user = user, user.accessToken == nil {
+                user.generateAccessToken()
+                try user.save()
+            }
+
+            let node = try Node(node: ["isEditMode": true, "accessToken": user!.accessToken])
+
+            return try self.drop.view.make("registration", node)
+        }
+        
+        builder.post("edit_registration") { request in
+            guard var user = try request.sessionAuth.user() else {
+                debugPrint("couldn't find user session")
+                return Response(redirect: "/")
+            }
+            
+            // now take the parameters from the request, and file a registration request
+            guard let registrationJSON = request.json?["registration_data"] else {
+                throw Abort.custom(status: .badRequest, message: "no json with `registration_data` found")
+            }
+            
+            let registrationData: RegistrationData = try registrationJSON.converted()
+            
+            user.registrationDetails = registrationData
+            try user.save()
+            //            try request.sessionAuth.logout()
+            return Response(redirect: "/")
+            
+            //            return try self.drop.view.make("registration", ["flash": "Sorry, but the registration  has been closed. For further inquiries please contact us on our fb page."])
+        }
+
+        
     }
 
     private func buildLogout<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
@@ -238,6 +262,94 @@ struct WebRouter {
         
         builder.get("unsubscribed") { request in
             return try self.drop.view.make("unsubscribe")
+        }
+    }
+    
+    private func buildResetPassword<B: RouteBuilder>(_ builder: B) where B.Value == Wrapped {
+        builder.get("request_reset_password") { request in
+            
+            
+            return try self.drop.view.make("request_reset_password")
+        }
+        
+        builder.post("request_reset_password") { request in
+            do {
+                guard let email = request.data["email"]?.string else {
+                    throw Abort.custom(status: .badRequest, message: "You haven't entered a valid email.")
+                }
+            
+                guard var user = try IVSAUser.query().filter("email", email).first() else {
+                    throw Abort.custom(status: .badRequest, message: "The email wasn't found in the system.")
+                }
+                
+                user.generateResetPasswordToken()
+                try user.save()
+                
+                do {
+                    try MailgunClient.sendResetPasswordEmail(toUser: user, baseURL: request.baseURL)
+                } catch { }
+                
+                
+                return try self.drop.view.make("request_reset_password", ["successful": true])
+            }
+            catch let e as Abort {
+                switch e {
+                case .custom(_, let message):
+                    return try self.drop.view.make("request_reset_password", ["flash": message])
+                default:
+                    return try self.drop.view.make("request_reset_password", ["flash": "Something went wrong. Please try again later!"])
+                }
+            }
+            
+        }
+        
+        builder.get("reset_password", IVSAUser.self, String.self) { request, user, token in
+            do {
+                guard user.isPasswordResetting && token == user.resetPasswordToken else {
+                    throw Abort.custom(status: .badRequest, message: "Invalid password reset token.")
+                }
+                
+                return try self.drop.view.make("reset_password")
+            }
+            catch let e as Abort {
+                switch e {
+                case .custom(_, let message):
+                    return try self.drop.view.make("reset_password", ["flash": message])
+                default:
+                    return try self.drop.view.make("reset_password", ["flash": "Something went wrong. Please try again later!"])
+                }
+            }
+            
+        }
+        
+        builder.post("reset_password", IVSAUser.self, String.self) { request, user, token in
+            do {
+                guard user.isPasswordResetting && token == user.resetPasswordToken else {
+                    throw Abort.custom(status: .badRequest, message: "Invalid password reset token.")
+                }
+                guard let password = request.data["password"]?.string,
+                    let confirmPassword = request.data["confirm_password"]?.string else {
+                        throw Abort.custom(status: .badRequest, message: "Missing params.")
+                }
+                guard password.equals(any: confirmPassword) else {
+                    throw Abort.custom(status: .badRequest, message: "Password mismatch.")
+                }
+                
+                var mutableUser = user
+                mutableUser.updatePassword(pass: password)
+                try mutableUser.save()
+                
+                return try self.drop.view.make("reset_password", ["successful": true])
+            }
+            catch let e as Abort {
+                switch e {
+                case .custom(_, let message):
+                    return try self.drop.view.make("reset_password", ["flash": message])
+                default:
+                    return try self.drop.view.make("reset_password", ["flash": "Something went wrong. Please try again later!"])
+                }
+            }
+            
         }
     }
 }

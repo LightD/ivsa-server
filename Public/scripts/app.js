@@ -309,7 +309,10 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
       var formattedBday = $filter('date')(bday, "dd/MM/yyyy");
       data.registration_data.personal_information.birth_date = formattedBday;
       console.log(JSON.stringify(data));
-      $http.post("/register", JSON.stringify(data))
+
+      var endpointName = ($scope.isEditMode ? "edit_registration" : "register");
+
+      $http.post("/" + endpointName, JSON.stringify(data))
       .then(function success(data) {
         $scope.isLoading = false;
         $window.location.href = "/register";
@@ -323,11 +326,14 @@ ivsaApp.controller('ApplicationRegistrationController', function ApplicationRegi
   }
 
   $scope.token = "";
+  $scope.isEditMode = false;
 
-  $scope.setup = function(token) {
+  $scope.setup = function(token, isEditMode) {
     $scope.token = token;
      $scope.isLoading = true;
-
+     if (isEditMode) {
+       $scope.isEditMode = isEditMode;
+     }
      $http.get("/api/me", { headers: { "Authorization": "Bearer " +  token} })
      .then(function success(object) {
           $scope.isLoading = false;

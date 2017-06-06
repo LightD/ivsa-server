@@ -5,14 +5,14 @@
 }
 
 #export("body") {
-    
+
     <div class="container-fluid">
         <div class="row">
             <img class="ivsa-logo-main" src="/images/ivsalogo.png" />
         </div>
         <div class="row">
-            
-            
+
+
             <div class="col-sm-6 col-sm-offset-3">
                 <form action="/login" method="POST" style="margin-bottom: 20px;">
                     <div class="form-group">
@@ -24,9 +24,10 @@
                         <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary" style="margin-right: 14px;">Login</button>
-                    
+
                 </form>
-                <p>You're not on our system yet? <a href="/signup" class="btn btn-primary">Register now</a>
+                <p>You're not on our system yet? <a href="/signup" class="btn btn-link">Register now</a>
+                <p>Forgot your password? <a href="/request_reset_password" class="btn btn-warning">Request password reset</a>
 
             </div>
 
