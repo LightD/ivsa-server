@@ -4,58 +4,112 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++ED06144" : 9223372036854775807,
-    "013355313FF9FF2B55EA1241A5D12353638D9AC3+++9D7112E" : 9223372036854775807,
-    "9948E95A70F754B78E92114BF205DC946294AF5D+++AA2AEC3" : 9223372036854775807,
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++1B12D91" : 9223372036854775807,
-    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++3222665" : 9223372036854775807,
-    "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++0F0D5EE" : 9223372036854775807,
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3386E7F" : 9223372036854775807,
-    "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++C5928C8" : 9223372036854775807,
-    "4FDC995D8E7D859D7B56258C349B2368429A1836+++87F7C4C" : 9223372036854775807,
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++FE2C95D" : 9223372036854775807,
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++7D84DEC" : 9223372036854775807,
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++E202A23" : 9223372036854775807,
-    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++939BEC3" : 9223372036854775807,
+    "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++F5536CD" : 9223372036854775807,
+    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++EC23098" : 9223372036854775807,
     "07D38DC615E8ADA07E68B7DA8DD8A2654638A334+++BD45200" : 9223372036854775807,
     "CADB2473D823C4B67E031AA19BD5C58C5C0C5C2C+++C3B6B5D" : 9223372036854775807,
-    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++2DFBF82" : 9223372036854775807,
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++DAA741B" : 9223372036854775807,
-    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++BD3FF6F" : 9223372036854775807,
+    "013355313FF9FF2B55EA1241A5D12353638D9AC3+++9D7112E" : 9223372036854775807,
+    "7E7C1062562B886ABFA1C65C1E929E1339657116+++98C3152" : 9223372036854775807,
+    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC+++F2BD89D" : 9223372036854775807,
+    "013355313FF9FF2B55EA1241A5D12353638D9AC3+++347CA87" : 9223372036854775807,
+    "789252EF81C502A43EF1153AAFB885D64C59FEBD+++AF47E9E" : 9223372036854775807,
+    "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++0F0D5EE" : 9223372036854775807,
+    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++B3D7641" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++5D0485F" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++7D84DEC" : 9223372036854775807,
+    "BB6059597ED233770EB070B23F7A260DF184AEBC+++FDBC13F" : 9223372036854775807,
+    "19278C05F991845F9DC0A319D6F77B1D93D9A83E+++CBB74AF" : 9223372036854775807,
+    "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++13CE83C" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3EB9B21" : 9223372036854775807,
+    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++3222665" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++FE2C95D" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++1B12D91" : 9223372036854775807,
+    "4FDC995D8E7D859D7B56258C349B2368429A1836+++87F7C4C" : 9223372036854775807,
+    "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++C5928C8" : 9223372036854775807,
+    "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++ED06144" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++0DBFDC8" : 9223372036854775807,
+    "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++4A3D052" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++7D1F7CC" : 9223372036854775807,
+    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++97F2A60" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++E202A23" : 9223372036854775807,
     "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++A2DF335" : 9223372036854775807,
-    "6400345F86F53D4096DD633F09AAE772FA6A202B+++90AFD0D" : 9223372036854775807
+    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++939BEC3" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++DAA741B" : 9223372036854775807,
+    "07D38DC615E8ADA07E68B7DA8DD8A2654638A334+++7A87929" : 9223372036854775807,
+    "9948E95A70F754B78E92114BF205DC946294AF5D+++0E964FC" : 9223372036854775807,
+    "CADB2473D823C4B67E031AA19BD5C58C5C0C5C2C+++226ED76" : 9223372036854775807,
+    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++A3149F1" : 9223372036854775807,
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3386E7F" : 9223372036854775807,
+    "6400345F86F53D4096DD633F09AAE772FA6A202B+++90AFD0D" : 9223372036854775807,
+    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++2DFBF82" : 9223372036854775807,
+    "9948E95A70F754B78E92114BF205DC946294AF5D+++AA2AEC3" : 9223372036854775807,
+    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++DFEB861" : 9223372036854775807,
+    "6400345F86F53D4096DD633F09AAE772FA6A202B+++D34477A" : 9223372036854775807,
+    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++BD3FF6F" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7D2B9DE5-0808-4258-B3E3-C4B90340872B",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++ED06144" : "ivsa-server\/Packages\/Console-1.0.2\/",
-    "013355313FF9FF2B55EA1241A5D12353638D9AC3+++9D7112E" : "ivsa-server\/Packages\/TLS-1.1.2\/",
-    "9948E95A70F754B78E92114BF205DC946294AF5D+++AA2AEC3" : "ivsa-server\/Packages\/JSON-1.0.6\/",
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++1B12D91" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
-    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++3222665" : "ivsa-server\/Packages\/Polymorphic-1.0.1\/",
-    "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++0F0D5EE" : "ivsa-server\/Packages\/Socks-1.2.7\/",
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3386E7F" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
-    "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++C5928C8" : "ivsa-server\/Packages\/Fluent-1.4.3\/",
-    "4FDC995D8E7D859D7B56258C349B2368429A1836+++87F7C4C" : "ivsa-server\/",
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++FE2C95D" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++7D84DEC" : "ivsa-server\/Packages\/Core-1.1.2\/",
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++E202A23" : "ivsa-server\/Packages\/Engine-1.3.12\/",
-    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++939BEC3" : "ivsa-server\/Packages\/BSON-3.7.2\/",
+    "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++F5536CD" : "ivsa-server\/.build\/checkouts\/fluent.git-6251908308727715749\/",
+    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++EC23098" : "ivsa-server\/.build\/checkouts\/polymorphic.git--4354167031091999056\/",
     "07D38DC615E8ADA07E68B7DA8DD8A2654638A334+++BD45200" : "ivsa-server\/Packages\/Crypto-1.1.0\/",
     "CADB2473D823C4B67E031AA19BD5C58C5C0C5C2C+++C3B6B5D" : "ivsa-server\/Packages\/Multipart-1.0.3\/",
-    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++2DFBF82" : "ivsa-server\/Packages\/MongoKitten-1.7.4\/",
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++DAA741B" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
-    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++BD3FF6F" : "ivsa-server\/Packages\/Node-1.0.1\/",
+    "013355313FF9FF2B55EA1241A5D12353638D9AC3+++9D7112E" : "ivsa-server\/Packages\/TLS-1.1.2\/",
+    "7E7C1062562B886ABFA1C65C1E929E1339657116+++98C3152" : "ivsa-server\/.build\/checkouts\/Turnstile.git-2443676010155639616\/",
+    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC+++F2BD89D" : "ivsa-server\/.build\/checkouts\/Jay.git--595626396716718175\/",
+    "013355313FF9FF2B55EA1241A5D12353638D9AC3+++347CA87" : "ivsa-server\/.build\/checkouts\/tls.git-2678149690400510061\/",
+    "789252EF81C502A43EF1153AAFB885D64C59FEBD+++AF47E9E" : "ivsa-server\/.build\/checkouts\/clibressl.git-4924093653370840509\/",
+    "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++0F0D5EE" : "ivsa-server\/Packages\/Socks-1.2.7\/",
+    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++B3D7641" : "ivsa-server\/.build\/checkouts\/node.git-9175390252000121167\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++5D0485F" : "ivsa-server\/.build\/checkouts\/engine.git-3311994267206676365\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++7D84DEC" : "ivsa-server\/Packages\/Core-1.1.2\/",
+    "BB6059597ED233770EB070B23F7A260DF184AEBC+++FDBC13F" : "ivsa-server\/.build\/checkouts\/mongo-driver.git-8048380255664029588\/",
+    "19278C05F991845F9DC0A319D6F77B1D93D9A83E+++CBB74AF" : "ivsa-server\/.build\/checkouts\/mongo-provider.git-3889432062388704695\/",
+    "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++13CE83C" : "ivsa-server\/.build\/checkouts\/socks.git--8001262774462276871\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3EB9B21" : "ivsa-server\/.build\/checkouts\/vapor.git-5492988889259800272\/",
+    "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++3222665" : "ivsa-server\/Packages\/Polymorphic-1.0.1\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++FE2C95D" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++1B12D91" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
+    "4FDC995D8E7D859D7B56258C349B2368429A1836+++87F7C4C" : "ivsa-server\/",
+    "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++C5928C8" : "ivsa-server\/Packages\/Fluent-1.4.3\/",
+    "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++ED06144" : "ivsa-server\/Packages\/Console-1.0.2\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++0DBFDC8" : "ivsa-server\/.build\/checkouts\/core.git-9210800844849382486\/",
+    "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++4A3D052" : "ivsa-server\/.build\/checkouts\/console.git--2431895819212044213\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++7D1F7CC" : "ivsa-server\/.build\/checkouts\/routing.git-5366657101075133678\/",
+    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++97F2A60" : "ivsa-server\/.build\/checkouts\/path-indexable.git-6101080875983074629\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++E202A23" : "ivsa-server\/Packages\/Engine-1.3.12\/",
     "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++A2DF335" : "ivsa-server\/Packages\/Routing-1.1.0\/",
-    "6400345F86F53D4096DD633F09AAE772FA6A202B+++90AFD0D" : "ivsa-server\/Packages\/Leaf-1.0.7\/"
+    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++939BEC3" : "ivsa-server\/Packages\/BSON-3.7.2\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++DAA741B" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
+    "07D38DC615E8ADA07E68B7DA8DD8A2654638A334+++7A87929" : "ivsa-server\/.build\/checkouts\/crypto.git-7980259129511365902\/",
+    "9948E95A70F754B78E92114BF205DC946294AF5D+++0E964FC" : "ivsa-server\/.build\/checkouts\/json.git-9153249592855998091\/",
+    "CADB2473D823C4B67E031AA19BD5C58C5C0C5C2C+++226ED76" : "ivsa-server\/.build\/checkouts\/multipart.git-4210556629793786970\/",
+    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++A3149F1" : "ivsa-server\/.build\/checkouts\/MongoKitten.git--6244548337864045047\/",
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3386E7F" : "ivsa-server\/Packages\/Vapor-1.5.15\/",
+    "6400345F86F53D4096DD633F09AAE772FA6A202B+++90AFD0D" : "ivsa-server\/Packages\/Leaf-1.0.7\/",
+    "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++2DFBF82" : "ivsa-server\/Packages\/MongoKitten-1.7.4\/",
+    "9948E95A70F754B78E92114BF205DC946294AF5D+++AA2AEC3" : "ivsa-server\/Packages\/JSON-1.0.6\/",
+    "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++DFEB861" : "ivsa-server\/.build\/checkouts\/BSON.git--1864673809949788219\/",
+    "6400345F86F53D4096DD633F09AAE772FA6A202B+++D34477A" : "ivsa-server\/.build\/checkouts\/leaf.git-9164445114487378533\/",
+    "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++BD3FF6F" : "ivsa-server\/Packages\/Node-1.0.1\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ivsa",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ivsa.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/tls.git-2678149690400510061",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "013355313FF9FF2B55EA1241A5D12353638D9AC3+++347CA87"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/tls.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "013355313FF9FF2B55EA1241A5D12353638D9AC3+++9D7112E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/crypto.git-7980259129511365902",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "07D38DC615E8ADA07E68B7DA8DD8A2654638A334+++7A87929"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/crypto.git",
@@ -63,9 +117,19 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "07D38DC615E8ADA07E68B7DA8DD8A2654638A334+++BD45200"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/mongo-provider.git-3889432062388704695",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "19278C05F991845F9DC0A319D6F77B1D93D9A83E+++CBB74AF"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/LightD\/ivsa-server",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4FDC995D8E7D859D7B56258C349B2368429A1836+++87F7C4C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/core.git-9210800844849382486",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++0DBFDC8"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/engine.git",
@@ -76,6 +140,21 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/routing.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3386E7F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/vapor.git-5492988889259800272",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++3EB9B21"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/engine.git-3311994267206676365",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++5D0485F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/routing.git-5366657101075133678",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3+++7D1F7CC"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/core.git",
@@ -108,9 +187,19 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6400345F86F53D4096DD633F09AAE772FA6A202B+++90AFD0D"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/leaf.git-9164445114487378533",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6400345F86F53D4096DD633F09AAE772FA6A202B+++D34477A"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/fluent.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++C5928C8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/fluent.git-6251908308727715749",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "65880DAFEE5F57D1D1C181560E763EECFD96B06D+++F5536CD"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/OpenKitten\/BSON.git",
@@ -118,9 +207,19 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++939BEC3"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/BSON.git--1864673809949788219",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "686ABC7D4D16AC8C2BF9FA66CA941F6EB6F984F7+++DFEB861"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/polymorphic.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++3222665"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/polymorphic.git--4354167031091999056",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6D09577DC770D433CEBE622BD4B45C8CF6CB8CCC+++EC23098"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/OpenKitten\/MongoKitten.git",
@@ -128,9 +227,39 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++2DFBF82"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/MongoKitten.git--6244548337864045047",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F592973CDAFC6396CA0DD0B7DAC14E5B55161D2+++A3149F1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/console.git--2431895819212044213",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++4A3D052"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/console.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "748C9296F4CFA6FB6918A0C73ECFD0DCCA1E2109+++ED06144"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/clibressl.git-4924093653370840509",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "789252EF81C502A43EF1153AAFB885D64C59FEBD+++AF47E9E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/Turnstile.git-2443676010155639616",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7E7C1062562B886ABFA1C65C1E929E1339657116+++98C3152"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/Jay.git--595626396716718175",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC+++F2BD89D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/json.git-9153249592855998091",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9948E95A70F754B78E92114BF205DC946294AF5D+++0E964FC"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/json.git",
@@ -143,9 +272,34 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++0F0D5EE"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/socks.git--8001262774462276871",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9C479842BAB37E5A02B52F0D8BB690041F1A927F+++13CE83C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/mongo-driver.git-8048380255664029588",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BB6059597ED233770EB070B23F7A260DF184AEBC+++FDBC13F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/multipart.git-4210556629793786970",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CADB2473D823C4B67E031AA19BD5C58C5C0C5C2C+++226ED76"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/multipart.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CADB2473D823C4B67E031AA19BD5C58C5C0C5C2C+++C3B6B5D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/path-indexable.git-6101080875983074629",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++97F2A60"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/nourhelmi\/Development\/ivsa-server\/.build\/repositories\/node.git-9175390252000121167",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EE0211841CDBC942EFB5905580DF4AA57B5992F6+++B3D7641"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/node.git",

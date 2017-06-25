@@ -202,6 +202,43 @@ func refrainFromPostcongresPaymentEmail(baseURL: String) -> EmailBody {
     return EmailBody(type: .html, content: html)
 }
 
+func congressGuideEmail(baseURL: String) -> EmailBody {
+    var html = ""
+    html += "<!DOCTYPE html>"
+    html += "<html>"
+    html += "<body>"
+    html += "<p> Dearest selected delegates of our 66th IVSA Congress, </p>"
+    
+    html += "<p> Approximately ONE MONTH left till Congress and we hope you are as excited as we are! <br /> The beautiful tropical country of Malaysia awaits you! </p>"
+    
+    html += "<p> Now, before you even think about taking out that luggage bag, we would like you to <b> download all the attachments provided </b> within this email, and <b>READ THEM THOROUGHLY.</b> <br>"
+    html += "There are FOUR PDF Attachments along with this email which contains the following detailed information:- <br />"
+    html += "1. Congress Guide <br />"
+    html += "2. Items To-Bring for Congress <br />"
+    html += "3. Visa & Medical Requirements to enter Malaysia <br />"
+    html += "4. Dutiable Goods & Prohibited Items in Malaysia <br />"
+    html += "</p>"
+    
+    html += "<p> We would also like to remind you again to <b>update your FLIGHT DETAILS, STUDENT UNIVERSITY ID NUMBER, & your most current PASSPORT NUMBER in your profiles via our website</b>: <a href='http://www.mycongresslah.com/login'> www.mycongresslah.com/login </a> <br />"
+    html += "These information are CRUCIAL for you to be eligible to board our complementary air port shuttle, and use our congress busses during the event. Failure in providing us with these details <b>within the next 3 DAYS </b> will affect your congress experience. <br /> "
+    html += "Please refer to our Congress Guide or Facebook Page for further information and guidance on updating your own Delegate Profile. <br /> </p>"
+    html += "<p>  Other than that, if you would like to show your love and support towards IVSA Global's <b>Development Fund</b>, don't miss out on owning some cool <b>IVSA merchandise!</b> <br />"
+    html += "Link to view and order is as follows:- <a href='https://docs.google.com/forms/d/e/1FAIpQLSeCPDUDhvk8kuRmfcFxogMNX9wlYy1tc7OyI4R5isAkDPANZQ/viewform'> https://docs.google.com/forms/d/e/1FAIpQLSeCPDUDhvk8kuRmfcFxogMNX9wlYy1tc7OyI4R5isAkDPANZQ/viewform </a> </p>"
+    
+    html += "<p> Please do not hesitate to email us any further questions of queries. <br /> Till the next congress update! </p>"
+    html += "<p> Warmest Regards, </p>"
+    
+    html += "<p> Organizing Committee, <br/> 66th IVSA Congress - Malaysia 2017, <br /> IVSA Malaysia. <br /> </p>"
+    html += "<br />"
+    
+    
+    html += "<img width='170' height='200' src='\(baseURL)/images/ivsamalaysiawhitebg.jpg' />"
+    
+    html += "</body>"
+    html += "</html>"
+    
+    return EmailBody(type: .html, content: html)
+}
 
 func optionsForTransportationsEmail(baseURL: String) -> EmailBody {
     var html = ""
@@ -538,9 +575,29 @@ struct MailgunClient {
         try sendMail(client: client, to: user.email, subject: "[POST CONGRESS] Options for Transportation", body: optionsForTransportationsEmail(baseURL: baseURL))
         
     }
+    
+    static func sendCongressGuideEmail(toUser user: IVSAUser, baseURL: String) throws {
+        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
 
+        guard let congressGuide = EmailAttachment(filename: "Malaysia Congress Guide.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        guard let medicalRequirements = EmailAttachment(filename: "66thIVSA_VISA & Medical Requirements.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        guard let duitiableGoods = EmailAttachment(filename: "66thIVSA_Dutiable Goods & Prohibited Items.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        guard let toBringList = EmailAttachment(filename: "66thIVSA_To-Bring-List.pdf", in: workDir) else {
+            throw EmailError.missingFile
+        }
+        try sendMail(client: client, to: user.email, subject: "Congress Guide - Important Information & Items To-Bring List", body: congressGuideEmail(baseURL: baseURL), attachments: [congressGuide, medicalRequirements, duitiableGoods, toBringList])
+        
+    }
+    
     private static func sendMail(client: SMTPClient<TCPClientStream>, to: String, subject: String, body: EmailBody, attachments: [EmailAttachment] = []) throws {
 
+        let client = try SMTPClient<TCPClientStream>.makeMailgunClient()
 
         let credentials = SMTP.SMTPCredentials(
             user: "ivsa@mycongresslah.com",
