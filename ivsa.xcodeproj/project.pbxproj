@@ -9559,7 +9559,7 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -9573,7 +9573,6 @@
 				OBJ_34 /* Dependencies */,
 				OBJ_1497 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* MongoHMAC */ = {
@@ -12548,7 +12547,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1497 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

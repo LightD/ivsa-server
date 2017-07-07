@@ -19,7 +19,8 @@
 	<th > Email </th>
 	<th > Name </th>
 	<th > Position </th>
-  <th > Passport #() </th>
+	<th > Passport #() </th>
+	<th > Action </th>
 </tr>
 
 <tr ng-repeat="applicant in applicants track by $index">
@@ -35,10 +36,10 @@
 	</td>
 	<!-- <td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td>
 	<td> <a href="/admin/applicant_details/{{applicant._id}}" target="_blank">  {{applicant.registration_details.ivsa_chapter.position}} </a> </td> -->
-	<!-- <td>
+	<td>
 	<button type="button" class="btn btn-success" ng-click="accept(applicant._id, $index)">Accept</button>
-	<button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button>
-	</td> -->
+	<!-- <button type="button" class="btn btn-danger" ng-click="reject(applicant._id, $index)">Reject</button> -->
+	</td> 
 </tr>
 </table>
 </div>

@@ -5,7 +5,12 @@ import Auth
 import Turnstile
 import Sessions
 
-
+extension Sequence where Iterator.Element: Hashable {
+    func unique() -> [Iterator.Element] {
+        var seen: [Iterator.Element: Bool] = [:]
+        return self.filter { seen.updateValue(true, forKey: $0) == nil }
+    }
+}
 
 protocol IVSAError: Error {
     var vaporError: Abort { get }

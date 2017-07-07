@@ -74,6 +74,26 @@ class AdminRouteCollection: RouteCollection {
             return try JSON(node: ["ok": "awesome"])
         }
         
+        adminRouteBuilder.get("uniqueCountries") { request in
+            let users = try IVSAUser.query().filter("application_status", "accepted").run()
+            // 1. get distinct countries
+            let countries = users.map { $0.registrationDetails?.personalInfo.countryOfLegalResidence }.filter { $0 != nil }.map { $0!.lowercased() }
+            let uniqueCountries = countries.unique()
+            let node = try Node(node: uniqueCountries)
+            
+            return try JSON(node: node)
+        }
+        
+        adminRouteBuilder.get("trythis") { request in
+            let users = try IVSAUser.query().filter("application_status", "accepted").run()
+            // 1. get distinct countries
+            let countries = users.map { $0.registrationDetails?.personalInfo.countryOfLegalResidence }.filter { $0 != nil }.map { $0!.lowercased() }
+            let uniqueCountries = countries.unique()
+            print("unique countries: \(uniqueCountries)")
+            // 2.
+            
+            return try JSON(node: [:])
+        }
         
         // accepted values for :application_status param are:
         // inReview
